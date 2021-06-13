@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <title>azDroppable</title>
   <link rel="stylesheet" href="./droppable.css">
-  <script type="module" src="../../azdom/azdom.js"></script>
 </head>
 
 <body>
@@ -18,7 +17,6 @@
     +<div class="message"></div>
   </div>
   <script type="module">
-    import { dndEvent } from '../../azdom/utils.js';
     import { Droppable } from './droppable.js';
     import { Draggable } from '../draggable/draggable.js';
     const source0 = document.querySelector('div.source');
@@ -33,7 +31,7 @@
     const targets = document.querySelectorAll('div.target');
     targets.forEach(target => {
       az.ui(Droppable, target, {
-        interestedDropEvents: dndEvent.all,
+        interestedDropEvents: az.dom.dndEvent.all,
         source_all_in: function (e) {
           e.detail.target.querySelector('.message').textContent = e.type;
         },

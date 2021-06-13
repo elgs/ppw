@@ -139,8 +139,8 @@ export class Draggable {
          const dts = me.dropTargets;
          dts.map(dt => {
             // const dropId = dt.getAttribute('drop-id');
-            const ps = getPositionState(node, dt.dt, e);
-            if (dndEvent.dragged & dt.interestedDropEvents) {
+            const ps = azdom.getPositionState(node, dt.dt, e);
+            if (az.dom.dndEvent.dragged & dt.interestedDropEvents) {
                dt.dt.dispatchEvent(
                   new CustomEvent('dragged', {
                      detail: {
@@ -193,16 +193,16 @@ export class Draggable {
 
       for (const dt of me.dropTargets) {
          const oldPs = me.dropTargetStates[dt.dropId];
-         const ps = getPositionState(node, dt.dt, e);
+         const ps = azdom.getPositionState(node, dt.dt, e);
          me.dropTargetStates[dt.dropId] = ps;
          if (oldPs !== undefined && oldPs !== ps) {
-            const states = Object.keys(dndState);
+            const states = Object.keys(az.dom.dndState);
             for (const state of states) {
-               const nState = ps & dndState[state];
-               const oState = oldPs & dndState[state];
+               const nState = ps & az.dom.dndState[state];
+               const oState = oldPs & az.dom.dndState[state];
                if (nState !== oState) {
                   const eventName = state + (!!nState ? '_in' : '_out');
-                  if (dndEvent[eventName] & dt.interestedDropEvents) {
+                  if (az.dom.dndEvent[eventName] & dt.interestedDropEvents) {
                      dt.dt.dispatchEvent(
                         new CustomEvent(eventName, {
                            detail: {
@@ -264,8 +264,8 @@ export class Draggable {
       const dts = me.dropTargets;
       dts.map(dt => {
          // const dropId = dt.getAttribute('drop-id');
-         const ps = getPositionState(dom, dt.dt, e);
-         if (dndEvent.dropped & dt.interestedDropEvents) {
+         const ps = azdom.getPositionState(dom, dt.dt, e);
+         if (az.dom.dndEvent.dropped & dt.interestedDropEvents) {
             dt.dt.dispatchEvent(
                new CustomEvent('dropped', {
                   detail: {
@@ -359,7 +359,7 @@ export class Draggable {
       document.addEventListener('mouseup', me.onmouseup);
       document.addEventListener('mouseleave', me.onmouseup);
 
-      me.dropTargets = [...document.querySelectorAll('.azdom-droppable')]
+      me.dropTargets = [...document.querySelectorAll('.azui-droppable')]
          .filter(dt => dt !== dom)
          .map(dt => {
             return {

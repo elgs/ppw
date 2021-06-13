@@ -71,34 +71,34 @@ export const getPositionState = function (source, target, event) {
    const t = target.getBoundingClientRect();
 
    if (s.bottom > t.top && s.right > t.left && s.top < t.bottom && s.left < t.right) {
-      ret += dndState.touch;
+      ret += az.dom.dndState.touch;
    }
 
    const hasTouches = event.touches && event.touches.length;
    const pointerX = hasTouches ? event.touches[0].pageX : event.pageX;
    const pointerY = hasTouches ? event.touches[0].pageY : event.pageY;
    if (!isOutside(pointerX, pointerY, t)) {
-      ret += dndState.pointer;
+      ret += az.dom.dndState.pointer;
    }
 
    if (s.top >= t.top && s.left >= t.left && s.bottom <= t.bottom && s.right <= t.right) {
-      ret += dndState.source_all;
+      ret += az.dom.dndState.source_all;
    }
 
    if (t.top >= s.top && t.left >= s.left && t.bottom <= s.bottom && t.right <= s.right) {
-      ret += dndState.target_all;
+      ret += az.dom.dndState.target_all;
    }
 
    const sx = getDocScrollLeft() + s.left + s.width / 2;
    const sy = getDocScrollTop() + s.top + s.height / 2;
    if (!isOutside(sx, sy, t)) {
-      ret += dndState.source_center;
+      ret += az.dom.dndState.source_center;
    }
 
    const tx = getDocScrollLeft() + t.left + t.width / 2;
    const ty = getDocScrollTop() + t.top + t.height / 2;
    if (!isOutside(tx, ty, s)) {
-      ret += dndState.target_center;
+      ret += az.dom.dndState.target_center;
    }
    return ret;
 };

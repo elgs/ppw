@@ -1,8 +1,8 @@
-import { dndEvent, dndState } from '../../azdom/utils.js';
+import '../azdom.js';
 
 export class Droppable {
-
-   constructor() {
+   static id = 'azui-droppable';
+   constructor(dom, options) {
       const me = this;
 
       const attachEvent = eventName => {
@@ -11,7 +11,7 @@ export class Droppable {
          };
       };
 
-      Object.keys(dndState).map(state => {
+      Object.keys(az.dom.dndState).map(state => {
          const stateIn = state + '_in';
          const stateOut = state + '_out';
          attachEvent(stateIn);
@@ -19,9 +19,7 @@ export class Droppable {
       });
       attachEvent('dragged');
       attachEvent('dropped');
-   }
 
-   azInit(options) {
       const settings = {
          // source_all_in: function (e) {},
          // source_all_out: function (e) {},
@@ -37,24 +35,23 @@ export class Droppable {
          // pointer_out: function (e) {},
          // dragged: function (e) {},
          // dropped: function (e) {},
-         interestedDropEvents: dndEvent.all,
+         interestedDropEvents: az.dom.dndEvent.all,
          ...options
       };
 
 
-      const me = this;
-      const node = me.node;
+      me.dom = dom;
       me.settings = settings;
 
-      node.setAttribute('az-interested-drop-events', settings.interestedDropEvents);
+      dom.setAttribute('az-interested-drop-events', settings.interestedDropEvents);
 
       const addEventListener = eventName => {
          if (settings[eventName]) {
-            me.node.addEventListener(eventName, me[eventName]);
+            me.dom.addEventListener(eventName, me[eventName]);
          }
       };
 
-      Object.keys(dndState).map(state => {
+      Object.keys(az.dom.dndState).map(state => {
          const stateIn = state + '_in';
          const stateOut = state + '_out';
          addEventListener(stateIn);
