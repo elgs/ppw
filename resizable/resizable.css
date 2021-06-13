@@ -1,0 +1,85 @@
+.azui[azdom-resizable] > .handle {
+  background-color: #e8e8e8;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  position: absolute !important;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.azui[azdom-resizable] > .handle.active {
+  background-color: #d4d4d4;
+}
+
+.azui[azdom-resizable] > .handle > div.collapseButton {
+  background-color: white;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  cursor: pointer;
+}
+
+.azui[azdom-resizable] > .handle > div.collapseButton.active svg {
+  fill: #a4d666 !important;
+}
+
+.azui[azdom-resizable] > .handle > div.collapseButton.collapseButtonH {
+  width: 30px;
+}
+
+.azui[azdom-resizable] > .handle > div.collapseButton.collapseButtonH > span.collapseIcon {
+  height: 4px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.azui[azdom-resizable] > .handle > div.collapseButton.collapseButtonH > span.collapseIcon > svg {
+  fill: #e8e8e8;
+  width: 8px;
+  height: 4px;
+  display: block;
+}
+
+.azui[azdom-resizable] > .handle > div.collapseButton.collapseButtonV {
+  height: 30px;
+}
+
+.azui[azdom-resizable] > .handle > div.collapseButton.collapseButtonV > span.collapseIcon {
+  width: 4px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.azui[azdom-resizable] > .handle > div.collapseButton.collapseButtonV > span.collapseIcon > svg {
+  fill: #e8e8e8;
+  width: 4px;
+  height: 8px;
+  display: block;
+}

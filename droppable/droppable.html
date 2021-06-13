@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>azDroppable</title>
+  <link rel="stylesheet" href="./droppable.css">
+  <script type="module" src="../../azdom/azdom.js"></script>
+</head>
+
+<body>
+  <div class="div-basic center-content source">
+    +<div class="message">Drag me!</div>
+  </div>
+  <div class="div-basic div-small center-content target">
+    +<div class="message"></div>
+  </div>
+  <div class="div-basic div-large center-content target">
+    +<div class="message"></div>
+  </div>
+  <script type="module">
+    import { dndEvent } from '../../azdom/utils.js';
+    import { Droppable } from './droppable.js';
+    import { Draggable } from '../draggable/draggable.js';
+    const source0 = document.querySelector('div.source');
+    az.ui(Draggable, source0, {
+      create: function (e) {
+        if (e.type === 'touchstart') {
+          e.preventDefault();
+        }
+      }
+    });
+
+    const targets = document.querySelectorAll('div.target');
+    targets.forEach(target => {
+      az.ui(Droppable, target, {
+        interestedDropEvents: dndEvent.all,
+        source_all_in: function (e) {
+          e.detail.target.querySelector('.message').textContent = e.type;
+        },
+        source_all_out: function (e) {
+          e.detail.target.querySelector('.message').textContent = e.type;
+        },
+        target_all_in: function (e) {
+          e.detail.target.querySelector('.message').textContent = e.type;
+        },
+        target_all_out: function (e) {
+          e.detail.target.querySelector('.message').textContent = e.type;
+        },
+        source_center_in: function (e) {
+          e.detail.target.querySelector('.message').textContent = e.type;
+        },
+        source_center_out: function (e) {
+          e.detail.target.querySelector('.message').textContent = e.type;
+        },
+        target_center_in: function (e) {
+          e.detail.target.querySelector('.message').textContent = e.type;
+        },
+        target_center_out: function (e) {
+          e.detail.target.querySelector('.message').textContent = e.type;
+        },
+        touch_in: function (e) {
+          e.detail.target.querySelector('.message').textContent = e.type;
+        },
+        touch_out: function (e) {
+          e.detail.target.querySelector('.message').textContent = e.type;
+        },
+        pointer_in: function (e) {
+          e.detail.target.querySelector('.message').textContent = e.type;
+        },
+        pointer_out: function (e) {
+          e.detail.target.querySelector('.message').textContent = e.type;
+        },
+        dragged: function (e) {
+          e.detail.target.querySelector('.message').textContent = e.type;
+        },
+        dropped: function (e) {
+          e.detail.target.querySelector('.message').textContent = e.type;
+        }
+      });
+    });
+  </script>
+</body>
+</html>

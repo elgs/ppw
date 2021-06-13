@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>azDraggable - Axis</title>
+  <link rel="stylesheet" href="./draggable.css">
+</head>
+<body>
+  <div class="div-basic center-content draggable x">Drag me!</div>
+  <div class="div-basic center-content draggable y">Drag me!</div>
+
+  <script type="module">
+    import { Draggable } from './draggable.js';
+
+    az.ui(Draggable, '.draggable.x', { axis: 'x' });
+    az.ui(Draggable, '.draggable.y', { axis: 'y' });
+  </script>
+</body>
+</html>

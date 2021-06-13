@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>azDraggable - Snap</title>
+  <link rel="stylesheet" href="./draggable.css">
+  <style>
+    .draggable {
+      margin: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="div-basic center-content draggable x">Drag me!</div>
+  <div class="div-basic center-content draggable y">Drag me!</div>
+  <div class="div-basic center-content draggable z">Drag me!</div>
+  <div class="div-basic center-content draggable w">Drag me!</div>
+
+  <script type="module">
+    import { Draggable } from './draggable.js';
+
+    const draggables = document.querySelectorAll('.draggable');
+
+    draggables.forEach(draggable => {
+      az.ui(Draggable, draggable, {
+        snapDistance: 8,
+        snapGap: 1
+      });
+    });
+  </script>
+</body>
+</html>

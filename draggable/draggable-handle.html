@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>azDraggable - Handle</title>
+  <link rel="stylesheet" href="./draggable.css">
+</head>
+<body>
+  <div class="div-basic draggable">
+    <div class="draggable-handle center-content">Drag here!</div>
+  </div>
+
+  <script type="module">
+    import { Draggable } from './draggable.js';
+
+    az.ui(Draggable, '.draggable', {
+      handle: '.draggable-handle'
+    });
+  </script>
+</body>
+</html>

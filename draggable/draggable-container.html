@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>azDraggable - Container</title>
+  <link rel="stylesheet" href="./draggable.css">
+</head>
+<body>
+  <div class="div-container container">
+    <div class="div-basic center-content draggable">Drag me!</div>
+  </div>
+
+  <script type="module">
+    import { Draggable } from './draggable.js';
+
+    az.ui(Draggable, '.draggable', {
+      containment: '.container'
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+{
+  "name": "azdnd",
+  "version": "0.0.6",
+  "description": "A drag and drop ui manager.",
+  "scripts": {
+    "test": "npx jasmine tests/*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com:22/elgs/azdnd.git"
+  },
+  "keywords": [
+    "azdnd"
+  ],
+  "author": "Qian Chen",
+  "license": "MIT",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "jasmine": "3.6.3",
+    "live-server": "^1.2.1",
+    "puppeteer": "5.5.0"
+  }
+}

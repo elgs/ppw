@@ -1,0 +1,70 @@
+html,
+body {
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  overflow: hidden;
+  margin: 0;
+}
+
+.div-basic {
+  position: relative;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border: 1px solid #979797;
+  width: 100px;
+  height: 100px;
+  font-family: sans-serif;
+  font-size: 11px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  margin: 70px;
+}
+
+.div-basic.div-small {
+  width: 70px;
+  height: 70px;
+}
+
+.div-basic.div-large {
+  width: 130px;
+  height: 130px;
+}
+
+.div-basic .draggable-handle {
+  border-bottom: 1px solid #979797;
+  height: 20px;
+}
+
+.center-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.div-container {
+  width: 300px;
+  height: 300px;
+  border: 1px solid #979797;
+}
+
+.message {
+  position: absolute;
+  bottom: 0;
+}
