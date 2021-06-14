@@ -501,7 +501,9 @@ export const normalizeTree = data => {
 };
 
 
-// dom holds component object in [azdom-className]
+let domId = 0;
+
+// dom holds component object in [class id]
 globalThis.az.ui = (componentClass, domElement, options) => {
    const dom = resolveDOM(null, domElement);
    let componentObject = dom[componentClass.id];
@@ -511,6 +513,8 @@ globalThis.az.ui = (componentClass, domElement, options) => {
 
    componentObject = new componentClass(dom, options ?? {});
    dom[componentClass.id] = componentObject;
+   dom.addA
    dom.classList.add('azui', componentClass.id);
+   dom.setAttribute(componentClass.id, domId++);
    return componentObject;
 };

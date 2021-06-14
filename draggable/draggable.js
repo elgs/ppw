@@ -117,7 +117,7 @@ export class Draggable {
 
    onmousemove(e) {
       const me = this;
-      const node = me.dom;
+      const dom = me.dom;
       const settings = me.settings;
       // console.log(e.type, e.currentTarget, me);
       if (!me.selected) {
@@ -132,19 +132,19 @@ export class Draggable {
 
          // me.style['cursor', 'pointer');
          if (settings.opacity) {
-            node.style.opacity = settings.opacity;
+            dom.style.opacity = settings.opacity;
          }
          me.started = true;
 
          const dts = me.dropTargets;
          dts.map(dt => {
             // const dropId = dt.getAttribute('drop-id');
-            const ps = azdom.getPositionState(node, dt.dt, e);
+            const ps = azdom.getPositionState(dom, dt.dt, e);
             if (az.dom.dndEvent.dragged & dt.interestedDropEvents) {
                dt.dt.dispatchEvent(
                   new CustomEvent('dragged', {
                      detail: {
-                        source: node,
+                        source: dom,
                         target: dt.dt,
                         state: ps
                      }
@@ -193,7 +193,7 @@ export class Draggable {
 
       for (const dt of me.dropTargets) {
          const oldPs = me.dropTargetStates[dt.dropId];
-         const ps = azdom.getPositionState(node, dt.dt, e);
+         const ps = azdom.getPositionState(dom, dt.dt, e);
          me.dropTargetStates[dt.dropId] = ps;
          if (oldPs !== undefined && oldPs !== ps) {
             const states = Object.keys(az.dom.dndState);
@@ -206,7 +206,7 @@ export class Draggable {
                      dt.dt.dispatchEvent(
                         new CustomEvent(eventName, {
                            detail: {
-                              source: node,
+                              source: dom,
                               target: dt.dt,
                               previousState: oldPs,
                               state: ps,
@@ -364,7 +364,7 @@ export class Draggable {
          .map(dt => {
             return {
                dt,
-               dropId: dt['azdom-droppable'],
+               dropId: dt.getAttribute('azui-droppable'),
                interestedDropEvents: dt.getAttribute('az-interested-drop-events') * 1
             };
          });
