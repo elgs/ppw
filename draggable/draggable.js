@@ -129,6 +129,7 @@ export class Draggable {
          }
 
          me.setContainment(settings.containment);
+         // console.log(settings.containment);
 
          // me.style['cursor', 'pointer');
          if (settings.opacity) {
@@ -389,10 +390,10 @@ export class Draggable {
             } else if (containment === 'document') {
                // me.containerScrollN = -document.documentElement.scrollLeft;
                // me.containerScrollW = -document.documentElement.scrollTop;
-               me.containerScrollW = -getDocScrollLeft();
-               me.containerScrollN = -getDocScrollTop();
-               me.containerScrollS = getDocHeight();
-               me.containerScrollE = getDocWidth();
+               me.containerScrollW = -azdom.getDocScrollLeft();
+               me.containerScrollN = -azdom.getDocScrollTop();
+               me.containerScrollS = azdom.getDocHeight();
+               me.containerScrollE = azdom.getDocWidth();
             } else if (containment === 'window') {
                me.containerScrollN = 0;
                me.containerScrollW = 0;
@@ -411,6 +412,7 @@ export class Draggable {
                container = containment[0];
             } else if (containment instanceof Node) {
                container = containment;
+               // console.log(containment);
             }
          }
 

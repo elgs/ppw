@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <script type="module" src="../../azdom/azdom.js"></script>
   <title>azSortable</title>
   <style>
     * {
@@ -112,10 +111,8 @@
   </div>
   <script type="module">
     import { Sortable } from './sortable.js';
-    import { Draggable } from '../draggable/draggable.js';
     const elem0 = document.querySelectorAll('.azSortable0');
     elem0.forEach(el => {
-      az.ui(Draggable, el);
       az.ui(Sortable, el, {
         placeholder: true,
         showPlaceHolder: false,
@@ -129,7 +126,6 @@
 
     const elem1 = document.querySelectorAll('.azSortable1');
     elem1.forEach(el => {
-      az.ui(Draggable, el);
       az.ui(Sortable, el, {
         placeholder: false,
         detachable: true,

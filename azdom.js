@@ -74,7 +74,7 @@ export const getPositionState = function (source, target, event) {
       ret += az.dom.dndState.touch;
    }
 
-   const hasTouches = event.touches && event.touches.length;
+   const hasTouches = event.touches?.length;
    const pointerX = hasTouches ? event.touches[0].pageX : event.pageX;
    const pointerY = hasTouches ? event.touches[0].pageY : event.pageY;
    if (!isOutside(pointerX, pointerY, t)) {

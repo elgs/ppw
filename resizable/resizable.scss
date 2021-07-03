@@ -6,7 +6,7 @@ $collapseIconSize: 4px;
 $allow: #a4d666;
 
 .azui {
-  &[azdom-resizable] > .handle {
+  &.azui-resizable > .handle {
     background-color: $main-color;
     box-sizing: border-box;
     position: absolute !important;
