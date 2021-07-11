@@ -124,7 +124,7 @@ export class Draggable {
          return;
       }
       if (!me.started) {
-         if (settings.start(e, me.selected, me) === false) {
+         if (settings.start.call(me, e, me.selected, me) === false) {
             return false;
          }
 
@@ -162,7 +162,7 @@ export class Draggable {
       me.mouseDX = me.mouseX - me.mouseX0;
       me.mouseDY = me.mouseY - me.mouseY0;
 
-      if (settings.drag(e, me.selected, me) === false) {
+      if (settings.drag.call(me, e, me.selected, me) === false) {
          return false;
       }
 
@@ -238,7 +238,7 @@ export class Draggable {
       const me = this;
       const dom = this.dom;
       const settings = this.settings;
-      if (me.started && settings.stop(e, me.selected, me) === false) {
+      if (me.started && settings.stop.call(me, e, me.selected, me) === false) {
          return false;
       }
       me.started = false;
@@ -314,7 +314,7 @@ export class Draggable {
       me.mouseEX = 0;
       me.mouseEY = 0;
 
-      if (settings.create(e, dom, me) === false) {
+      if (settings.create?.call(me, e, dom, me) === false) {
          return;
       }
 

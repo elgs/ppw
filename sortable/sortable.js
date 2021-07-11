@@ -108,11 +108,11 @@ export class Sortable {
                   // draggable and droppable need to be in the same sortable in order to share the same place holder, improvement?
                   draggable.settings = {
                      ...draggable.settings,
-                     ...me.getDragConfig(me),
+                     ...me.dragConfig,
                   };
                   droppable.settings = {
                      ...droppable.settings,
-                     ...me.getDropConfig(me),
+                     ...me.dropConfig,
                   };
                };
 
@@ -142,8 +142,8 @@ export class Sortable {
 
       const items = Array.prototype.filter.call(dom.children, n => matches(n, '.azSortableItem:not(.az-placeholder)'));
       items.forEach(item => {
-         az.ui(Draggable, item, me.getDragConfig(me));
-         az.ui(Droppable, item, me.getDropConfig(me));
+         az.ui(Draggable, item, me.dragConfig);
+         az.ui(Droppable, item, me.dropConfig);
       });
    }
 
@@ -192,43 +192,40 @@ export class Sortable {
 
       elem.classList.add('azSortableItem');
 
-      // do nothing if initialized, initialize if not initialized.
-      az.ui(Draggable, elem, me.getDragConfig(me));
-      az.ui(Droppable, elem, me.getDropConfig(me));
+      az.ui(Draggable, elem, me.dragConfig);
+      az.ui(Droppable, elem, me.dropConfig);
 
    }
 
-   getDragConfig(me) {
-      return {
-         containment: me.dom,
-         resist: 5,
-         create: this.onDragCreate.bind(me),
-         start: this.onDragStart.bind(me),
-         stop: this.onDragStop.bind(me),
-      };
-   }
-
-   getDropConfig(me) {
-      return {
-         interestedDropEvents: az.dom.dndEvent.target_center_in | az.dom.dndEvent.target_center_out,
-         target_center_in: this.onOverTargetCenter.bind(me),
-         target_center_out: this.onLeaveTargetCenter.bind(me),
-      };
+   dragConfig = {
+      containment: this.dom,
+      resist: 5,
+      // create: this.onDragCreate,
+      start: this.onDragStart,
+      stop: this.onDragStop,
    };
 
-   onDragCreate(e, target) {
-      if (this.settings.create(e, target, this) === false) {
-         return false;
-      }
+   dropConfig = {
+      interestedDropEvents: az.dom.dndEvent.target_center_in | az.dom.dndEvent.target_center_out,
+      target_center_in: this.onOverTargetCenter,
+      target_center_out: this.onLeaveTargetCenter,
    };
+
+   // onDragCreate(e, target) {
+   //    console.log(this);
+   //    if (this.settings.create(e, target, this) === false) {
+   //       return false;
+   //    }
+   // };
 
    onDragStart(e, target) {
+      console.log(this);
       const settings = this.settings;
       const dom = this.dom;
       this.selected = target;
-      if (settings.start(e, this.selected, this) === false) {
-         return false;
-      }
+      // if (settings.start.call(this, e, this.selected, this) === false) {
+      //    return false;
+      // }
       target.style['z-index'] = ++this.z;
       this.selected.classList.add('azSortableSelected');
 
@@ -239,7 +236,7 @@ export class Sortable {
          if (!settings.showPlaceHolder) {
             // me.ph.style['visibility'] = 'hidden';
          }
-         // console.log(target, me.ph);
+         // console.log(target, this.ph);
 
          const w = getWidth(this.selected);
          const h = getHeight(this.selected);

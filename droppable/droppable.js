@@ -32,7 +32,7 @@ export class Droppable {
 
       const addEventListener = eventName => {
          if (settings[eventName]) {
-            me.dom.addEventListener(eventName, me.settings[eventName]);
+            me.dom.addEventListener(eventName, me.settings[eventName]?.bind(me));
          }
       };
 
