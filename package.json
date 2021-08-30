@@ -17,7 +17,7 @@
   "dependencies": {
   },
   "devDependencies": {
-    "jasmine": "3.8.0",
+    "jasmine": "3.9.0",
     "live-server": "^1.2.1",
     "puppeteer": "10.2.0"
   }
