@@ -2,30 +2,23 @@ import '../azdom.js';
 
 export class Droppable {
    static id = 'azui-droppable';
-
-   constructor(options) {
-      const me = this;
-
-      const settings = {
-         // source_all_in: function (e) {},
-         // source_all_out: function (e) {},
-         // target_all_in: function (e) {},
-         // target_all_out: function (e) {},
-         // source_center_in: function (e) {},
-         // source_center_out: function (e) {},
-         // target_center_in: function (e) {},
-         // target_center_out: function (e) {},
-         // touch_in: function (e) {},
-         // touch_out: function (e) {},
-         // pointer_in: function (e) {},
-         // pointer_out: function (e) {},
-         // dragged: function (e) {},
-         // dropped: function (e) {},
-         interestedDropEvents: az.dom.dndEvent.all,
-         ...options
-      };
-      me.settings = settings;
-   }
+   static settings = {
+      // source_all_in: function (e) {},
+      // source_all_out: function (e) {},
+      // target_all_in: function (e) {},
+      // target_all_out: function (e) {},
+      // source_center_in: function (e) {},
+      // source_center_out: function (e) {},
+      // target_center_in: function (e) {},
+      // target_center_out: function (e) {},
+      // touch_in: function (e) {},
+      // touch_out: function (e) {},
+      // pointer_in: function (e) {},
+      // pointer_out: function (e) {},
+      // dragged: function (e) {},
+      // dropped: function (e) {},
+      interestedDropEvents: az.dom.dndEvent.all,
+   };
 
    init() {
       const me = this;

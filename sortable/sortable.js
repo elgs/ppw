@@ -4,39 +4,34 @@ import { diffPositionInnerBorder, getDocScrollLeft, getDocScrollTop, getHeight, 
 
 export class Sortable {
    static id = 'azui-sortable';
-   constructor(options) {
-      const me = this;
-      const settings = {
-         placeholder: true,
-         showPlaceHolder: false,
-         detachable: false,
-         align: 'x', // or y
-         create: function (event, ui, me) {
-            // console.log('create', ui);
-         },
-         start: function (event, ui, me) {
-            // console.log('start', ui);
-         },
-         sort: function (event, data, me) {
-            // console.log('sort', data);
-         },
-         stop: function (event, data, me) {
-            // console.log('stop', data);
-         },
-         add: function (event, data, me) {
-            // console.log('add', data);
-         },
-         ...options
-      };
-
-      this.settings = settings;
-
-   }
+   static settings = {
+      placeholder: true,
+      showPlaceHolder: false,
+      detachable: false,
+      align: 'x', // or y
+      create: function (event, ui, me) {
+         // console.log('create', ui);
+      },
+      start: function (event, ui, me) {
+         // console.log('start', ui);
+      },
+      sort: function (event, data, me) {
+         // console.log('sort', data);
+      },
+      stop: function (event, data, me) {
+         // console.log('stop', data);
+      },
+      add: function (event, data, me) {
+         // console.log('add', data);
+      },
+   };
 
    init() {
 
+      const me = this;
+      const settings = me.settings;
+      const dom = me.dom;
       this.z = 0;
-
 
       if (settings.detachable) {
          az.ui(Droppable, dom, {
@@ -222,7 +217,6 @@ export class Sortable {
    // };
 
    onDragStart(e, target) {
-      console.log(this);
       const settings = this.settings;
       const dom = this.dom;
       this.selected = target;
@@ -311,7 +305,6 @@ export class Sortable {
    };
 
    onDragStop(e, target, draggable) {
-      console.log(this);
       // console.log('on drag stop');
       const settings = this.settings;
       const me = this;

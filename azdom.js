@@ -511,11 +511,12 @@ globalThis.az.ui = (componentClass, domElement, options) => {
       return componentObject;
    }
 
-   componentObject = new componentClass(options ?? {});
+   componentObject = new componentClass();
    dom[componentClass.id] = componentObject;
    dom.classList.add('azui', componentClass.id);
    dom.setAttribute(componentClass.id, domId++);
    componentObject.dom = dom;
+   componentObject.settings = { ...componentClass.settings, ...options };
    componentObject.init?.call(componentObject);
    return componentObject;
 };

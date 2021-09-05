@@ -2,47 +2,42 @@ import * as azdom from '../azdom.js';
 
 export class Draggable {
    static id = 'azui-draggable';
-   constructor(options) {
+   static settings = {
+      // the handle this element is dragged on. It could be a DOM element, or a string of css selector, defaults to the element itself.
+      handle: false,
+      // the axis this element could be dragged along with, possible values are 'x', 'y', defaults to both directions.
+      axis: false,
+      // the continer element this element is constrained to. It could be a DOM element, or a string of css selector, defaults to false.
+      containment: false,
+      // distance in pixels dragged before this element actually starts to move.
+      resist: false,
+      // the degree of opacity the element is while dragging, default to false.
+      opacity: false,
+      // distance in pixels within which the element will snap to another's edge.
+      snapDistance: 0,
+      // the distance in pixels the gap is kept between snapped elements, defaults to 3.
+      snapGap: 1,
+      create: function (event, ui, me) {
+         // console.log('create', ui);
+      },
+      start: function (event, ui, me) {
+         // console.log('start', ui);
+      },
+      drag: function (event, ui, me) {
+         // console.log('drag', ui);
+      },
+      stop: function (event, ui, me) {
+         // console.log('stop', ui);
+      }
+   };
+
+   init() {
       this.onmousedown = this.onmousedown.bind(this);
       this.onmousemove = this.onmousemove.bind(this);
       this.onmouseup = this.onmouseup.bind(this);
 
       const me = this;
-      const settings = {
-         // the handle this element is dragged on. It could be a DOM element, or a string of css selector, defaults to the element itself.
-         handle: false,
-         // the axis this element could be dragged along with, possible values are 'x', 'y', defaults to both directions.
-         axis: false,
-         // the continer element this element is constrained to. It could be a DOM element, or a string of css selector, defaults to false.
-         containment: false,
-         // distance in pixels dragged before this element actually starts to move.
-         resist: false,
-         // the degree of opacity the element is while dragging, default to false.
-         opacity: false,
-         // distance in pixels within which the element will snap to another's edge.
-         snapDistance: 0,
-         // the distance in pixels the gap is kept between snapped elements, defaults to 3.
-         snapGap: 1,
-         create: function (event, ui, me) {
-            // console.log('create', ui);
-         },
-         start: function (event, ui, me) {
-            // console.log('start', ui);
-         },
-         drag: function (event, ui, me) {
-            // console.log('drag', ui);
-         },
-         stop: function (event, ui, me) {
-            // console.log('stop', ui);
-         },
-         ...options
-      };
 
-      me.settings = settings;
-   }
-
-   init() {
-      const me = this;
       const dom = me.dom;
       me.dropTargetStates = {};
       me.position = getComputedStyle(dom).position;
