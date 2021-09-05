@@ -2,7 +2,7 @@ import * as azdom from '../azdom.js';
 
 export class Draggable {
    static id = 'azui-draggable';
-   constructor(dom, options) {
+   constructor(options) {
       this.onmousedown = this.onmousedown.bind(this);
       this.onmousemove = this.onmousemove.bind(this);
       this.onmouseup = this.onmouseup.bind(this);
@@ -38,9 +38,12 @@ export class Draggable {
          ...options
       };
 
-      me.dom = dom;
       me.settings = settings;
+   }
 
+   init() {
+      const me = this;
+      const dom = me.dom;
       me.dropTargetStates = {};
       me.position = getComputedStyle(dom).position;
       if (me.position !== 'absolute' && me.position !== 'fixed') {

@@ -14,8 +14,6 @@
   ],
   "author": "Qian Chen",
   "license": "MIT",
-  "dependencies": {
-  },
   "devDependencies": {
     "jasmine": "3.9.0",
     "live-server": "^1.2.1",

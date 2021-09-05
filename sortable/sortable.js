@@ -4,7 +4,7 @@ import { diffPositionInnerBorder, getDocScrollLeft, getDocScrollTop, getHeight, 
 
 export class Sortable {
    static id = 'azui-sortable';
-   constructor(dom, options) {
+   constructor(options) {
       const me = this;
       const settings = {
          placeholder: true,
@@ -30,7 +30,10 @@ export class Sortable {
       };
 
       this.settings = settings;
-      this.dom = dom;
+
+   }
+
+   init() {
 
       this.z = 0;
 
@@ -308,7 +311,7 @@ export class Sortable {
    };
 
    onDragStop(e, target, draggable) {
-      // console.log(me.selected, target, me.ph);
+      console.log(this);
       // console.log('on drag stop');
       const settings = this.settings;
       const me = this;
@@ -348,7 +351,7 @@ export class Sortable {
       target.style.right = '';
       target.style.bottom = '';
 
-      if (settings.stop(e, data, me) === false) {
+      if (settings.stop.call(me, e, data, me) === false) {
          return false;
       }
 

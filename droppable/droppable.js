@@ -2,7 +2,8 @@ import '../azdom.js';
 
 export class Droppable {
    static id = 'azui-droppable';
-   constructor(dom, options) {
+
+   constructor(options) {
       const me = this;
 
       const settings = {
@@ -23,15 +24,15 @@ export class Droppable {
          interestedDropEvents: az.dom.dndEvent.all,
          ...options
       };
-
-
-      me.dom = dom;
       me.settings = settings;
+   }
 
-      dom.setAttribute('az-interested-drop-events', settings.interestedDropEvents);
+   init() {
+      const me = this;
+      this.dom.setAttribute('az-interested-drop-events', this.settings.interestedDropEvents);
 
       const addEventListener = eventName => {
-         if (settings[eventName]) {
+         if (me.settings[eventName]) {
             me.dom.addEventListener(eventName, me.settings[eventName]?.bind(me));
          }
       };
