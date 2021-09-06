@@ -36,6 +36,7 @@ export class Sortable {
       if (settings.detachable) {
          az.ui(Droppable, dom, {
             interestedDropEvents: az.dom.dndEvent.pointer_in | az.dom.dndEvent.pointer_out,
+            sortContainer: me,
             pointer_in: function (e) {
                // console.log('pointer in fired');
                const source = e.detail.source;
@@ -48,9 +49,9 @@ export class Sortable {
                const draggable = az.ui(Draggable, source);
                const droppable = az.ui(Droppable, source);
                const detachedContainer = draggable.detachedContainer;
-               // if (!detachedContainer) {
-               //   return;
-               // }
+               if (!detachedContainer) {
+                  return;
+               }
                me.selected = source;
                const phs = siblings(source, '.az-placeholder');
                if (phs.length > 0) {
@@ -293,7 +294,7 @@ export class Sortable {
       if (settings.sort.call(this.settings.sortContainer, e, data, this.settings.sortContainer) === false) {
          return false;
       }
-      if (!settings.placeholder) {
+      if (!settings.placeholder && this.settings.sortContainer.selected) {
          siblings(this.settings.sortContainer.selected).forEach(el => el.classList.remove('azSortableDropAfter', 'azSortableDropBefore'));
          this.settings.sortContainer.selected.classList.remove('azSortableAllow');
          this.settings.sortContainer.selected.classList.add('azSortableDeny');
