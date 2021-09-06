@@ -17,6 +17,7 @@ export class Droppable {
       // pointer_out: function (e) {},
       // dragged: function (e) {},
       // dropped: function (e) {},
+      sortContainer: null,
       interestedDropEvents: az.dom.dndEvent.all,
    };
 

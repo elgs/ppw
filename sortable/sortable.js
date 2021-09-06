@@ -9,19 +9,19 @@ export class Sortable {
       showPlaceHolder: false,
       detachable: false,
       align: 'x', // or y
-      create: function (event, ui, me) {
-         // console.log('create', ui);
+      create: function (event, ui) {
+         // console.log('create');
       },
-      start: function (event, ui, me) {
-         // console.log('start', ui);
+      start: function (event, ui) {
+         // console.log('start');
       },
-      sort: function (event, data, me) {
+      sort: function (event, data) {
          // console.log('sort', data);
       },
-      stop: function (event, data, me) {
+      stop: function (event, data) {
          // console.log('stop', data);
       },
-      add: function (event, data, me) {
+      add: function (event, data) {
          // console.log('add', data);
       },
    };
@@ -198,162 +198,158 @@ export class Sortable {
    dragConfig = {
       containment: this.dom,
       resist: 5,
-      // create: this.onDragCreate,
+      create: this.onDragCreate,
       start: this.onDragStart,
       stop: this.onDragStop,
+      sortContainer: this,
    };
 
    dropConfig = {
       interestedDropEvents: az.dom.dndEvent.target_center_in | az.dom.dndEvent.target_center_out,
       target_center_in: this.onOverTargetCenter,
       target_center_out: this.onLeaveTargetCenter,
+      sortContainer: this,
    };
 
-   // onDragCreate(e, target) {
-   //    console.log(this);
-   //    if (this.settings.create(e, target, this) === false) {
-   //       return false;
-   //    }
-   // };
-
-   onDragStart(e, target) {
-      const settings = this.settings;
-      const dom = this.dom;
-      this.selected = target;
-      // if (settings.start.call(this, e, this.selected, this) === false) {
-      //    return false;
-      // }
-      target.style['z-index'] = ++this.z;
-      this.selected.classList.add('azSortableSelected');
-
-      if (settings.placeholder) {
-         this.ph = target.cloneNode(false);
-         this.ph.removeAttribute('id');
-         this.ph.classList.add('az-placeholder');
-         if (!settings.showPlaceHolder) {
-            // me.ph.style['visibility'] = 'hidden';
-         }
-         // console.log(target, this.ph);
-
-         const w = getWidth(this.selected);
-         const h = getHeight(this.selected);
-         const offsetTop = position(this.selected).top + dom.scrollTop;
-         const offsetLeft = position(this.selected).left + dom.scrollLeft;
-         // console.log(offsetTop, offsetLeft);
-         this.ph.style['background-color'] = 'red';
-
-         target.style.position = 'absolute';
-         target.style.top = offsetTop + 'px';
-         target.style.left = offsetLeft + 'px';
-         target.style.right = 'auto';
-         target.style.bottom = 'auto';
-         setWidth(this.selected, w);
-         setHeight(this.selected, h);
-         // insert me.ph before me.selected
-         insertBefore(this.ph, this.selected);
-      } else {
-         this.selected.classList.add('azSortableDeny');
+   onDragCreate(e) {
+      if (this.settings.sortContainer.settings.create.call(this.settings.sortContainer, e) === false) {
+         return false;
       }
    };
 
+   onDragStart(e) {
+      const sortContainerSettings = this.settings.sortContainer.settings;
+      this.settings.sortContainer.selected = this.dom;
+      if (sortContainerSettings.start.call(this.settings.sortContainer, e) === false) {
+         return false;
+      }
+      this.dom.style['z-index'] = ++this.settings.sortContainer.z;
+      this.dom.classList.add('azSortableSelected');
+
+      if (sortContainerSettings.placeholder) {
+         this.settings.sortContainer.ph = this.dom.cloneNode(false);
+         this.settings.sortContainer.ph.removeAttribute('id');
+         this.settings.sortContainer.ph.classList.add('az-placeholder');
+         if (!sortContainerSettings.showPlaceHolder) {
+            this.settings.sortContainer.ph.style['visibility'] = 'hidden';
+         }
+         // console.log(target, this.ph);
+
+         const w = getWidth(this.dom);
+         const h = getHeight(this.dom);
+         const offsetTop = position(this.dom).top + this.dom.scrollTop;
+         const offsetLeft = position(this.dom).left + this.dom.scrollLeft;
+         // console.log(offsetTop, offsetLeft);
+         this.settings.sortContainer.ph.style['background-color'] = 'red';
+
+         this.dom.style.position = 'absolute';
+         this.dom.style.top = offsetTop + 'px';
+         this.dom.style.left = offsetLeft + 'px';
+         this.dom.style.right = 'auto';
+         this.dom.style.bottom = 'auto';
+         setWidth(this.dom, w);
+         setHeight(this.dom, h);
+         // insert me.ph before me.selected
+         insertBefore(this.settings.sortContainer.ph, this.dom);
+      } else {
+         this.dom.classList.add('azSortableDeny');
+      }
+   }
+
    onOverTargetCenter(e) {
       // console.log('on over target center!');
-      const settings = this.settings;
+      const settings = this.settings.sortContainer.settings;
       const data = e.detail;
       if (!data.source.classList.contains('azSortableItem') || data.source.classList.contains('az-sortable-moving')) {
          return;
       }
 
-      if (settings.sort(e, data, this) === false) {
+      if (settings.sort.call(this.settings.sortContainer, e, data) === false) {
          return false;
       }
-      console.log('a', this.dom, data.target);
       if (settings.placeholder) {
-         if (this.ph) {
-            console.log('b');
+         if (this.settings.sortContainer.ph) {
             // console.log('me.ph:', me.ph);
             // console.log('target:', data.target);
-            swapElement(this.ph, data.target);
+            swapElement(this.settings.sortContainer.ph, data.target);
          }
          // console.log(data.target);
-      } else if (this.selected) {
+      } else if (this.settings.sortContainer.selected) {
          siblings(data.target).forEach(el => el.classList.remove('azSortableDropAfter', 'azSortableDropBefore'));
-         data.target.classList.add(index(this.selected) < index(data.target) ? 'azSortableDropAfter' : 'azSortableDropBefore');
-         this.selected.classList.remove('azSortableDeny');
-         this.selected.classList.add('azSortableAllow');
-         this.ph = data.target;
+         data.target.classList.add(index(this.settings.sortContainer.selected) < index(data.target) ? 'azSortableDropAfter' : 'azSortableDropBefore');
+         this.settings.sortContainer.selected.classList.remove('azSortableDeny');
+         this.settings.sortContainer.selected.classList.add('azSortableAllow');
+         this.settings.sortContainer.ph = data.target;
       }
-   };
+   }
 
    onLeaveTargetCenter(e) {
       // console.log('on leave target center!');
-      const settings = this.settings;
-      const me = this;
+      const settings = this.settings.sortContainer.settings;
       const data = e.detail;
       if (!data.source.classList.contains('azSortableItem')) {
          return;
       }
-      if (settings.sort(e, data, me) === false) {
+      if (settings.sort.call(this.settings.sortContainer, e, data, this.settings.sortContainer) === false) {
          return false;
       }
       if (!settings.placeholder) {
-         siblings(me.selected).forEach(el => el.classList.remove('azSortableDropAfter', 'azSortableDropBefore'));
-         me.selected.classList.remove('azSortableAllow');
-         me.selected.classList.add('azSortableDeny');
-         me.ph = null;
+         siblings(this.settings.sortContainer.selected).forEach(el => el.classList.remove('azSortableDropAfter', 'azSortableDropBefore'));
+         this.settings.sortContainer.selected.classList.remove('azSortableAllow');
+         this.settings.sortContainer.selected.classList.add('azSortableDeny');
+         this.settings.sortContainer.ph = null;
       }
-   };
+   }
 
-   onDragStop(e, target, draggable) {
+   onDragStop(e) {
       // console.log('on drag stop');
-      const settings = this.settings;
-      const me = this;
+      const sortContainerSettings = this.settings.sortContainer.settings;
       const data = {
-         source: me.selected,
-         target: me.ph,
-         boundingClientRect: target.getBoundingClientRect(),
-         detached: draggable.detachedX || draggable.detachedY
+         source: this.settings.sortContainer.selected,
+         target: this.settings.sortContainer.ph,
+         boundingClientRect: this.dom.getBoundingClientRect(),
+         detached: this.detachedX || this.detachedY
       };
-      if (me.selected) {
-         me.selected.classList.remove('azSortableSelected');
-         me.selected.classList.remove('azSortableAllow');
-         me.selected.classList.remove('azSortableDeny');
-         if (me.ph) {
-            if (settings.placeholder) {
-               me.selected.style.width = '';
-               me.selected.style.height = '';
-               insertBefore(me.selected, me.ph);
-               remove(me.ph);
-               target.style.position = 'relative';
+      if (this.settings.sortContainer.selected) {
+         this.settings.sortContainer.selected.classList.remove('azSortableSelected');
+         this.settings.sortContainer.selected.classList.remove('azSortableAllow');
+         this.settings.sortContainer.selected.classList.remove('azSortableDeny');
+         if (this.settings.sortContainer.ph) {
+            if (sortContainerSettings.placeholder) {
+               this.settings.sortContainer.selected.style.width = '';
+               this.settings.sortContainer.selected.style.height = '';
+               insertBefore(this.settings.sortContainer.selected, this.settings.sortContainer.ph);
+               remove(this.settings.sortContainer.ph);
+               this.dom.style.position = 'relative';
             } else {
-               me.ph.classList.remove('azSortableDropBefore');
-               me.ph.classList.remove('azSortableDropAfter');
-               if (index(me.selected) < index(me.ph)) {
-                  insertAfter(me.selected, me.ph);
+               this.settings.sortContainer.ph.classList.remove('azSortableDropBefore');
+               this.settings.sortContainer.ph.classList.remove('azSortableDropAfter');
+               if (index(this.settings.sortContainer.selected) < index(this.settings.sortContainer.ph)) {
+                  insertAfter(this.settings.sortContainer.selected, this.settings.sortContainer.ph);
                } else {
-                  insertBefore(me.selected, me.ph);
+                  insertBefore(this.settings.sortContainer.selected, this.settings.sortContainer.ph);
                }
             }
-            me.ph = null;
+            this.settings.sortContainer.ph = null;
          }
-         me.selected = null;
+         this.settings.sortContainer.selected = null;
       }
       // console.log(me.selected, target, me.ph);
-      target.style.top = '';
-      target.style.left = '';
-      target.style.right = '';
-      target.style.bottom = '';
+      this.dom.style.top = '';
+      this.dom.style.left = '';
+      this.dom.style.right = '';
+      this.dom.style.bottom = '';
 
-      if (settings.stop.call(me, e, data, me) === false) {
+      if (sortContainerSettings.stop.call(this.settings.sortContainer, e, data, this.settings.sortContainer) === false) {
          return false;
       }
 
-      if (draggable.stopHook) {
+      if (this.stopHook) {
          setTimeout(() => {
-            draggable.stopHook();
-            draggable.stopHook = null;
+            this.stopHook();
+            this.stopHook = null;
          });
       }
-   };
+   }
 
 }

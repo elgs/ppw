@@ -17,17 +17,18 @@ export class Draggable {
       snapDistance: 0,
       // the distance in pixels the gap is kept between snapped elements, defaults to 3.
       snapGap: 1,
-      create: function (event, ui, me) {
-         // console.log('create', ui);
+      sortContainer: null,
+      create: function (event) {
+         // console.log('create');
       },
-      start: function (event, ui, me) {
-         // console.log('start', ui);
+      start: function (event) {
+         // console.log('start');
       },
-      drag: function (event, ui, me) {
-         // console.log('drag', ui);
+      drag: function (event) {
+         // console.log('drag');
       },
-      stop: function (event, ui, me) {
-         // console.log('stop', ui);
+      stop: function (event) {
+         // console.log('stop');
       }
    };
 
@@ -52,7 +53,6 @@ export class Draggable {
       me.detachedY = false;
 
       me.dropTargets = null;
-      me.selected = null;
       me.mouseX0 = 0; // original mouse position
       me.mouseY0 = 0;
       me.containerBoundaries = null;
@@ -118,11 +118,11 @@ export class Draggable {
       const dom = me.dom;
       const settings = me.settings;
       // console.log(e.type, e.currentTarget, me);
-      if (!me.selected) {
+      if (!me.dom) {
          return;
       }
       if (!me.started) {
-         if (settings.start.call(me, e, me.selected, me) === false) {
+         if (settings.start.call(me, e) === false) {
             return false;
          }
 
@@ -160,7 +160,7 @@ export class Draggable {
       me.mouseDX = me.mouseX - me.mouseX0;
       me.mouseDY = me.mouseY - me.mouseY0;
 
-      if (settings.drag.call(me, e, me.selected, me) === false) {
+      if (settings.drag.call(me, e) === false) {
          return false;
       }
 
@@ -220,7 +220,7 @@ export class Draggable {
             }
          }
       }
-      // me.selected.style['background-color'] = 'red';
+      // me.dom.style['background-color'] = 'red';
 
       if (settings.axis === 'x') {
          me.moveX(me.mouseDX);
@@ -236,7 +236,7 @@ export class Draggable {
       const me = this;
       const dom = this.dom;
       const settings = this.settings;
-      if (me.started && settings.stop.call(me, e, me.selected, me) === false) {
+      if (me.started && settings.stop.call(me, e) === false) {
          return false;
       }
       me.started = false;
@@ -256,9 +256,6 @@ export class Draggable {
       document.removeEventListener('mousemove', me.onmousemove);
       document.removeEventListener('mouseup', me.onmouseup);
       document.removeEventListener('mouseleave', me.onmouseup);
-
-      // me.selected.style['background-color'] = 'white';
-      me.selected = null;
 
       const dts = me.dropTargets;
       dts.map(dt => {
@@ -300,19 +297,17 @@ export class Draggable {
       // the reason not to use stopPropation is to allow other events to bubble through, like click to increase z-index.
       // e.stopPropagation(); // no no
 
-      // only move the me.selected, not any of it's ancestors.
+      // only move the me.dom, not any of it's ancestors.
       if (e.target.closest(`.${Draggable.id}`) !== dom) {
          return;
       }
-
-      me.selected = dom;
 
       me.mouseX = me.mouseX0 = e.touches ? e.touches[0].pageX : e.pageX;
       me.mouseY = me.mouseY0 = e.touches ? e.touches[0].pageY : e.pageY;
       me.mouseEX = 0;
       me.mouseEY = 0;
 
-      if (settings.create?.call(me, e, dom, me) === false) {
+      if (settings.create?.call(me, e) === false) {
          return;
       }
 
@@ -463,7 +458,7 @@ export class Draggable {
       me.marginS = parseInt(nodeStyles['margin-bottom']);
       me.marginW = parseInt(nodeStyles['margin-left']);
 
-      const mebcr = me.selected.getBoundingClientRect();
+      const mebcr = me.dom.getBoundingClientRect();
       me.scrollN = mebcr.top + azdom.getDocScrollTop();
       me.scrollE = mebcr.right + azdom.getDocScrollLeft();
       me.scrollS = mebcr.bottom + azdom.getDocScrollTop();
@@ -513,22 +508,22 @@ export class Draggable {
    moveAbsoluteX(dx) {
       const me = this;
       if (me.containerScrollW === undefined || me.detachedX) {
-         me.selected.style.right = 'auto';
-         me.selected.style.left = me.W + dx + 'px';
+         me.dom.style.right = 'auto';
+         me.dom.style.left = me.W + dx + 'px';
       } else {
          if (-dx > me.scrollW - me.containerScrollW - me.containerBorderW - me.containerPaddingW - me.marginW) {
             // console.log('hit left wall');
             const di = me.containerScrollW + me.containerBorderW + me.containerPaddingW - (me.parentScrollW + me.parentBorderW + me.parentPaddingW);
-            me.selected.style.right = 'auto';
-            me.selected.style.left = me.parentPaddingW + di + 'px';
+            me.dom.style.right = 'auto';
+            me.dom.style.left = me.parentPaddingW + di + 'px';
          } else if (dx > me.containerScrollE - me.scrollE - me.containerBorderE - me.containerPaddingE - me.marginE) {
             // console.log('hit right wall');
             const di = me.containerScrollE - me.containerBorderE - me.containerPaddingE - (me.parentScrollE - me.parentBorderE - me.parentPaddingE);
-            me.selected.style.left = 'auto';
-            me.selected.style.right = me.parentPaddingE - di + 'px';
+            me.dom.style.left = 'auto';
+            me.dom.style.right = me.parentPaddingE - di + 'px';
          } else {
-            me.selected.style.right = 'auto';
-            me.selected.style.left = me.W + dx + 'px';
+            me.dom.style.right = 'auto';
+            me.dom.style.left = me.W + dx + 'px';
          }
       }
    }
@@ -536,22 +531,22 @@ export class Draggable {
    moveAbsoluteY(dy) {
       const me = this;
       if (me.containerScrollN === undefined || me.detachedY) {
-         me.selected.style.bottom = 'auto';
-         me.selected.style.top = me.N + dy + 'px';
+         me.dom.style.bottom = 'auto';
+         me.dom.style.top = me.N + dy + 'px';
       } else {
          if (-dy > me.scrollN - me.containerScrollN - me.containerBorderN - me.containerPaddingN - me.marginN) {
             // console.log('hit ceiling');
             const di = me.containerScrollN + me.containerBorderN + me.containerPaddingN - (me.parentScrollN + me.parentBorderN + me.parentPaddingN);
-            me.selected.style.bottom = 'auto';
-            me.selected.style.top = me.parentPaddingN + di + 'px';
+            me.dom.style.bottom = 'auto';
+            me.dom.style.top = me.parentPaddingN + di + 'px';
          } else if (dy > me.containerScrollS - me.scrollS - me.containerBorderS - me.containerPaddingS - me.marginS) {
             // console.log('hit floor');
             const di = me.containerScrollS - me.containerBorderS - me.containerPaddingS - (me.parentScrollS - me.parentBorderS - me.parentPaddingS);
-            me.selected.style.top = 'auto';
-            me.selected.style.bottom = me.parentPaddingS - di + 'px';
+            me.dom.style.top = 'auto';
+            me.dom.style.bottom = me.parentPaddingS - di + 'px';
          } else {
-            me.selected.style.bottom = 'auto';
-            me.selected.style.top = me.N + dy + 'px';
+            me.dom.style.bottom = 'auto';
+            me.dom.style.top = me.N + dy + 'px';
          }
       }
    }
@@ -559,20 +554,20 @@ export class Draggable {
    moveFixedX(dx) {
       const me = this;
       if (me.containerScrollW === undefined || me.detachedX) {
-         me.selected.style.right = 'auto';
-         me.selected.style.left = me.W + dx + 'px';
+         me.dom.style.right = 'auto';
+         me.dom.style.left = me.W + dx + 'px';
       } else {
          if (-dx > me.scrollW - me.containerScrollW - me.containerBorderW - me.containerPaddingW - me.marginW) {
             // console.log('hit left wall');
-            me.selected.style.right = 'auto';
-            me.selected.style.left = me.containerScrollW + me.containerBorderW + me.containerPaddingW + 'px';
+            me.dom.style.right = 'auto';
+            me.dom.style.left = me.containerScrollW + me.containerBorderW + me.containerPaddingW + 'px';
          } else if (dx > me.containerScrollE - me.scrollE - me.containerBorderE - me.containerPaddingE - me.marginE) {
             // console.log('hit right wall');
-            me.selected.style.right = 'auto';
-            me.selected.style.left = me.containerScrollE - me.containerBorderE - me.containerPaddingE - me.width - me.marginW - me.marginE + 'px';
+            me.dom.style.right = 'auto';
+            me.dom.style.left = me.containerScrollE - me.containerBorderE - me.containerPaddingE - me.width - me.marginW - me.marginE + 'px';
          } else {
-            me.selected.style.right = 'auto';
-            me.selected.style.left = me.W + dx + 'px';
+            me.dom.style.right = 'auto';
+            me.dom.style.left = me.W + dx + 'px';
          }
       }
    }
@@ -580,20 +575,20 @@ export class Draggable {
    moveFixedY(dy) {
       const me = this;
       if (me.containerScrollN === undefined || me.detachedY) {
-         me.selected.style.bottom = 'auto';
-         me.selected.style.top = me.N + dy + 'px';
+         me.dom.style.bottom = 'auto';
+         me.dom.style.top = me.N + dy + 'px';
       } else {
          if (-dy > me.scrollN - me.containerScrollN - me.containerBorderN - me.containerPaddingN - me.marginN) {
             // console.log('hit ceiling');
-            me.selected.style.bottom = 'auto';
-            me.selected.style.top = me.containerScrollN + me.containerBorderN + me.containerPaddingN + 'px';
+            me.dom.style.bottom = 'auto';
+            me.dom.style.top = me.containerScrollN + me.containerBorderN + me.containerPaddingN + 'px';
          } else if (dy > me.containerScrollS - me.scrollS - me.containerBorderS - me.containerPaddingS - me.marginS) {
             // console.log('hit floor');
-            me.selected.style.bottom = 'auto';
-            me.selected.style.top = me.containerScrollS - me.containerBorderS - me.containerPaddingS - me.height - me.marginN - me.marginS + 'px';
+            me.dom.style.bottom = 'auto';
+            me.dom.style.top = me.containerScrollS - me.containerBorderS - me.containerPaddingS - me.height - me.marginN - me.marginS + 'px';
          } else {
-            me.selected.style.bottom = 'auto';
-            me.selected.style.top = me.N + dy + 'px';
+            me.dom.style.bottom = 'auto';
+            me.dom.style.top = me.N + dy + 'px';
          }
       }
    }
@@ -601,20 +596,20 @@ export class Draggable {
    moveRelativeX(dx) {
       const me = this;
       if (me.containerScrollW === undefined || me.detachedX) {
-         me.selected.style.right = 'auto';
-         me.selected.style.left = me.W + dx + 'px';
+         me.dom.style.right = 'auto';
+         me.dom.style.left = me.W + dx + 'px';
       } else {
          if (-dx > me.scrollW - me.containerScrollW - me.containerBorderW - me.containerPaddingW - me.marginW) {
             // console.log('hit left wall');
-            me.selected.style.right = 'auto';
-            me.selected.style.left = -(me.scrollW - me.containerScrollW - me.containerBorderW - me.containerPaddingW - me.marginW) + me.W + 'px';
+            me.dom.style.right = 'auto';
+            me.dom.style.left = -(me.scrollW - me.containerScrollW - me.containerBorderW - me.containerPaddingW - me.marginW) + me.W + 'px';
          } else if (dx > me.containerScrollE - me.scrollE - me.containerBorderE - me.containerPaddingE - me.marginE) {
             // console.log('hit right wall');
-            me.selected.style.left = 'auto';
-            me.selected.style.right = -(me.containerScrollE - me.scrollE - me.containerBorderE - me.containerPaddingE - me.marginE) + me.E + 'px';
+            me.dom.style.left = 'auto';
+            me.dom.style.right = -(me.containerScrollE - me.scrollE - me.containerBorderE - me.containerPaddingE - me.marginE) + me.E + 'px';
          } else {
-            me.selected.style.right = 'auto';
-            me.selected.style.left = me.W + dx + 'px';
+            me.dom.style.right = 'auto';
+            me.dom.style.left = me.W + dx + 'px';
          }
       }
    }
@@ -622,20 +617,20 @@ export class Draggable {
    moveRelativeY(dy) {
       const me = this;
       if (me.containerScrollN === undefined || me.detachedY) {
-         me.selected.style.bottom = 'auto';
-         me.selected.style.top = me.N + dy + 'px';
+         me.dom.style.bottom = 'auto';
+         me.dom.style.top = me.N + dy + 'px';
       } else {
          if (-dy > me.scrollN - me.containerScrollN - me.containerBorderN - me.containerPaddingN - me.marginN) {
             // console.log('hit ceiling');
-            me.selected.style.bottom = 'auto';
-            me.selected.style.top = -(me.scrollN - me.containerScrollN - me.containerBorderN - me.containerPaddingN - me.marginN) + me.N + 'px';
+            me.dom.style.bottom = 'auto';
+            me.dom.style.top = -(me.scrollN - me.containerScrollN - me.containerBorderN - me.containerPaddingN - me.marginN) + me.N + 'px';
          } else if (dy > me.containerScrollS - me.scrollS - me.containerBorderS - me.containerPaddingS - me.marginS) {
             // console.log('hit floor');
-            me.selected.style.top = 'auto';
-            me.selected.style.bottom = -(me.containerScrollS - me.scrollS - me.containerBorderS - me.containerPaddingS - me.marginS) + me.S + 'px';
+            me.dom.style.top = 'auto';
+            me.dom.style.bottom = -(me.containerScrollS - me.scrollS - me.containerBorderS - me.containerPaddingS - me.marginS) + me.S + 'px';
          } else {
-            me.selected.style.bottom = 'auto';
-            me.selected.style.top = me.N + dy + 'px';
+            me.dom.style.bottom = 'auto';
+            me.dom.style.top = me.N + dy + 'px';
          }
       }
    }
