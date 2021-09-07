@@ -22,19 +22,19 @@ export class Resizable {
       onDoubleClick: function (event) {
          // console.log(event.target);
       },
-      create: function (event, ui) {
-         // console.log('create', ui);
+      create: function (event) {
+         // console.log('create');
       },
-      start: function (event, ui) {
-         // console.log('start', ui);
+      start: function (event) {
+         // console.log('start');
       },
-      resize: function (event, ui) {
-         // console.log('resize', ui);
+      resize: function (event, handle, by) {
+         // console.log('resize', handle, by);
       },
-      stop: function (event, ui) {
-         // console.log('stop', ui);
+      stop: function (event) {
+         // console.log('stop');
       },
-      collapse: function (event, ui, wh) {
+      collapse: function (event, button, wh) {
          // console.log(this, event, ui, wh);
       },
    };
@@ -574,17 +574,16 @@ export class Resizable {
 
    collapseX(event, ui) {
       const me = this;
-      console.log(me);
       const w = getWidth(me.dom);
       me.dom.style.transition = 'all .2s ease-in';
       if (w > 0) {
          me.dom.setAttribute('azCollapseWidth', w);
          setWidth(me.dom, 0);
-         me.settings.collapse.call(me.dom, event, ui, w);
+         me.settings.collapse.call(me, event, ui, w);
       } else {
          const storedW = me.dom.getAttribute('azCollapseWidth') * 1;
          setWidth(me.dom, storedW);
-         me.settings.collapse.call(me.dom, event, ui, -storedW);
+         me.settings.collapse.call(me, event, ui, -storedW);
       }
       setTimeout(() => {
          me.dom.style.transition = '';
@@ -599,11 +598,11 @@ export class Resizable {
       if (h > 0) {
          me.dom.setAttribute('azCollapseHeight', h);
          setHeight(me.dom, 0);
-         me.settings.collapse.call(me.dom, event, ui, h);
+         me.settings.collapse.call(me, event, ui, h);
       } else {
          const storedH = me.dom.getAttribute('azCollapseHeight') * 1;
          setHeight(me.dom, storedH);
-         me.settings.collapse.call(me.dom, event, ui, -storedH);
+         me.settings.collapse.call(me, event, ui, -storedH);
       }
       setTimeout(() => {
          me.dom.style.transition = '';
