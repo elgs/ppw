@@ -48,6 +48,11 @@ export class Sortable {
 
                const draggable = az.ui(Draggable, source);
                const droppable = az.ui(Droppable, source);
+               if (draggable.settings.sortContainer.settings.placeholder !== me.settings.placeholder) {
+                  return;
+               }
+               draggable.settings.sortContainer = me;
+               droppable.settings.sortContainer = me;
                const detachedContainer = draggable.detachedContainer;
                if (!detachedContainer) {
                   return;
@@ -103,18 +108,6 @@ export class Sortable {
                draggable.detachedX = false;
                draggable.detachedY = false;
 
-               draggable.stopHook = function () {
-                  // draggable and droppable need to be in the same sortable in order to share the same place holder, improvement?
-                  draggable.settings = {
-                     ...draggable.settings,
-                     ...me.dragConfig,
-                  };
-                  droppable.settings = {
-                     ...droppable.settings,
-                     ...me.dropConfig,
-                  };
-               };
-
                setTimeout(() => {
                   // don't trigger on target center event until 50ms later.
                   source.classList.remove('az-sortable-moving');
@@ -123,6 +116,9 @@ export class Sortable {
             },
             pointer_out: function (e) {
                // console.log('pointer out fired');
+               if (!me.selected) {
+                  return;
+               }
                const source = e.detail.source;
                if (!source.classList.contains('azSortableItem')) {
                   return;
@@ -133,8 +129,6 @@ export class Sortable {
                draggable.detachedY = true;
 
                draggable.detachedContainer = me;
-
-               draggable.stopHook = null;
             }
          });
       }
@@ -151,7 +145,7 @@ export class Sortable {
       const dom = me.dom;
       const settings = me.settings;
 
-      if (settings.add(null, elem, me) === false) {
+      if (settings.add.call(this, elem) === false) {
          return false;
       }
 
@@ -270,7 +264,7 @@ export class Sortable {
       }
       if (settings.placeholder) {
          if (this.settings.sortContainer.ph) {
-            // console.log('me.ph:', me.ph);
+            // console.log('ph:', this.settings.sortContainer.dom);
             // console.log('target:', data.target);
             swapElement(this.settings.sortContainer.ph, data.target);
          }
@@ -341,16 +335,8 @@ export class Sortable {
       this.dom.style.right = '';
       this.dom.style.bottom = '';
 
-      if (sortContainerSettings.stop.call(this.settings.sortContainer, e, data, this.settings.sortContainer) === false) {
+      if (sortContainerSettings.stop.call(this.settings.sortContainer, e, data) === false) {
          return false;
       }
-
-      if (this.stopHook) {
-         setTimeout(() => {
-            this.stopHook();
-            this.stopHook = null;
-         });
-      }
    }
-
 }
