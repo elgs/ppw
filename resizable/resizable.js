@@ -8,43 +8,41 @@ const svgTriangleRight = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1
 
 export class Resizable {
    static id = 'azui-resizable';
-   constructor(dom, options) {
-      const settings = {
-         minWidth: 0,
-         maxWidth: Number.MAX_SAFE_INTEGER,
-         minHeight: 0,
-         maxHeight: Number.MAX_SAFE_INTEGER,
-         aspectRatio: false,
-         handleSize: 4,
-         handles: 'all', //n, e, s, w, ne, se, sw, nw, all
-         moveOnResize: true,
-         hideHandles: false,
-         hideCollapseButton: false,
-         onDoubleClick: function (event) {
-            // console.log(event.target);
-         },
-         create: function (event, ui) {
-            // console.log('create', ui);
-         },
-         start: function (event, ui) {
-            // console.log('start', ui);
-         },
-         resize: function (event, ui) {
-            // console.log('resize', ui);
-         },
-         stop: function (event, ui) {
-            // console.log('stop', ui);
-         },
-         collapse: function (event, ui, wh) {
-            // console.log(this, event, ui, wh);
-         },
-         ...options
-      };
+   static settings = {
+      minWidth: 0,
+      maxWidth: Number.MAX_SAFE_INTEGER,
+      minHeight: 0,
+      maxHeight: Number.MAX_SAFE_INTEGER,
+      aspectRatio: false,
+      handleSize: 4,
+      handles: 'all', //n, e, s, w, ne, se, sw, nw, all
+      moveOnResize: true,
+      hideHandles: false,
+      hideCollapseButton: false,
+      onDoubleClick: function (event) {
+         // console.log(event.target);
+      },
+      create: function (event, ui) {
+         // console.log('create', ui);
+      },
+      start: function (event, ui) {
+         // console.log('start', ui);
+      },
+      resize: function (event, ui) {
+         // console.log('resize', ui);
+      },
+      stop: function (event, ui) {
+         // console.log('stop', ui);
+      },
+      collapse: function (event, ui, wh) {
+         // console.log(this, event, ui, wh);
+      },
+   };
+   init() {
 
       const me = this;
-      this.dom = dom;
-
-      me.settings = settings;
+      const dom = this.dom;
+      const settings = this.settings;
 
       let position = getComputedStyle(dom)['position'];
       if (position !== 'absolute' && position !== 'fixed') {
@@ -219,7 +217,7 @@ export class Resizable {
          me._resetHandles();
 
          const onCreate = function (event, elem) {
-            if (settings.create.call(dom, event, elem) === false) {
+            if (settings.create.call(me, event) === false) {
                return false;
             }
             mx = event.touches ? event.touches[0].clientX : event.clientX;
@@ -251,8 +249,8 @@ export class Resizable {
             // console.log('create');
          };
 
-         const onStart = function (event, elem) {
-            if (settings.start.call(dom, event, elem) === false) {
+         const onStart = function (event) {
+            if (settings.start.call(me, event) === false) {
                return false;
             }
 
@@ -268,15 +266,15 @@ export class Resizable {
                me.dom.setAttribute('azCollapseWidth', w);
             }
 
-            elem.classList.add('active');
+            this.dom.classList.add('active');
             // event.preventDefault();
          };
 
-         const onStop = function (event, elem) {
-            if (settings.stop.call(dom, event, elem) === false) {
+         const onStop = function (event) {
+            if (settings.stop.call(dom, event) === false) {
                return false;
             }
-            elem.classList.remove('active');
+            this.dom.classList.remove('active');
 
             setTimeout(() => {
                me._resetHandles();
@@ -311,14 +309,14 @@ export class Resizable {
             axis: 'y',
             create: onCreate,
             start: onStart,
-            drag: function (event, elem) {
+            drag: function (event) {
                // const nmx = event.touches ? event.touches[0].clientX : event.clientX;
                const nmy = event.touches ? event.touches[0].clientY : event.clientY;
                const by = {
                   dy: nmy - my
                };
 
-               if (settings.resize.call(dom, event, eh.n, by) === false) {
+               if (settings.resize.call(me, event, eh.n, by) === false) {
                   return false;
                }
 
@@ -334,7 +332,7 @@ export class Resizable {
             axis: 'x',
             create: onCreate,
             start: onStart,
-            drag: function (event, elem) {
+            drag: function (event) {
                const nmx = event.touches ? event.touches[0].clientX : event.clientX;
                // const nmy = event.touches ? event.touches[0].clientY : event.clientY;
 
@@ -342,7 +340,7 @@ export class Resizable {
                   dx: nmx - mx
                };
 
-               if (settings.resize.call(dom, event, eh.e, by) === false) {
+               if (settings.resize.call(me, event, eh.e, by) === false) {
                   return false;
                }
 
@@ -357,7 +355,7 @@ export class Resizable {
             axis: 'y',
             create: onCreate,
             start: onStart,
-            drag: function (event, elem) {
+            drag: function (event) {
                // const nmx = event.touches ? event.touches[0].clientX : event.clientX;
                const nmy = event.touches ? event.touches[0].clientY : event.clientY;
 
@@ -365,7 +363,7 @@ export class Resizable {
                   dy: nmy - my
                };
 
-               if (settings.resize.call(dom, event, eh.s, by) === false) {
+               if (settings.resize.call(me, event, eh.s, by) === false) {
                   return false;
                }
 
@@ -380,7 +378,7 @@ export class Resizable {
             axis: 'x',
             create: onCreate,
             start: onStart,
-            drag: function (event, elem) {
+            drag: function (event) {
                const nmx = event.touches ? event.touches[0].clientX : event.clientX;
                // const nmy = event.touches ? event.touches[0].clientY : event.clientY;
 
@@ -388,7 +386,7 @@ export class Resizable {
                   dx: nmx - mx
                };
 
-               if (settings.resize.call(dom, event, eh.w, by) === false) {
+               if (settings.resize.call(me, event, eh.w, by) === false) {
                   return false;
                }
 
@@ -403,7 +401,7 @@ export class Resizable {
          h.ne && az.ui(Draggable, eh.ne, {
             create: onCreate,
             start: onStart,
-            drag: function (event, elem) {
+            drag: function (event) {
                const nmx = event.touches ? event.touches[0].clientX : event.clientX;
                const nmy = event.touches ? event.touches[0].clientY : event.clientY;
 
@@ -415,7 +413,7 @@ export class Resizable {
                   dy
                };
 
-               if (settings.resize.call(dom, event, eh.ne, by) === false) {
+               if (settings.resize.call(me, event, eh.ne, by) === false) {
                   return false;
                }
 
@@ -430,7 +428,7 @@ export class Resizable {
          h.se && az.ui(Draggable, eh.se, {
             create: onCreate,
             start: onStart,
-            drag: function (event, elem) {
+            drag: function (event) {
                const nmx = event.touches ? event.touches[0].clientX : event.clientX;
                const nmy = event.touches ? event.touches[0].clientY : event.clientY;
 
@@ -442,7 +440,7 @@ export class Resizable {
                   dy
                };
 
-               if (settings.resize.call(dom, event, eh.se, by) === false) {
+               if (settings.resize.call(me, event, eh.se, by) === false) {
                   return false;
                }
 
@@ -458,7 +456,7 @@ export class Resizable {
          h.sw && az.ui(Draggable, eh.sw, {
             create: onCreate,
             start: onStart,
-            drag: function (event, elem) {
+            drag: function (event) {
                const nmx = event.touches ? event.touches[0].clientX : event.clientX;
                const nmy = event.touches ? event.touches[0].clientY : event.clientY;
 
@@ -470,7 +468,7 @@ export class Resizable {
                   dy
                };
 
-               if (settings.resize.call(dom, event, eh.sw, by) === false) {
+               if (settings.resize.call(me, event, eh.sw, by) === false) {
                   return false;
                }
 
@@ -485,7 +483,7 @@ export class Resizable {
          h.nw && az.ui(Draggable, eh.nw, {
             create: onCreate,
             start: onStart,
-            drag: function (event, elem) {
+            drag: function (event) {
                const nmx = event.touches ? event.touches[0].clientX : event.clientX;
                const nmy = event.touches ? event.touches[0].clientY : event.clientY;
 
@@ -497,7 +495,7 @@ export class Resizable {
                   dy
                };
 
-               if (settings.resize.call(dom, event, eh.nw, by) === false) {
+               if (settings.resize.call(me, event, eh.nw, by) === false) {
                   return false;
                }
 
