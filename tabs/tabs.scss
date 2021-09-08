@@ -1,7 +1,7 @@
-@import '../_utilities/utilities.scss';
+@import '../ppw.scss';
 
 .azui {
-  &.azTabs {
+  &.azui-tabs {
     box-shadow: $shadow;
     display: flex;
     flex-direction: column;
