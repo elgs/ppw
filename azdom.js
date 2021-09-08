@@ -27,7 +27,23 @@ globalThis.az = globalThis.az ?? {
          none: 0
       },
    },
+   cursor: {
+      x: undefined,
+      y: undefined
+   },
 };
+
+let wait = false;
+document.addEventListener('mousemove', e => {
+   if (!wait) {
+      az.cursor.x = e.clientX;
+      az.cursor.y = e.clientY;
+      wait = true;
+      setTimeout(() => {
+         wait = false;
+      }, 50);
+   }
+});
 
 export const resolveDOM = (parent, dom) => {
    dom = resolveFunction(dom);

@@ -1,0 +1,78 @@
+.azui {
+  font-size: 13px;
+  font-family: -apple-system, BlinkMacSystemFont, "San Francisco", "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif;
+}
+
+.azui *,
+.azui *::before,
+.azui *::after {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.azui.azContextMenuPopup {
+  background-color: #e8e8e8;
+  position: absolute;
+  min-width: 100px;
+  -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.12), 0 5px 5px rgba(0, 0, 0, 0.12), 0 10px 30px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 0 5px rgba(0, 0, 0, 0.12), 0 5px 5px rgba(0, 0, 0, 0.12), 0 10px 30px rgba(0, 0, 0, 0.1);
+  outline: none;
+  font-size: 12px;
+}
+
+.azui.azContextMenuPopup div.azMenuItem {
+  display: -ms-grid;
+  display: grid;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  -ms-grid-columns: 24px 1fr;
+      grid-template-columns: 24px 1fr;
+  background-color: #e8e8e8;
+  width: 100%;
+  padding: 5px 0;
+}
+
+.azui.azContextMenuPopup div.azMenuItem span {
+  display: inline-block;
+}
+
+.azui.azContextMenuPopup div.azMenuItem span.icon {
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 1;
+  grid-column: 1/2;
+  text-align: center;
+  width: 24px;
+}
+
+.azui.azContextMenuPopup div.azMenuItem span.icon svg {
+  margin-top: 3px;
+  width: 10px;
+  height: 10px;
+}
+
+.azui.azContextMenuPopup div.azMenuItem span.title {
+  -ms-grid-column: 2;
+  -ms-grid-column-span: 1;
+  grid-column: 2/3;
+  margin: 1px 10px 0 8px;
+}
+
+.azui.azContextMenuPopup div.azMenuItem.disabled * {
+  color: gray;
+  fill: gray;
+  cursor: not-allowed;
+}
+
+.azui.azContextMenuPopup div.azMenuItem:not(.disabled).selected {
+  background-color: #498dd5;
+  color: #e8e8e8;
+  cursor: pointer;
+}
+
+.azui.azContextMenuPopup div.azMenuSeparator {
+  height: 2px;
+  border-top: solid 1px #d6d6d6;
+  background-color: white;
+  margin: 2px 0;
+  padding: 0;
+}
