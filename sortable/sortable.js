@@ -145,7 +145,7 @@ export class Sortable {
       const dom = me.dom;
       const settings = me.settings;
 
-      if (settings.add.call(this, elem) === false) {
+      if (settings.add.call(this, null, elem) === false) {
          return false;
       }
 

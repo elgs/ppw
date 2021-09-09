@@ -1,9 +1,4 @@
-$main-color: #e8e8e8;
-$more-active: darken($main-color, 12%);
-$active: darken($main-color, 8%);
-$less-active: darken($main-color, 4%);
-$collapseIconSize: 4px;
-$allow: #a4d666;
+@import '../ppw.scss';
 
 .azui {
   &.azui-resizable > .handle {
