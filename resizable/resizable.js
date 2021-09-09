@@ -179,7 +179,7 @@ export class Resizable {
                eld.classList.add('handle');
                eld.style['z-index'] = Number.MAX_SAFE_INTEGER;
                eld.style['cursor'] = getCursor(d);
-               // eld.style['position'] = 'absolute';
+               eld.style['position'] = 'absolute';
                if (settings.hideHandles) {
                   eld.style['opacity'] = 0;
                } else if (!settings.hideCollapseButton) {
