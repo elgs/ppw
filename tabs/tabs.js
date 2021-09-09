@@ -20,7 +20,7 @@ const getTabContextMenu = closable => [{
    title: 'Close tab',
    disabled: !closable,
    action: function (e, target) {
-      const currentTabNode = target.closest('.azTabs');
+      const currentTabNode = target.closest('.azui-tabs');
       const currentTabs = az.ui(Tabs, currentTabNode);
       currentTabs.remove(_getTabId(target.getAttribute('tab-id')));
       return false;
@@ -30,7 +30,7 @@ const getTabContextMenu = closable => [{
    title: 'Close other tabs',
    disabled: !closable,
    action: function (e, target) {
-      const currentTabNode = target.closest('.azTabs');
+      const currentTabNode = target.closest('.azui-tabs');
       const currentTabs = az.ui(Tabs, currentTabNode);
       siblings(target, '.azTabLabel').forEach(function (element) {
          if (matches(element, '.azClosable')) {
@@ -44,7 +44,7 @@ const getTabContextMenu = closable => [{
    title: 'Close tabs to the right',
    disabled: !closable,
    action: function (e, target) {
-      const currentTabNode = target.closest('.azTabs');
+      const currentTabNode = target.closest('.azui-tabs');
       const currentTabs = az.ui(Tabs, currentTabNode);
       nextAll(target, '.azTabLabel').forEach(function (element) {
          if (matches(element, '.azClosable')) {
@@ -60,7 +60,7 @@ const getTabContextMenu = closable => [{
    title: 'Close All',
    disabled: !closable,
    action: function (e, target) {
-      const currentTabNode = target.closest('.azTabs');
+      const currentTabNode = target.closest('.azui-tabs');
       const currentTabs = az.ui(Tabs, currentTabNode);
       siblings(target, '.azTabLabel').forEach(function (element) {
          if (matches(element, '.azClosable')) {
@@ -102,7 +102,7 @@ export class Tabs {
                }
             }
 
-            const currentTabNode = event.target.closest('.azTabs');
+            const currentTabNode = event.target.closest('.azui-tabs');
             const currentTabs = az.ui(Tabs, currentTabNode);
             if (event.button === 2 || cm.on || me.sorted) {
                return;
@@ -115,7 +115,7 @@ export class Tabs {
          };
       };
       me.closeClicked = function (event) {
-         const currentTabNode = event.target.closest('.azTabs');
+         const currentTabNode = event.target.closest('.azui-tabs');
          const currentTabs = az.ui(Tabs, currentTabNode);
          // console.log(event.currentTarget.parentNode.getAttribute('tab-id'));
          const tabId = _getTabId(event.currentTarget.parentNode.getAttribute('tab-id'));
@@ -187,7 +187,7 @@ export class Tabs {
             } else {
                const contentNode = me.dom.querySelector('[tab-id=azTabContent-' + tabId + ']');
 
-               const targetTabsNode = data.source.closest('.azTabs');
+               const targetTabsNode = data.source.closest('.azui-tabs');
 
                if (targetTabsNode !== me.dom) {
                   targetTabsNode.appendChild(contentNode);
@@ -345,7 +345,7 @@ export class Tabs {
          }
       }
 
-      tabId = tabId || randGen(8);
+      tabId ??= ++_tabId;
 
       const iconDiv = document.createElement('div');
       iconDiv.classList.add('icon');
