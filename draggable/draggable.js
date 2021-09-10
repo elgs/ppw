@@ -44,8 +44,8 @@ export class Draggable {
       me.position = getComputedStyle(dom).position;
       if (me.position !== 'absolute' && me.position !== 'fixed') {
          dom.style.position = 'relative';
+         me.position = 'relative';
       }
-      me.position = getComputedStyle(dom).position;
 
       me.savedZIndex;
 
