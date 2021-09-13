@@ -212,18 +212,19 @@ export class Tabs {
             }
          },
          add: (e, elem) => {
-            const draggable = az.ui(Draggable, elem);
-            draggable.detachedX = false;
-            draggable.detachedY = false;
+            // console.log(elem);
+            // const draggable = az.ui(Draggable, elem);
+            // draggable.detachedX = false;
+            // draggable.detachedY = false;
 
-            // draggable.stopHook = function () {
-            //    // draggable and droppable need to be in the same sortable in order to
-            //    // share the same place holder, improvement?
-            //    az.ui(Droppable, elem, me.sortable.dropConfig, true);
-            //    az.ui(Draggable, elem, me.sortable.dragConfig, true);
-            // };
-            me.dom.style['z-index'] = ++Tabs.z;
-            me.fitTabWidth();
+            // // draggable.stopHook = function () {
+            // //    // draggable and droppable need to be in the same sortable in order to
+            // //    // share the same place holder, improvement?
+            // //    az.ui(Droppable, elem, me.sortable.dropConfig, true);
+            // //    az.ui(Draggable, elem, me.sortable.dragConfig, true);
+            // // };
+            // me.dom.style['z-index'] = ++Tabs.z;
+            // me.fitTabWidth();
          }
       });
 
