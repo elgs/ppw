@@ -335,7 +335,11 @@ export class Sortable {
       this.dom.style.right = '';
       this.dom.style.bottom = '';
 
-      if (sortContainerSettings.stop.call(this.settings.sortContainer, e, data) === false) {
+      if (this.detachedContainer) {
+         if (this.detachedContainer.settings.stop.call(this.detachedContainer, e, data) === false) {
+            return false;
+         }
+      } else if (this.settings.sortContainer.settings.stop.call(this.settings.sortContainer, e, data) === false) {
          return false;
       }
    }
