@@ -18,6 +18,9 @@ export class Sortable {
       sort: function (event, data) {
          // console.log('sort', data);
       },
+      sorted: function (event, data) {
+         // console.log('sorted', data);
+      },
       stop: function (event, data) {
          // console.log('stop', data);
       },
@@ -259,7 +262,7 @@ export class Sortable {
          return;
       }
 
-      if (settings.sort.call(this.settings.sortContainer, e, data) === false) {
+      if (settings.sort?.call(this.settings.sortContainer, e, data) === false) {
          return false;
       }
       if (settings.placeholder) {
@@ -285,7 +288,7 @@ export class Sortable {
       if (!data.source.classList.contains('azSortableItem')) {
          return;
       }
-      if (settings.sort.call(this.settings.sortContainer, e, data, this.settings.sortContainer) === false) {
+      if (settings.sorted?.call(this.settings.sortContainer, e, data) === false) {
          return false;
       }
       if (!settings.placeholder && this.settings.sortContainer.selected) {
@@ -334,6 +337,9 @@ export class Sortable {
       this.dom.style.left = '';
       this.dom.style.right = '';
       this.dom.style.bottom = '';
+
+      this.detachedX = false;
+      this.detachedY = false;
 
       if (this.detachedContainer) {
          if (this.detachedContainer.settings.stop.call(this.detachedContainer, e, data) === false) {

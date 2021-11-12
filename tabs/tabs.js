@@ -162,7 +162,7 @@ export class Tabs {
       // me.dragging = false;
       me.sortable = az.ui(Sortable, tabLabels, {
          detachable: settings.detachable,
-         create: (e, target) => {
+         create: function (e, target) {
             if (matches(e.target, '.close,.close *')) {
                return false; // don't drag when clicking on icons
             }
@@ -174,10 +174,12 @@ export class Tabs {
          // start: (e, data) => {
          //     me.dragging = true;
          // },
-         sort: (e, data) => {
+         sort: function (e, data) {
             me.sorted = true;
          },
-         stop: (e, data) => {
+         stop: function (e, data) {
+            console.log('*******');
+            console.log(data);
             me.sorted = false;
             const tabId = _getTabId(data.source.getAttribute('tab-id'));
             if (data.detached) {
