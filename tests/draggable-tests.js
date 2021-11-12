@@ -1,6 +1,8 @@
 const puppeteer = require('puppeteer');
 const liveServer = require("live-server");
 
+jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
+
 const port = 2000 + Math.floor(Math.random() * Math.floor(1000));
 liveServer.start({
    port,
