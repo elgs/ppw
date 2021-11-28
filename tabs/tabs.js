@@ -179,6 +179,7 @@ export class Tabs {
          },
          stop: function (e, data) {
             console.log('*******');
+            console.log(me.dom);
             console.log(data);
             me.sorted = false;
             const tabId = _getTabId(data.source.getAttribute('tab-id'));
@@ -430,10 +431,6 @@ export class Tabs {
       let activated = false;
 
       if (trigger) {
-         // @doc:event:start
-         // @doc:willActivate: fires before a `tab` is activated.
-         // @doc:tabId: tabId
-         // @doc:event:end
          dom.dispatchEvent(
             new CustomEvent('willActivate', {
                detail: {
@@ -462,10 +459,6 @@ export class Tabs {
       });
 
       if (trigger && activated) {
-         // @doc:event:start
-         // @doc:didActivate: fires after a `tab` is activated.
-         // @doc:tabId: tabId
-         // @doc:event:end
          dom.dispatchEvent(
             new CustomEvent('didActivate', {
                detail: {
