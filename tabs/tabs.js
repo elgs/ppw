@@ -175,31 +175,28 @@ export class Tabs {
          //     me.dragging = true;
          // },
          sort: function (e, data) {
-            me.sorted = true;
+            const targetTabs = data.source['azui-draggable'].sortContainer.tabs;
+            targetTabs.sorted = true;
          },
          stop: function (e, data) {
-            console.log('*******');
-            console.log(me.dom);
-            console.log(data);
-            me.sorted = false;
+            const targetTabs = data.source['azui-draggable'].sortContainer.tabs;
+            console.log(targetTabs.dom, me.dom);
+            targetTabs.sorted = false;
             const tabId = _getTabId(data.source.getAttribute('tab-id'));
             if (data.detached) {
                const x = data.boundingClientRect.left + getDocScrollLeft();
                const y = data.boundingClientRect.top + getDocScrollTop();
-               me.spawn(tabId, x, y);
+               targetTabs.spawn(tabId, x, y);
             } else {
                const contentNode = me.dom.querySelector('[tab-id=azTabContent-' + tabId + ']');
+               console.log(contentNode);
 
-               const targetTabsNode = data.source.closest('.azui-tabs');
+               if (targetTabs.dom !== me.dom) {
+                  targetTabs.dom.appendChild(contentNode);
 
-               if (targetTabsNode !== me.dom) {
-                  targetTabsNode.appendChild(contentNode);
+                  // targetTabs.activate(tabId);
 
-                  const targetTabs = az.ui(Tabs, targetTabsNode);
-                  targetTabs.activate(tabId);
-
-                  const tabHeader = data.source; //.closest('.azTabLabel#azTabHeader-' + tabId);
-                  // const isActive = matches(tabHeader, '.active');
+                  const tabHeader = data.source;
                   const headers = me.dom.querySelectorAll('.azTabLabel');
                   if (headers.length) {
                      const active = tabHeader.parentNode.querySelector('.active');
@@ -230,6 +227,7 @@ export class Tabs {
             // me.fitTabWidth();
          }
       });
+      me.sortable.tabs = me;
 
       tabHeaderContainer.style['height'] = settings.headerHeight + 'px';
 
@@ -297,11 +295,7 @@ export class Tabs {
       const parentStyle = getComputedStyle(dom.parentNode);
       const parentBorderTop = parseInt(parentStyle['border-top-width']);
       const parentBorderLeft = parseInt(parentStyle['border-left-width']);
-      if (
-         parentStyle.position !== 'relative' &&
-         parentStyle.position !== 'absolute' &&
-         parentStyle.position !== 'fixed'
-      ) {
+      if (parentStyle.position !== 'relative' && parentStyle.position !== 'absolute' && parentStyle.position !== 'fixed') {
          dom.parentNode.style.position = 'relative';
       }
 

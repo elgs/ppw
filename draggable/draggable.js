@@ -17,7 +17,6 @@ export class Draggable {
       snapDistance: 0,
       // the distance in pixels the gap is kept between snapped elements, defaults to 3.
       snapGap: 1,
-      sortContainer: null,
       create: function (event) {
          // console.log('create');
       },

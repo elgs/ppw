@@ -17,7 +17,6 @@ export class Droppable {
       // pointer_out: function (e) {},
       // dragged: function (e) {},
       // dropped: function (e) {},
-      sortContainer: null,
       interestedDropEvents: az.dom.dndEvent.all,
    };
 
@@ -25,7 +24,7 @@ export class Droppable {
       const me = this;
       this.dom.setAttribute('az-interested-drop-events', this.settings.interestedDropEvents);
 
-      const addEventListener = eventName => {
+      const addEvent = eventName => {
          if (me.settings[eventName]) {
             me.dom.addEventListener(eventName, me.settings[eventName]?.bind(me));
          }
@@ -34,10 +33,10 @@ export class Droppable {
       Object.keys(az.dom.dndState).map(state => {
          const stateIn = state + '_in';
          const stateOut = state + '_out';
-         addEventListener(stateIn);
-         addEventListener(stateOut);
+         addEvent(stateIn);
+         addEvent(stateOut);
       });
-      addEventListener('dragged');
-      addEventListener('dropped');
+      addEvent('dragged');
+      addEvent('dropped');
    }
 }
