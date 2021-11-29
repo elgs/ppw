@@ -3,7 +3,6 @@ import { getDocScrollLeft, getDocScrollTop, isTouchDevice, matches, nextAll, nor
 import { ContextMenu } from '../contextmenu/contextmenu.js';
 import { Sortable } from '../sortable/sortable.js';
 import { Draggable } from '../draggable/draggable.js';
-import { Droppable } from '../droppable/droppable.js';
 import { Resizable } from '../resizable/resizable.js';
 
 let _tabId = 0;
@@ -179,8 +178,12 @@ export class Tabs {
             targetTabs.sorted = true;
          },
          stop: function (e, data) {
-            const targetTabs = data.source['azui-draggable'].sortContainer.tabs;
-            console.log(targetTabs.dom, me.dom);
+            const draggable = data.source['azui-draggable'];
+            const targetTabs = draggable.sortContainer.tabs;
+            let sourceTabs = targetTabs;
+            if (draggable.detachedContainer) {
+               sourceTabs = draggable.detachedContainer?.tabs ?? targetTabs;
+            }
             targetTabs.sorted = false;
             const tabId = _getTabId(data.source.getAttribute('tab-id'));
             if (data.detached) {
@@ -188,44 +191,30 @@ export class Tabs {
                const y = data.boundingClientRect.top + getDocScrollTop();
                targetTabs.spawn(tabId, x, y);
             } else {
-               const contentNode = me.dom.querySelector('[tab-id=azTabContent-' + tabId + ']');
-               console.log(contentNode);
+               const contentNode = sourceTabs.dom.querySelector('[tab-id=azTabContent-' + tabId + ']');
 
-               if (targetTabs.dom !== me.dom) {
+               if (targetTabs.dom !== sourceTabs.dom) {
                   targetTabs.dom.appendChild(contentNode);
 
-                  // targetTabs.activate(tabId);
+                  targetTabs.activate(tabId);
 
                   const tabHeader = data.source;
-                  const headers = me.dom.querySelectorAll('.azTabLabel');
+                  const headers = sourceTabs.dom.querySelectorAll('.azTabLabel');
                   if (headers.length) {
                      const active = tabHeader.parentNode.querySelector('.active');
                      if (!active) {
-                        me.activateByIndex(0);
+                        sourceTabs.activateByIndex(0);
                      }
-                     // me.showHideScrollers();
-                     me.fitTabWidth();
+                     sourceTabs.fitTabWidth();
                   } else if (settings.closeOnEmpty) {
-                     remove(me.dom);
+                     remove(sourceTabs.dom);
                   }
                }
             }
          },
-         add: (e, elem) => {
-            // console.log(elem);
-            // const draggable = az.ui(Draggable, elem);
-            // draggable.detachedX = false;
-            // draggable.detachedY = false;
-
-            // // draggable.stopHook = function () {
-            // //    // draggable and droppable need to be in the same sortable in order to
-            // //    // share the same place holder, improvement?
-            // //    az.ui(Droppable, elem, me.sortable.dropConfig, true);
-            // //    az.ui(Draggable, elem, me.sortable.dragConfig, true);
-            // // };
-            // me.dom.style['z-index'] = ++Tabs.z;
-            // me.fitTabWidth();
-         }
+         enter: function (e, sortable) {
+            sortable.tabs.dom.style['z-index'] = ++Tabs.z;
+         },
       });
       me.sortable.tabs = me;
 
@@ -285,8 +274,8 @@ export class Tabs {
    spawn(tabId, x = 10, y = 10) {
       const me = this;
       const dom = me.dom;
-      const tabHeader = document.querySelector('.azTabLabel[tab-id=azTabHeader-' + tabId + ']');
-      const tabContent = document.querySelector('[tab-id=azTabContent-' + tabId + ']');
+      const tabHeader = me.dom.querySelector('.azTabLabel[tab-id=azTabHeader-' + tabId + ']');
+      const tabContent = me.dom.querySelector('[tab-id=azTabContent-' + tabId + ']');
       const isActive = matches(tabHeader, '.active');
 
       const parentBcr = dom.parentNode.getBoundingClientRect();
@@ -309,6 +298,7 @@ export class Tabs {
       newTabsElem.style.left = x - parentX - parentBorderLeft + 'px';
       dom.parentNode.appendChild(newTabsElem);
       const newTabs = az.ui(Tabs, newTabsElem, {});
+      newTabs.dom.style['z-index'] = ++Tabs.z;
 
       // const newLabels = newNode.querySelector('div.azTabHeader>.azTabLabels');
       // console.log(tabHeader, newLabels);
@@ -347,7 +337,7 @@ export class Tabs {
 
       const iconDiv = document.createElement('div');
       iconDiv.classList.add('icon');
-      iconDiv.appendChild(normalizeIcon(icon || ''));
+      iconDiv.appendChild(normalizeIcon(icon ?? ''));
 
       let headerNode;
       if (typeof title === 'string') {
@@ -381,11 +371,12 @@ export class Tabs {
 
       me.sortable.add(headerNode);
 
-      const contentNode = document.createElement('div');
+      let contentNode;
       if (content && typeof content === 'string') {
+         contentNode = document.createElement('div');
          contentNode.innerHTML = content;
       } else {
-         contentNode.appendChild(content);
+         contentNode = content;
       }
       contentNode.setAttribute('tab-id', 'azTabContent-' + tabId);
       contentNode.classList.add('azTabContent');
@@ -396,7 +387,7 @@ export class Tabs {
 
       // me.showHideScrollers();
       me.fitTabWidth();
-      if (activate === true) {
+      if (activate) {
          me.activate(tabId, trigger);
       }
       return tabId;
@@ -420,6 +411,7 @@ export class Tabs {
       }
    }
    activate(tabId, trigger = false) {
+      tabId = String(tabId);
       const me = this;
       const dom = me.dom;
       let activated = false;

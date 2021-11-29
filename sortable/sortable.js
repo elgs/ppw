@@ -15,6 +15,8 @@ export class Sortable {
       start: function (event, ui) {
          // console.log('start');
       },
+      enter: function (event, ui) { },
+      exit: function (event, ui) { },
       sort: function (event, data) {
          // console.log('sort', data);
       },
@@ -53,6 +55,7 @@ export class Sortable {
                if (draggable.sortContainer.settings.placeholder !== me.settings.placeholder) {
                   return;
                }
+               me.settings.enter.call(me, e, me);
                draggable.sortContainer = me;
                droppable.sortContainer = me;
                const detachedContainer = draggable.detachedContainer;
@@ -121,6 +124,7 @@ export class Sortable {
                if (!me.selected) {
                   return;
                }
+               me.settings.exit.call(me, e, me);
                const source = e.detail.source;
                if (!source.classList.contains('azSortableItem')) {
                   return;
@@ -193,7 +197,6 @@ export class Sortable {
       const droppable = az.ui(Droppable, elem, me.dropConfig);
       draggable.sortContainer = me;
       droppable.sortContainer = me;
-
    }
 
    dragConfig = {
@@ -349,5 +352,7 @@ export class Sortable {
       } else if (this.sortContainer.settings.stop.call(this.sortContainer, e, data) === false) {
          return false;
       }
+
+      this.detachedContainer = null;
    }
 }
