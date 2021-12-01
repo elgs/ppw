@@ -71,6 +71,50 @@ const getTabContextMenu = closable => [{
    }
 }];
 
+function closeClicked(event) {
+   const currentTabNode = event.target.closest('.azui-tabs');
+   const currentTabs = az.ui(Tabs, currentTabNode);
+   const tabId = _getTabId(event.currentTarget.parentNode.getAttribute('tab-id'));
+   currentTabs.remove(tabId);
+   event.stopPropagation();
+}
+
+function createHeaderClicked(cm) {
+   return function (event) {
+      if (event.type === 'touchend') {
+         // event.preventDefault();
+         if (cm.rightClick.triggered) {
+            return;
+         }
+      }
+
+      const currentTabNode = event.target.closest('.azui-tabs');
+      const currentTabs = az.ui(Tabs, currentTabNode);
+      if (event.button === 2 || cm.on) {
+         return;
+      }
+      // console.log(event.button);
+      const tabId = _getTabId(event.currentTarget.getAttribute('tab-id'));
+      if (!event.target.classList.contains('close') && !event.target.parentNode.classList.contains('close')) {
+         currentTabs.activate(tabId, true);
+      }
+   };
+}
+
+function applyHeaderEvents(el) {
+   if (el.headerEventsApplied) {
+      return;
+   }
+   el.headerEventsApplied = true;
+   const closable = matches(el, '.azClosable');
+   const cm = az.ui(ContextMenu, el, {
+      items: getTabContextMenu(closable)
+   });
+   const headerClicked = createHeaderClicked(cm);
+   el.addEventListener('mouseup', headerClicked);
+   el.addEventListener('touchend', headerClicked);
+}
+
 export class Tabs {
    static id = 'azui-tabs';
    static settings = {
@@ -89,49 +133,6 @@ export class Tabs {
       const dom = me.dom;
       const settings = me.settings;
 
-
-      // dom.style['grid-template-rows'] = `${settings.headerHeight}px 1fr`;
-
-      me.createHeaderClicked = function (cm) {
-         return function (event) {
-            if (event.type === 'touchend') {
-               // event.preventDefault();
-               if (cm.rightClick.triggered) {
-                  return;
-               }
-            }
-
-            const currentTabNode = event.target.closest('.azui-tabs');
-            const currentTabs = az.ui(Tabs, currentTabNode);
-            if (event.button === 2 || cm.on || me.sorted) {
-               return;
-            }
-            // console.log(event.button);
-            const tabId = _getTabId(event.currentTarget.getAttribute('tab-id'));
-            if (!event.target.classList.contains('close') && !event.target.parentNode.classList.contains('close')) {
-               currentTabs.activate(tabId, true);
-            }
-         };
-      };
-      me.closeClicked = function (event) {
-         const currentTabNode = event.target.closest('.azui-tabs');
-         const currentTabs = az.ui(Tabs, currentTabNode);
-         // console.log(event.currentTarget.parentNode.getAttribute('tab-id'));
-         const tabId = _getTabId(event.currentTarget.parentNode.getAttribute('tab-id'));
-         currentTabs.remove(tabId);
-         event.stopPropagation();
-      };
-
-      me.applyEvents = el => {
-         const closable = matches(el, '.azClosable');
-         const cm = az.ui(ContextMenu, el, {
-            items: getTabContextMenu(closable)
-         });
-         const headerClicked = me.createHeaderClicked(cm);
-         el.addEventListener('mouseup', headerClicked);
-         el.addEventListener('touchend', headerClicked);
-      };
-
       let tabHeaderContainer = dom.querySelector('div.azTabHeader');
       if (!tabHeaderContainer) {
          tabHeaderContainer = document.createElement('div');
@@ -144,14 +145,14 @@ export class Tabs {
       tabHeaderContainer.appendChild(tabLabels);
 
       tabLabelList.forEach(el => {
-         me.applyEvents(el);
+         applyHeaderEvents(el);
          el.style.height = settings.headerHeight + 'px';
 
          if (matches(el, '.azClosable')) {
             const iconDiv = document.createElement('div');
             iconDiv.classList.add('close');
             iconDiv.appendChild(parseDOMElement(icons.svgClose)[0]);
-            iconDiv.addEventListener('click', me.closeClicked);
+            iconDiv.addEventListener('click', closeClicked);
             el.appendChild(iconDiv);
          }
          tabLabels.appendChild(el);
@@ -170,21 +171,18 @@ export class Tabs {
                e.preventDefault();
             }
          },
-         // start: (e, data) => {
-         //     me.dragging = true;
-         // },
-         sort: function (e, data) {
-            const targetTabs = data.source['azui-draggable'].sortContainer.tabs;
-            targetTabs.sorted = true;
-         },
          stop: function (e, data) {
-            const draggable = data.source['azui-draggable'];
+            let draggable;
+            try {
+               draggable = data.source['azui-draggable'];
+            } catch {
+               console.log(data);
+            }
             const targetTabs = draggable.sortContainer.tabs;
             let sourceTabs = targetTabs;
             if (draggable.detachedContainer) {
                sourceTabs = draggable.detachedContainer?.tabs ?? targetTabs;
             }
-            targetTabs.sorted = false;
             const tabId = _getTabId(data.source.getAttribute('tab-id'));
             if (data.detached) {
                const x = data.boundingClientRect.left + getDocScrollLeft();
@@ -192,7 +190,7 @@ export class Tabs {
                targetTabs.spawn(tabId, x, y);
             } else {
                const contentNode = sourceTabs.dom.querySelector('[tab-id=azTabContent-' + tabId + ']');
-
+               // console.log(targetTabs.dom, sourceTabs);
                if (targetTabs.dom !== sourceTabs.dom) {
                   targetTabs.dom.appendChild(contentNode);
 
@@ -274,8 +272,8 @@ export class Tabs {
    spawn(tabId, x = 10, y = 10) {
       const me = this;
       const dom = me.dom;
-      const tabHeader = me.dom.querySelector('.azTabLabel[tab-id=azTabHeader-' + tabId + ']');
-      const tabContent = me.dom.querySelector('[tab-id=azTabContent-' + tabId + ']');
+      const tabHeader = document.querySelector('.azTabLabel[tab-id=azTabHeader-' + tabId + ']');
+      const tabContent = document.querySelector('[tab-id=azTabContent-' + tabId + ']');
       const isActive = matches(tabHeader, '.active');
 
       const parentBcr = dom.parentNode.getBoundingClientRect();
@@ -366,7 +364,7 @@ export class Tabs {
 
       const closeDiv = headerNode.querySelector('.close');
       if (closeDiv) {
-         closeDiv.addEventListener('click', me.closeClicked);
+         closeDiv.addEventListener('click', closeClicked);
       }
 
       me.sortable.add(headerNode);
@@ -383,7 +381,7 @@ export class Tabs {
       contentNode.style['display'] = 'none';
       me.dom.appendChild(contentNode);
 
-      me.applyEvents(headerNode);
+      applyHeaderEvents(headerNode);
 
       // me.showHideScrollers();
       me.fitTabWidth();
