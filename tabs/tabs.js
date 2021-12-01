@@ -172,12 +172,7 @@ export class Tabs {
             }
          },
          stop: function (e, data) {
-            let draggable;
-            try {
-               draggable = data.source['azui-draggable'];
-            } catch {
-               console.log(data);
-            }
+            const draggable = data.source['azui-draggable'];
             const targetTabs = draggable.sortContainer.tabs;
             let sourceTabs = targetTabs;
             if (draggable.detachedContainer) {
