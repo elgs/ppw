@@ -135,6 +135,7 @@ export class Sortable {
                draggable.detachedY = true;
 
                draggable.detachedContainer = me;
+               draggable.originalContainer ??= me;
             }
          });
       }
@@ -345,14 +346,15 @@ export class Sortable {
       this.detachedX = false;
       this.detachedY = false;
 
-      if (this.detachedContainer) {
-         if (this.detachedContainer.settings.stop.call(this.detachedContainer, e, data) === false) {
+      if (this.originalContainer) {
+         if (this.originalContainer.settings.stop.call(this.originalContainer, e, data) === false) {
             return false;
          }
       } else if (this.sortContainer.settings.stop.call(this.sortContainer, e, data) === false) {
          return false;
       }
 
+      this.originalContainer = null;
       this.detachedContainer = null;
    }
 }

@@ -175,8 +175,8 @@ export class Tabs {
             const draggable = data.source['azui-draggable'];
             const targetTabs = draggable.sortContainer.tabs;
             let sourceTabs = targetTabs;
-            if (draggable.detachedContainer) {
-               sourceTabs = draggable.detachedContainer?.tabs ?? targetTabs;
+            if (draggable.originalContainer) {
+               sourceTabs = draggable.originalContainer?.tabs ?? targetTabs;
             }
             const tabId = _getTabId(data.source.getAttribute('tab-id'));
             if (data.detached) {
