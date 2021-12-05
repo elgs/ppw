@@ -55,10 +55,10 @@ export class ContextMenu {
                });
             }
          } else {
-            setTimeout(() => {
-               me.menu.remove();
-               settings.onDismiss(e);
-            });
+            // setTimeout(() => {
+            me.menu.remove();
+            settings.onDismiss(e);
+            // });
          }
       };
 
@@ -114,13 +114,12 @@ export class ContextMenu {
       const onContextMenu = function (e) {
          // console.log(e.target);
          // console.log(e.currentTarget);
-
          const menu = document.createElement('div');
          me.menu = menu;
          menu.classList.add('azui', 'azContextMenuPopup');
          menu.style['z-index'] = Number.MAX_SAFE_INTEGER;
 
-         const onKeyUp = e => {
+         const onKeyDown = e => {
             // prevent browser scroll
             e.preventDefault();
             // console.log(e.keyCode);
@@ -156,7 +155,7 @@ export class ContextMenu {
          if (!isTouchDevice()) {
             menu.addEventListener('blur', dismissMenu, { once: true });
          }
-         menu.addEventListener('keyup', onKeyUp);
+         menu.addEventListener('keydown', onKeyDown);
          menu.focus({
             preventScroll: true
          });
@@ -180,8 +179,8 @@ export class ContextMenu {
 
          // console.log(getWidth(menu), getHeight(menu));
          const menuPosition = calcMenuPosition(
-            e.touches ? e.touches[0].clientX : az.cursor.x || e.clientX,
-            e.touches ? e.touches[0].clientY : az.cursor.y || e.clientY,
+            e.touches ? e.touches[0].clientX : az.cursor.x ?? e.clientX,
+            e.touches ? e.touches[0].clientY : az.cursor.y ?? e.clientY,
             getWidth(menu),
             getHeight(menu)
          );

@@ -140,7 +140,7 @@ export class Docker {
 
       const iconSpan = document.createElement('span');
       iconSpan.classList.add('icon');
-      iconSpan.innerHTML = winSettings.icon || '';
+      iconSpan.innerHTML = winSettings.icon ?? '';
       docked.appendChild(iconSpan);
 
       const titleSpan = document.createElement('span');
