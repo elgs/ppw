@@ -124,6 +124,7 @@ export class Docker {
       if (typeof winSettings === 'string') {
          winSettings = {
             title: winSettings,
+            showMinimizeButton: true,
             showButtonInDocker: true
          };
       }

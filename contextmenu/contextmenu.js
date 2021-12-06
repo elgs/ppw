@@ -45,20 +45,16 @@ export class ContextMenu {
          if (e.type === 'touchstart') {
             const pb = me.menu.getBoundingClientRect();
             if (isOutside(e.touches ? e.touches[0].pageX : e.pageX, e.touches ? e.touches[0].pageY : e.pageY, pb)) {
-               setTimeout(() => {
-                  me.menu.remove();
-                  settings.onDismiss(e);
-               });
+               me.menu.remove();
+               settings.onDismiss(e);
             } else {
                document.addEventListener('touchstart', dismissMenu, {
                   once: true
                });
             }
          } else {
-            // setTimeout(() => {
             me.menu?.remove();
             settings.onDismiss(e);
-            // });
          }
       };
 
