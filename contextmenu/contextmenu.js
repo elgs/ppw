@@ -56,7 +56,7 @@ export class ContextMenu {
             }
          } else {
             // setTimeout(() => {
-            me.menu.remove();
+            me.menu?.remove();
             settings.onDismiss(e);
             // });
          }
@@ -112,6 +112,7 @@ export class ContextMenu {
       };
 
       const onContextMenu = function (e) {
+         dismissMenu(e);
          // console.log(e.target);
          // console.log(e.currentTarget);
          const menu = document.createElement('div');
