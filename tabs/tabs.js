@@ -1,5 +1,5 @@
 import * as icons from '../icons.js';
-import { getDocScrollLeft, getDocScrollTop, isTouchDevice, matches, nextAll, normalizeIcon, parseDOMElement, remove, siblings } from '../azdom.js';
+import { getDocScrollLeft, getDocScrollTop, isTouchDevice, matches, nextAll, normalizeIcon, parseDOMElement, siblings } from '../azdom.js';
 import { ContextMenu } from '../contextmenu/contextmenu.js';
 import { Sortable } from '../sortable/sortable.js';
 import { Draggable } from '../draggable/draggable.js';
@@ -200,7 +200,7 @@ export class Tabs {
                      }
                      sourceTabs.fitTabWidth();
                   } else if (settings.closeOnEmpty) {
-                     remove(sourceTabs.dom);
+                     sourceTabs.dom.remove();
                   }
                }
             }
@@ -308,7 +308,7 @@ export class Tabs {
          // me.showHideScrollers();
          me.fitTabWidth();
       } else if (me.settings.closeOnEmpty) {
-         remove(dom);
+         dom.remove();
       }
    }
 
@@ -391,8 +391,8 @@ export class Tabs {
       const dom = me.dom;
       const tab = dom.querySelector('.azTabLabel[tab-id=azTabHeader-' + tabId + ']');
       const isActive = matches(tab, '.active');
-      remove(tab);
-      remove(dom.querySelector('[tab-id=azTabContent-' + tabId + ']'));
+      tab.remove();
+      dom.querySelector('[tab-id=azTabContent-' + tabId + ']').remove();
       const headers = dom.querySelectorAll('.azTabLabel');
       if (headers.length) {
          if (isActive) {

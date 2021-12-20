@@ -1,6 +1,6 @@
 import { Draggable } from '../draggable/draggable.js';
 import { Droppable } from '../droppable/droppable.js';
-import { diffPositionInnerBorder, getDocScrollLeft, getDocScrollTop, getHeight, getWidth, index, insertAfter, insertBefore, matches, position, remove, setHeight, setWidth, siblings, swapElement } from '../azdom.js';
+import { diffPositionInnerBorder, getDocScrollLeft, getDocScrollTop, getHeight, getWidth, index, insertAfter, insertBefore, matches, position, setHeight, setWidth, siblings, swapElement } from '../azdom.js';
 
 export class Sortable {
    static id = 'azui-sortable';
@@ -129,6 +129,7 @@ export class Sortable {
                if (!source.classList.contains('azSortableItem')) {
                   return;
                }
+               source.classList.add('az-sortable-moving');
                // console.log(me.selected);
                const draggable = az.ui(Draggable, me.selected);
                draggable.detachedX = true;
@@ -322,7 +323,7 @@ export class Sortable {
                this.sortContainer.selected.style.width = '';
                this.sortContainer.selected.style.height = '';
                insertBefore(this.sortContainer.selected, this.sortContainer.ph);
-               remove(this.sortContainer.ph);
+               this.sortContainer.ph.remove();
                this.dom.style.position = 'relative';
             } else {
                this.sortContainer.ph.classList.remove('azSortableDropBefore');

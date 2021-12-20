@@ -124,7 +124,7 @@ export const swapElement = function (e0, e1) {
    insertBefore(temp, e0);
    insertBefore(e0, e1);
    insertBefore(e1, temp);
-   remove(temp);
+   temp.remove();
 };
 
 export const isTouchDevice = function () {
@@ -430,9 +430,9 @@ export const diffPositionInnerBorder = function (el0, el1) {
    return ret;
 };
 
-export const remove = function (el) {
-   el.parentNode.removeChild(el);
-};
+// export const remove = function (el) {
+//    el.parentNode.removeChild(el);
+// };
 
 export const normalizeIcon = function (i) {
    i = resolveFunction(i);
