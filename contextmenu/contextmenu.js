@@ -45,7 +45,7 @@ export class ContextMenu {
          if (e.type === 'touchstart') {
             const pb = me.menu.getBoundingClientRect();
             if (isOutside(e.touches ? e.touches[0].pageX : e.pageX, e.touches ? e.touches[0].pageY : e.pageY, pb)) {
-               me.menu.remove();
+               me.menu?.remove();
                settings.onDismiss(e);
             } else {
                document.addEventListener('touchstart', dismissMenu, {
@@ -150,7 +150,11 @@ export class ContextMenu {
          menu.setAttribute('tabindex', 0);
          document.documentElement.appendChild(menu);
          if (!isTouchDevice()) {
-            menu.addEventListener('blur', dismissMenu, { once: true });
+            menu.addEventListener('blur', e => {
+               setTimeout(() => {
+                  dismissMenu(e);
+               });
+            }, { once: true });
          }
          menu.addEventListener('keydown', onKeyDown);
          menu.focus({
