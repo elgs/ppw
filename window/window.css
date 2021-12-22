@@ -48,11 +48,11 @@
   background-color: #d4d4d4;
 }
 
-.azui.azui-window.inactive .azDocker .azSortableItem {
+.azui.azui-window.inactive .azui-docker .azSortableItem {
   background-color: #e8e8e8;
 }
 
-.azui.azui-window.inactive .azDocker .azSortableItem.dock-active {
+.azui.azui-window.inactive .azui-docker .azSortableItem.dock-active {
   background-color: #d4d4d4;
 }
 

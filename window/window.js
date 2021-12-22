@@ -33,7 +33,7 @@ export class Window {
 
       dom.style['position'] = 'absolute';
 
-      const dockers = siblings(dom, '.azDocker');
+      const dockers = siblings(dom, '.azui-docker');
       if (dockers.length === 0) {
          const dockerElem = document.createElement('div');
          dom.parentNode.appendChild(dockerElem);
@@ -361,9 +361,9 @@ export class Window {
    // method:start
    children() {
       //  Get child windows.
-      // return: Returns an array of child windows with class '.azWindowContent>.azWindow'.
+      // return: Returns an array of child windows with class '.azWindowContent>.azui-window'.
       // method:end
-      const children = this.dom.querySelectorAll('.azWindowContent>.azWindow');
+      const children = this.dom.querySelectorAll('.azWindowContent>.azui-window');
       return [...children].map(el => {
          return az.ui(Window, el);
       });
@@ -390,7 +390,7 @@ export class Window {
          })
       );
 
-      siblings(me.dom, '.azWindow').forEach(el => {
+      siblings(me.dom, '.azui-window').forEach(el => {
          el.classList.remove('active');
          el.classList.add('inactive');
       });
