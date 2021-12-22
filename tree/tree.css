@@ -1,0 +1,107 @@
+@media (hover: hover) {
+  .azui.azui-tree .treeScroller .azTreeNode:not(.disabled):hover {
+    background-color: #dedede;
+  }
+}
+
+.azui.azui-tree .treeScroller .azTreeNode:not(.disabled).active {
+  background-color: #c9c9c9;
+}
+
+.azui.azui-tree .treeScroller .disabled.azTreeNode * {
+  color: gray;
+  fill: gray;
+  cursor: not-allowed;
+}
+
+.azui.azui-tree .treeScroller .azTreeNode * {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.azui {
+  font-size: 13px;
+  font-family: -apple-system, BlinkMacSystemFont, "San Francisco", "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif;
+}
+
+.azui *,
+.azui *::before,
+.azui *::after {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.azui.azui-tree {
+  font-size: 14px;
+  height: 100%;
+  overflow: hidden;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 40px 1fr;
+      grid-template-rows: 40px 1fr;
+}
+
+.azui.azui-tree .searchDiv {
+  width: 100%;
+  padding: 5px;
+  background-color: #e8e8e8;
+}
+
+.azui.azui-tree .searchDiv .searchInput {
+  display: block;
+  border: 1px solid #d4d4d4;
+  border-radius: 3px;
+  width: 100%;
+  height: 100%;
+  padding: 5px;
+}
+
+.azui.azui-tree .treeScroller {
+  color: #333;
+  outline: none;
+  cursor: pointer;
+  overflow: auto;
+}
+
+.azui.azui-tree .treeScroller .keyon {
+  background-color: #dedede;
+}
+
+.azui.azui-tree .treeScroller .azTreeNode {
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  -webkit-transition-property: background-color;
+  transition-property: background-color;
+  line-height: 2;
+  padding: 0 4px;
+}
+
+.azui.azui-tree .treeScroller .azTreeNode svg {
+  width: 15px;
+  fill: #666;
+  position: relative;
+  top: 2px;
+  margin-right: 2px;
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
+}
+
+.azui.azui-tree .treeScroller .azTreeNode svg.collapsed {
+  -webkit-transform: rotate(0deg);
+          transform: rotate(0deg);
+}
+
+.azui.azui-tree .treeScroller .azTreeBranch {
+  display: block;
+  padding-left: 20px;
+}
+
+.azui.azui-tree .treeScroller .azTreeBranch.collapsed {
+  display: none;
+}
+
+.azui.azui-tree .treeScroller .filtered {
+  display: none;
+}

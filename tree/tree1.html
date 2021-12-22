@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <meta charset="UTF-8" />
+   <title>azTree</title>
+   <link rel="stylesheet" href="./tree.css">
+   <style>
+      html,
+      body {
+         background-color: #f9f9f9;
+         width: 100%;
+         height: 100%;
+         margin: 0;
+      }
+   </style>
+</head>
+<body>
+   <div id="myTree"></div>
+   <script type="module">
+      import { Tree } from './tree.js';
+      const data = [
+         'Coffee',
+         {
+            key: 'chocolate',
+            icon: '',
+            title: 'Chocolate',
+            action: function (e) {
+               console.log(e);
+            }
+         },
+         {
+            title: 'Grains',
+            collapsed: true,
+            children: ['Rice', 'Bread']
+         },
+         {
+            title: 'Protein',
+            children: [
+               'Beef',
+               {
+                  title: 'Fish',
+                  children: ['Salmon', 'Trout']
+               }
+            ]
+         }
+      ];
+      const tree = az.ui(Tree, '#myTree', {
+         data,
+         action: function (e) {
+            // console.log(this);
+            // console.log(e);
+         }
+      });
+   </script>
+</body>
+</html>
