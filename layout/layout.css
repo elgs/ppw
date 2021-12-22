@@ -1,0 +1,70 @@
+.azui {
+  font-size: 13px;
+  font-family: -apple-system, BlinkMacSystemFont, "San Francisco", "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif;
+}
+
+.azui *,
+.azui *::before,
+.azui *::after {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.azui.azui-layout {
+  display: -ms-grid;
+  display: grid;
+      grid-template-areas: 'n n n' 'w c e' 's s s';
+  -ms-grid-columns: auto 1fr auto;
+      grid-template-columns: auto 1fr auto;
+  -ms-grid-rows: auto 1fr auto;
+      grid-template-rows: auto 1fr auto;
+  position: relative;
+}
+
+.azui.azui-layout > .azLayoutArea {
+  overflow: hidden;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.azui.azui-layout > .azLayoutArea > div {
+  width: 100%;
+  height: 100%;
+}
+
+.azui.azui-layout > .azLayoutArea.azLayoutAreaNorth {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 3;
+  grid-area: n;
+  padding-bottom: 4px;
+}
+
+.azui.azui-layout > .azLayoutArea.azLayoutAreaEast {
+  -ms-grid-row: 2;
+  -ms-grid-column: 3;
+  grid-area: e;
+  padding-left: 4px;
+}
+
+.azui.azui-layout > .azLayoutArea.azLayoutAreaSouth {
+  -ms-grid-row: 3;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 3;
+  grid-area: s;
+  padding-top: 4px;
+}
+
+.azui.azui-layout > .azLayoutArea.azLayoutAreaWest {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  grid-area: w;
+  padding-right: 4px;
+}
+
+.azui.azui-layout > .azLayoutArea.azLayoutAreaCenter {
+  position: relative;
+  -ms-grid-row: 2;
+  -ms-grid-column: 2;
+  grid-area: c;
+}

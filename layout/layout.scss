@@ -1,7 +1,7 @@
-@import '../_utilities/utilities.scss';
+@import '../ppw.scss';
 
 .azui {
-  &.azLayout {
+  &.azui-layout {
     display: grid;
     grid-template-areas: 'n n n' 'w c e' 's s s';
     grid-template-columns: auto 1fr auto;
