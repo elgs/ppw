@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <meta charset="UTF-8" />
+   <title>azMenu</title>
+   <link rel="stylesheet" href="./menu.css">
+   <style>
+      div#div0 {
+         width: 200px;
+      }
+   </style>
+</head>
+
+<body>
+   <div id="div0"></div>
+   <script type="module">
+      import { Menu } from './menu.js';
+      const elem = document.querySelectorAll('div#div0');
+      az.ui(Menu, elem, {
+         items: [
+            {
+               icon: '☺',
+               title: 'Close',
+               disabled: true,
+               action: function (e, target) {
+                  console.log(target);
+                  console.log(this);
+                  alert(target);
+               }
+            },
+            {
+               icon: '☺',
+               title: 'Close Others',
+               action: function (e, target) {
+                  console.log(1);
+               }
+            },
+            null,
+            {
+               icon: '☺',
+               title: 'Close All',
+               action: function (e, target) {
+                  console.log(2);
+                  return false;
+               }
+            }
+         ]
+      });
+   </script>
+</body>
+</html>

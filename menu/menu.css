@@ -1,0 +1,100 @@
+@media (hover: hover) {
+  .azui.azui-menu div.azMenuItem:not(.disabled):hover {
+    background-color: #dedede;
+  }
+}
+
+.azui.azui-menu div.azMenuItem:not(.disabled).active {
+  background-color: #c9c9c9;
+}
+
+.azui.azui-menu div.disabled.azMenuItem * {
+  color: gray;
+  fill: gray;
+  cursor: not-allowed;
+}
+
+.azui.azui-menu div.azMenuItem * {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.azui {
+  font-size: 13px;
+  font-family: -apple-system, BlinkMacSystemFont, "San Francisco", "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif;
+}
+
+.azui *,
+.azui *::before,
+.azui *::after {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.azui.azui-menu {
+  min-width: 100px;
+  outline: none;
+  font-size: 12px;
+}
+
+.azui.azui-menu div.azMenuItem {
+  color: #444;
+  display: -ms-grid;
+  display: grid;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  -ms-grid-columns: 24px 1fr;
+      grid-template-columns: 24px 1fr;
+  background-color: #e8e8e8;
+  width: 100%;
+  padding: 5px 0;
+  border-bottom: 1px solid #ccc;
+  border-top: 1px solid white;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  -webkit-transition-property: background-color;
+  transition-property: background-color;
+}
+
+.azui.azui-menu div.azMenuItem:first-of-type {
+  border-top: none;
+}
+
+.azui.azui-menu div.azMenuItem:last-of-type {
+  border-bottom: none;
+}
+
+.azui.azui-menu div.azMenuItem span {
+  display: inline-block;
+}
+
+.azui.azui-menu div.azMenuItem span.icon {
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 1;
+  grid-column: 1/2;
+  text-align: center;
+  width: 24px;
+}
+
+.azui.azui-menu div.azMenuItem span.icon svg {
+  margin-top: 3px;
+  width: 10px;
+  height: 10px;
+}
+
+.azui.azui-menu div.azMenuItem span.title {
+  -ms-grid-column: 2;
+  -ms-grid-column-span: 1;
+  grid-column: 2/3;
+  margin: 1px 10px 0 8px;
+}
+
+.azui.azui-menu div.azMenuSeparator {
+  height: 2px;
+  border-top: solid 1px #d6d6d6;
+  background-color: white;
+  margin: 2px 0;
+  padding: 0;
+}
