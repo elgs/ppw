@@ -1,5 +1,5 @@
 {
-  "name": "azdnd",
+  "name": "ppw",
   "version": "0.0.6",
   "description": "A drag and drop ui manager.",
   "scripts": {
@@ -7,16 +7,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "ssh://git@github.com:22/elgs/azdnd.git"
+    "url": "ssh://git@github.com:22/elgs/ppw.git"
   },
   "keywords": [
-    "azdnd"
+    "ppw"
   ],
   "author": "Qian Chen",
   "license": "MIT",
   "devDependencies": {
     "jasmine": "3.10.0",
     "live-server": "^1.2.1",
-    "puppeteer": "13.0.0"
+    "puppeteer": "13.0.1"
   }
 }
