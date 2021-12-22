@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8" />
+   <title>Pager</title>
+   <link rel="stylesheet" href="./pager.css">
+</head>
+
+<body>
+   <div id="pager0"></div>
+   <script type="module">
+      import { Pager } from './pager.js';
+      const elem = document.querySelector('#pager0');
+      az.ui(Pager, elem, {
+         pageSize: 25,
+         pageNumber: 1,
+         totalSize: 101,
+         onPageChange: function (pageNumber, pageSize) {
+            const _pageNumber = Math.max(1, Math.min(Math.ceil(this.settings.totalSize / pageSize), pageNumber));
+            this.settings.pageNumber = _pageNumber;
+            console.log(pageSize, _pageNumber);
+         }
+      });
+   </script>
+</body>
+</html>

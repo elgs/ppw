@@ -1,8 +1,7 @@
-// 1 800 234 3993
-@import '../_utilities/utilities.scss';
+@import '../ppw.scss';
 
 .azui {
-  &.azDataTable {
+  &.azui-datatable {
     font-size: 12px;
 
     & > div.tbody {

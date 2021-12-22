@@ -1,0 +1,103 @@
+.azui {
+  font-size: 13px;
+  font-family: -apple-system, BlinkMacSystemFont, "San Francisco", "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif;
+}
+
+.azui *,
+.azui *::before,
+.azui *::after {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.azui.azui-select {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  display: inline-block;
+  position: relative;
+  font-size: 12px;
+}
+
+.azui.azui-select input.azSelectInput {
+  margin: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  width: 100%;
+  border: 1px solid gray;
+}
+
+.azui.azui-select .dirtySign {
+  position: absolute;
+  border-style: inset;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 6px 6px 0;
+  border-color: transparent #d95244 transparent transparent;
+  top: 0;
+  right: 0;
+  z-index: 1;
+}
+
+.azui.azui-select .azSelectdropdownButton {
+  position: absolute;
+  background-color: #e8e8e8;
+  right: 0;
+  top: 0;
+  width: 20px;
+  border: 1px solid gray;
+  height: 100%;
+  display: -ms-grid;
+  display: grid;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.azui.azui-select .azSelectdropdownButton svg {
+  width: 10px;
+  height: 10px;
+  fill: #4d4d4d;
+}
+
+.azui.azSelectMenu {
+  background-color: #e8e8e8;
+  border: 1px solid #d6d6d6;
+  position: absolute;
+  min-width: 100px;
+  font-size: 12px;
+}
+
+.azui.azSelectMenu div.azMenuItem {
+  display: -ms-grid;
+  display: grid;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  background-color: #e8e8e8;
+  width: 100%;
+  padding: 5px 0;
+}
+
+.azui.azSelectMenu div.azMenuItem .title {
+  display: inline-block;
+  margin: 1px 10px 0 8px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.azui.azSelectMenu div.azMenuItem.selected {
+  background-color: #498dd5;
+  color: #e8e8e8;
+}
+
+.azui.azSelectMenu div.azMenuSeparator {
+  height: 2px;
+  border-top: solid 1px #d6d6d6;
+  background-color: white;
+  margin: 2px 0;
+  padding: 0;
+}

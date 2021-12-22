@@ -1,0 +1,96 @@
+.azui {
+  font-size: 13px;
+  font-family: -apple-system, BlinkMacSystemFont, "San Francisco", "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif;
+}
+
+.azui *,
+.azui *::before,
+.azui *::after {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.azui.azui-inlineeditorwrapper {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.azui.azui-inlineeditorwrapper input.azInlineEditorInput {
+  margin: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  border: 1px solid gray;
+}
+
+.azui.azui-inlineeditorwrapper .dirtySign {
+  position: absolute;
+  border-style: inset;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 6px 6px 0;
+  border-color: transparent #d95244 transparent transparent;
+  top: 0;
+  right: 0;
+  z-index: 1;
+}
+
+.azui.azui-inlineeditorwrapper .numberButton {
+  position: absolute;
+  right: 0;
+  width: 20px;
+  height: 50%;
+  display: -ms-grid;
+  display: grid;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background: #e8e8e8;
+}
+
+.azui.azui-inlineeditorwrapper .numberButton.upButton {
+  top: 0;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #d6d6d6;
+}
+
+.azui.azui-inlineeditorwrapper .numberButton.upButton:hover {
+  background-color: #cfcfcf;
+}
+
+.azui.azui-inlineeditorwrapper .numberButton.upButton:active {
+  background-color: #b5b5b5;
+}
+
+.azui.azui-inlineeditorwrapper .numberButton.downButton {
+  bottom: 0;
+  border-width: 1px;
+  border-style: solid;
+  border-top-color: white;
+  border-left-color: #d6d6d6;
+  border-right-color: #d6d6d6;
+  border-bottom-color: #d6d6d6;
+}
+
+.azui.azui-inlineeditorwrapper .numberButton.downButton:hover {
+  background-color: #cfcfcf;
+}
+
+.azui.azui-inlineeditorwrapper .numberButton.downButton:active {
+  background-color: #b5b5b5;
+}
+
+.azui.azui-inlineeditorwrapper .numberButton svg {
+  width: 10px;
+  height: 10px;
+  fill: #4d4d4d;
+}

@@ -1,7 +1,7 @@
-@import '../_utilities/utilities.scss';
+@import '../ppw.scss';
 
 .azui {
-  &.azInlineEditorWrapper {
+  &.azui-inlineeditorwrapper {
     box-sizing: border-box;
     display: inline-block;
     width: 100%;

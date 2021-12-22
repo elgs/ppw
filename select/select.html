@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8" />
+   <title>azSelect</title>
+   <link rel="stylesheet" href="./select.css">
+</head>
+
+<body>
+   <div id="select0"></div>
+   <script type="module">
+      import { Select } from './select.js';
+      const elem = document.querySelector('#select0');
+      az.ui(Select, elem, {
+         items: [
+            {
+               key: '0',
+               title: 'Close'
+            },
+            'Close Others',
+            // null,
+            'Close All'
+         ]
+      });
+      az.ui(Select, elem, {
+         items: [
+            {
+               key: '0',
+               title: 'Close'
+            },
+            'Close Others',
+            // null,
+            'Close All'
+         ]
+      });
+   </script>
+</body>
+</html>
