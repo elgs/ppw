@@ -1,5 +1,5 @@
 import * as icons from '../icons.js';
-import { diffPosition, matches, remove, isTouchDevice } from '../azdom.js';
+import { diffPosition, matches, isTouchDevice } from '../azdom.js';
 import { Sortable } from '../sortable/sortable.js';
 import { ContextMenu } from '../contextmenu/contextmenu.js';
 
@@ -193,7 +193,7 @@ export class Docker {
 
    undock(dockId, notify) {
       // docker, window two way notify
-      remove(this.dom.querySelector(`[az-dock-id='${dockId}']`));
+      this.dom.querySelector(`[az-dock-id='${dockId}']`).remove();
 
       const dockedRef = document.querySelector(`[az-dock-ref='${dockId}']`);
       if (dockedRef) {
