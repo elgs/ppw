@@ -27,7 +27,7 @@ export class InlineEdit {
       }
    };
 
-   init(options) {
+   init() {
       const me = this;
       const dom = this.dom;
       const settings = this.settings;

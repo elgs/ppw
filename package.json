@@ -3,7 +3,8 @@
   "version": "0.0.6",
   "description": "A drag and drop ui manager.",
   "scripts": {
-    "test": "npx jasmine tests/*"
+    "test": "npx jasmine tests/*",
+    "dev": "npx live-server"
   },
   "repository": {
     "type": "git",
