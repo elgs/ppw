@@ -133,9 +133,9 @@ export class InlineEdit {
 
             editor.addEventListener('keyup', function (event) {
                // console.log('keyup');
-               if (event.keyCode === 13) {
+               if (event.key === 'Enter') {
                   me.done(event);
-               } else if (event.keyCode === 27) {
+               } else if (event.key === 'Escape') {
                   me.cancel(event);
                } else {
                   if (settings.edit(event, this.value) === false) {
@@ -148,9 +148,9 @@ export class InlineEdit {
             editor.addEventListener('keydown', function (event) {
                // console.log('keydown');
                if (settings.type === 'number') {
-                  if (event.keyCode === 38) {
+                  if (event.key === 'ArrowUp') {
                      editor.value = editor.value * 1 + 1;
-                  } else if (event.keyCode === 40) {
+                  } else if (event.key === 'ArrowDown') {
                      editor.value = editor.value * 1 - 1;
                   }
                }

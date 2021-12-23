@@ -84,7 +84,7 @@ export class Tree {
          filterTree(term, [...treeScroller.children]);
       });
       searchInput.addEventListener('keydown', e => {
-         if (e.keyCode === 40) {
+         if (e.key === 'ArrowDown') {
             e.preventDefault();
             if (!me.keyonItem) {
                me.keyonItem = treeScroller.querySelector('.azTreeNode:not(.filtered)');
@@ -180,7 +180,7 @@ export class Tree {
       const onKeyDown = e => {
          // console.log(e.keyCode);
          e.preventDefault();
-         if (e.keyCode === 38) {
+         if (e.key === 'ArrowUp') {
             // up
             const prev = navUp(me.keyonItem);
             if (prev) {
@@ -197,7 +197,7 @@ export class Tree {
             } else {
                searchInput.focus();
             }
-         } else if (e.keyCode === 40) {
+         } else if (e.key === 'ArrowDown') {
             // down
             // console.log(me.keyonItem);
             if (me.keyonItem) {
@@ -218,7 +218,7 @@ export class Tree {
                   }
                }
             }
-         } else if (e.keyCode === 37) {
+         } else if (e.key === 'ArrowLeft') {
             // left
             if (me.keyonItem) {
                const branch = nextElem(me.keyonItem, '.azTreeBranch:not(.collapsed)');
@@ -232,14 +232,14 @@ export class Tree {
                   me.keyonItem.classList.add('keyon');
                }
             }
-         } else if (e.keyCode === 39) {
+         } else if (e.key === 'ArrowRight') {
             // right
             if (me.keyonItem) {
                const branch = nextElem(me.keyonItem, '.azTreeBranch') || me.keyonItem.closest('.azTreeBranch');
                const key = branch.getAttribute('tree-key');
                me.toggle(key, true);
             }
-         } else if (e.keyCode === 13) {
+         } else if (e.key === 'Enter') {
             // enter
             me.keyonItem.dispatchEvent(new CustomEvent('mouseup'));
          }

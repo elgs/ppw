@@ -188,11 +188,11 @@ export class DataTable {
       const onKeyDown = e => {
          // console.log(e.keyCode);
 
-         if (e.keyCode === 27) {
+         if (e.key === 'Escape') {
             // esc
             e.preventDefault();
             me.rows[me.lastSelectedRowNum].classList.remove('selected');
-         } else if (e.keyCode === 37) {
+         } else if (e.key === 'ArrowLeft') {
             // left
             if (document.activeElement === me.activeEditor) {
                return;
@@ -200,7 +200,7 @@ export class DataTable {
             e.preventDefault();
             me.pager.update(--settings.pageNumber);
             e.currentTarget.scrollTop = 0;
-         } else if (e.keyCode === 38) {
+         } else if (e.key === 'ArrowUp') {
             // up
             if (document.activeElement === me.activeEditor) {
                return;
@@ -217,7 +217,7 @@ export class DataTable {
                // scroll down rowHeight
                e.currentTarget.scrollTop -= rowHeight;
             }
-         } else if (e.keyCode === 39) {
+         } else if (e.key === 'ArrowRight') {
             // right
             if (document.activeElement === me.activeEditor) {
                return;
@@ -225,7 +225,7 @@ export class DataTable {
             e.preventDefault();
             me.pager.update(++settings.pageNumber);
             e.currentTarget.scrollTop = 0;
-         } else if (e.keyCode === 40) {
+         } else if (e.key === 'ArrowDown') {
             // down
             if (document.activeElement === me.activeEditor) {
                return;
@@ -246,7 +246,7 @@ export class DataTable {
                   e.currentTarget.scrollTop += rowHeight;
                }
             }
-         } else if (e.keyCode === 13) {
+         } else if (e.key === 'Enter') {
             // enter
             e.preventDefault();
          }

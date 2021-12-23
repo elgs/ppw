@@ -78,7 +78,7 @@ export class Menu {
       const onKeyUp = e => {
          // console.log(e.keyCode);
 
-         if (e.keyCode === 38) {
+         if (e.key === 'ArrowUp') {
             // up
             if (me.activeMenuItem) {
                const prev = prevElem(me.activeMenuItem, ':not(.disabled).azMenuItem');
@@ -88,7 +88,7 @@ export class Menu {
                   me.activeMenuItem.classList.add('active');
                }
             }
-         } else if (e.keyCode === 40) {
+         } else if (e.key === 'ArrowDown') {
             // down
             if (me.activeMenuItem) {
                const next = nextElem(me.activeMenuItem, ':not(.disabled).azMenuItem');
@@ -98,7 +98,7 @@ export class Menu {
                   me.activeMenuItem.classList.add('active');
                }
             }
-         } else if (e.keyCode === 13) {
+         } else if (e.key === 'Enter') {
             // enter
             me.activeMenuItem.dispatchEvent(new CustomEvent('mouseup'));
          }

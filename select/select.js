@@ -192,7 +192,7 @@ export class Select {
          // console.log(me.selectInput.value.trim().length);
          // console.log(e.keyCode, me.selectInput.value.trim().length);
          e.stopPropagation();
-         if (e.keyCode === 27) {
+         if (e.key === 'Escape') {
             // esc key is pressed
             if (dropdownShown) {
                offDropdown(e);
@@ -205,12 +205,12 @@ export class Select {
                   })
                );
             }
-         } else if (e.keyCode === 38) {
+         } else if (e.key === 'ArrowUp') {
             // up
             --highlightIndex;
             highlightIndex = highlightIndex < 0 ? 0 : highlightIndex;
             navigateDropdown();
-         } else if (e.keyCode === 40) {
+         } else if (e.key === 'ArrowDown') {
             // if key code is down arrow key, triggered full dropdown
             if (!dropdownShown) {
                showDropdown(e, true);
@@ -220,7 +220,7 @@ export class Select {
                highlightIndex = highlightIndex >= menuLength - 1 ? menuLength - 1 : highlightIndex;
                navigateDropdown();
             }
-         } else if (e.keyCode === 13) {
+         } else if (e.key === 'Enter') {
             if (me.settings.allowNewItems) {
                if (dropdownShown) {
                   const selected = Array.prototype.filter.call(me.menu.children, n => matches(n, '.azMenuItem'))[

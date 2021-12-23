@@ -121,15 +121,15 @@ export class ContextMenu {
             e.preventDefault();
             // console.log(e.keyCode);
 
-            if (e.keyCode === 27) {
+            if (e.key === 'Escape') {
                // esc
                menu.blur();
-            } else if (e.keyCode === 38) {
+            } else if (e.key === 'ArrowUp') {
                // up
                --highlightIndex;
                highlightIndex = highlightIndex < 0 ? 0 : highlightIndex;
                navigateMenu();
-            } else if (e.keyCode === 40) {
+            } else if (e.key === 'ArrowDown') {
                // down
                const menuLength = me.menu.querySelectorAll('.azMenuItem').length;
                // console.log(menuLength);
@@ -137,7 +137,8 @@ export class ContextMenu {
                highlightIndex = highlightIndex >= menuLength - 1 ? menuLength - 1 : highlightIndex;
                // console.log(highlightIndex);
                navigateMenu();
-            } else if (e.keyCode === 13 || e.keyCode === 32) {
+            } else if (e.key === 'Enter' || e.key === ' ') {
+               console.log('asdfasdf');
                // enter
                const selected = Array.prototype.filter.call(me.menu.children, n => matches(n, '.azMenuItem'))[
                   highlightIndex
