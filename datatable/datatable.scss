@@ -40,7 +40,7 @@
         }
 
         & > div.td {
-          width: 100px; 
+          width: 100px;
           height: 100%;
           position: relative;
 
@@ -49,6 +49,9 @@
             height: 100%;
             .azui-inlineedit {
               padding-left: 10px;
+            }
+            .azui-inlineeditor > input {
+              padding-left: 9px;
             }
           }
         }

@@ -91,6 +91,10 @@
   padding-left: 10px;
 }
 
+.azui.azui-datatable > div.tbody > div.tr > div.td .azui-inlineeditor-wrapper .azui-inlineeditor > input {
+  padding-left: 9px;
+}
+
 .azui.azui-datatable > div.thead {
   height: 30px;
   background-color: #e8e8e8;
