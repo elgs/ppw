@@ -8,12 +8,10 @@
 </head>
 
 <body>
-   <div id="div0">
-      <span>123</span>
-   </div>
+   <span id='text'>123</span>
    <script type="module">
       import { InlineEdit } from './inlineedit.js';
-      const elem = document.querySelectorAll('#div0 span');
+      const elem = document.querySelectorAll('span#text');
       az.ui(InlineEdit, elem, {
          foo: 'bar',
          type: 'select',

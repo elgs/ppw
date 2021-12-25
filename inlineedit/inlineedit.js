@@ -32,6 +32,12 @@ export class InlineEdit {
       const dom = this.dom;
       const settings = this.settings;
 
+      // create a wrapper
+      const wrapper = document.createElement('div');
+      wrapper.classList.add('azui', 'azui-inlineeditor-wrapper');
+      insertAfter(wrapper, dom);
+      wrapper.append(dom);
+
       me.active = false;
 
       if (settings.create(null, this) === false) {
@@ -198,7 +204,7 @@ export class InlineEdit {
             // }
          }
          dom.style.display = 'none';
-         insertAfter(inlineEditor, dom);
+         wrapper.append(inlineEditor)
          me.active = true;
          settings.start(e, dom);
          return false;

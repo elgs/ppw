@@ -54,6 +54,9 @@
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   height: 28px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .azui.azui-datatable > div.tbody > div.tr:nth-child(even) {
@@ -76,41 +79,16 @@
 .azui.azui-datatable > div.tbody > div.tr > div.td {
   width: 100px;
   height: 100%;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  display: inline-block;
   position: relative;
 }
 
-.azui.azui-datatable > div.tbody > div.tr > div.td span {
-  padding: 0 0 0 10px;
-  display: inline-block;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
+.azui.azui-datatable > div.tbody > div.tr > div.td .azui-inlineeditor-wrapper {
   width: 100%;
   height: 100%;
 }
 
-.azui.azui-datatable > div.tbody > div.tr > div.td span::before {
-  content: "";
-  display: inline-block;
-  vertical-align: middle;
-  height: 100%;
-}
-
-.azui.azui-datatable > div.tbody > div.tr > div.td .azui-inlineeditorwrapper {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
-
-.azui.azui-datatable > div.tbody > div.tr > div.td .azui-inlineeditorwrapper input[type="text"].azInlineEditorInput {
-  padding: 0 0 2px 10px;
+.azui.azui-datatable > div.tbody > div.tr > div.td .azui-inlineeditor-wrapper .azui-inlineedit {
+  padding-left: 10px;
 }
 
 .azui.azui-datatable > div.thead {
