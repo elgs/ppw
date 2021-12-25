@@ -10,25 +10,28 @@
           box-sizing: border-box;
 }
 
-.azui.azui-inlineeditorwrapper {
+.azui.azui-inlineeditor {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   display: inline-block;
   width: 100%;
   height: 100%;
-  position: relative;
+  position: absolute;
 }
 
-.azui.azui-inlineeditorwrapper input.azInlineEditorInput {
+.azui.azui-inlineeditor input.azInlineEditorInput {
   margin: 0;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   width: 100%;
   height: 100%;
-  border: 1px solid gray;
 }
 
-.azui.azui-inlineeditorwrapper .dirtySign {
+.azui.azui-inlineeditor input.azInlineEditorInput:focus {
+  outline: none;
+}
+
+.azui.azui-inlineeditor .dirtySign {
   position: absolute;
   border-style: inset;
   width: 0;
@@ -41,7 +44,7 @@
   z-index: 1;
 }
 
-.azui.azui-inlineeditorwrapper .numberButton {
+.azui.azui-inlineeditor .numberButton {
   position: absolute;
   right: 0;
   width: 20px;
@@ -56,23 +59,23 @@
   background: #e8e8e8;
 }
 
-.azui.azui-inlineeditorwrapper .numberButton.upButton {
-  top: 0;
+.azui.azui-inlineeditor .numberButton.upButton {
+  top: 1px;
   border-width: 1px;
   border-style: solid;
   border-color: #d6d6d6;
 }
 
-.azui.azui-inlineeditorwrapper .numberButton.upButton:hover {
+.azui.azui-inlineeditor .numberButton.upButton:hover {
   background-color: #cfcfcf;
 }
 
-.azui.azui-inlineeditorwrapper .numberButton.upButton:active {
+.azui.azui-inlineeditor .numberButton.upButton:active {
   background-color: #b5b5b5;
 }
 
-.azui.azui-inlineeditorwrapper .numberButton.downButton {
-  bottom: 0;
+.azui.azui-inlineeditor .numberButton.downButton {
+  bottom: 1px;
   border-width: 1px;
   border-style: solid;
   border-top-color: white;
@@ -81,15 +84,15 @@
   border-bottom-color: #d6d6d6;
 }
 
-.azui.azui-inlineeditorwrapper .numberButton.downButton:hover {
+.azui.azui-inlineeditor .numberButton.downButton:hover {
   background-color: #cfcfcf;
 }
 
-.azui.azui-inlineeditorwrapper .numberButton.downButton:active {
+.azui.azui-inlineeditor .numberButton.downButton:active {
   background-color: #b5b5b5;
 }
 
-.azui.azui-inlineeditorwrapper .numberButton svg {
+.azui.azui-inlineeditor .numberButton svg {
   width: 10px;
   height: 10px;
   fill: #4d4d4d;

@@ -81,8 +81,8 @@ export class InlineEdit {
          // me.each(function () {
          // const clicked = clickedElem === node;
          const originalValue = dom.textContent.trim();
-         const editorWrapper = document.createElement('div');
-         editorWrapper.classList.add('azui', 'azui-inlineeditorwrapper');
+         const inlineEditor = document.createElement('div');
+         inlineEditor.classList.add('azui', 'azui-inlineeditor');
 
          const dirtySign = document.createElement('div');
          dirtySign.classList.add('dirtySign');
@@ -100,12 +100,12 @@ export class InlineEdit {
          };
 
          if (settings.type === 'select') {
-            const select = az.ui(Select, editorWrapper, {
+            const select = az.ui(Select, inlineEditor, {
                items: settings.options,
                allowNewItems: settings.allowNewItems,
                select: e => _checkDirty(select.selectInput)
             });
-            editorWrapper.appendChild(dirtySign);
+            inlineEditor.appendChild(dirtySign);
             select.dom.addEventListener('done', function (e) {
                me.done(e);
             });
@@ -122,14 +122,14 @@ export class InlineEdit {
             });
             // }
          } else {
-            editorWrapper.appendChild(dirtySign);
+            inlineEditor.appendChild(dirtySign);
             const editor = document.createElement('input');
             me.editor = editor;
             editor.setAttribute('type', 'text');
             editor.setAttribute('size', 1);
             editor.classList.add('azInlineEditorInput');
             editor.value = originalValue;
-            editorWrapper.appendChild(editor);
+            inlineEditor.appendChild(editor);
 
             editor.addEventListener('keyup', function (event) {
                // console.log('keyup');
@@ -166,13 +166,13 @@ export class InlineEdit {
                upButton.innerHTML = svgUp;
                upButton.classList.add('numberButton');
                upButton.classList.add('upButton');
-               editorWrapper.appendChild(upButton);
+               inlineEditor.appendChild(upButton);
 
                const downButton = document.createElement('div');
                downButton.innerHTML = svgDown;
                downButton.classList.add('numberButton');
                downButton.classList.add('downButton');
-               editorWrapper.appendChild(downButton);
+               inlineEditor.appendChild(downButton);
 
                upButton.addEventListener('click', function (event) {
                   event.stopPropagation();
@@ -198,7 +198,7 @@ export class InlineEdit {
             // }
          }
          dom.style.display = 'none';
-         insertAfter(editorWrapper, dom);
+         insertAfter(inlineEditor, dom);
          me.active = true;
          settings.start(e, dom);
          return false;
