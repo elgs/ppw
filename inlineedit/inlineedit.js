@@ -183,11 +183,13 @@ export class InlineEdit {
                upButton.addEventListener('click', function (event) {
                   event.stopPropagation();
                   editor.value = editor.value * 1 + 1;
+                  editor.focus();
                   _checkDirty(editor);
                });
                downButton.addEventListener('click', function (event) {
                   event.stopPropagation();
                   editor.value = editor.value * 1 - 1;
+                  editor.focus();
                   _checkDirty(editor);
                });
             }
