@@ -1,17 +1,18 @@
-@use '../ppw.scss' as *;
+@use "../ppw.scss" as *;
 
 .azui {
   &.azui-select {
-    box-sizing: border-box;
     display: inline-block;
     position: relative;
     font-size: 12px;
 
     input.azSelectInput {
       margin: 0;
-      box-sizing: border-box;
-      width: 100%; // height: 100%;
+      width: 100%; 
       border: 1px solid gray;
+      &:focus {
+        outline: none;
+      }
     }
 
     .dirtySign {

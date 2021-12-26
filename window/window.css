@@ -9,7 +9,6 @@
 }
 
 .azui.azui-window {
-  box-sizing: border-box;
   background-color: white;
   display: flex;
   flex-direction: column;
@@ -39,7 +38,6 @@
   background-color: #d4d4d4;
 }
 .azui.azui-window > .azWindowHeader {
-  box-sizing: border-box;
   width: 100%;
   padding: 6px;
   font-size: 12px;
@@ -121,5 +119,3 @@
   height: 100%;
   overflow: hidden;
 }
-
-/*# sourceMappingURL=window.css.map */

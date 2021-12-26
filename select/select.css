@@ -9,16 +9,17 @@
 }
 
 .azui.azui-select {
-  box-sizing: border-box;
   display: inline-block;
   position: relative;
   font-size: 12px;
 }
 .azui.azui-select input.azSelectInput {
   margin: 0;
-  box-sizing: border-box;
   width: 100%;
   border: 1px solid gray;
+}
+.azui.azui-select input.azSelectInput:focus {
+  outline: none;
 }
 .azui.azui-select .dirtySign {
   position: absolute;

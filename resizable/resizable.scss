@@ -3,7 +3,6 @@
 .azui {
   &.azui-resizable > .handle {
     background-color: $main-color;
-    box-sizing: border-box;
     position: absolute !important;
     display: flex;
     justify-content: center;

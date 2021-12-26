@@ -1,8 +1,7 @@
-@use '../ppw.scss' as *;
+@use "../ppw.scss" as *;
 
 .azui {
   &.azui-window {
-    box-sizing: border-box;
     background-color: white;
     // display: grid;
     display: flex;
@@ -46,7 +45,6 @@
     }
 
     & > .azWindowHeader {
-      box-sizing: border-box;
       width: 100%; // display: inline-block;
       // align-items: center;
       // grid-row: 1/2;
@@ -72,7 +70,7 @@
         height: 24px;
 
         &::before {
-          content: '';
+          content: "";
           display: inline-block;
           vertical-align: middle;
           height: 100%;
@@ -95,7 +93,7 @@
         text-align: left;
 
         &::before {
-          content: '';
+          content: "";
           display: inline-block;
           vertical-align: middle;
           height: 100%;
@@ -128,7 +126,7 @@
 
       .right {
         &::before {
-          content: '';
+          content: "";
           display: inline-block;
           vertical-align: middle;
           height: 100%;
@@ -145,7 +143,7 @@
       width: 100%;
       height: 100%;
       // grid-row: 2/3;
-      overflow: hidden; // box-sizing: border-box;
+      overflow: hidden;
     }
   }
 }

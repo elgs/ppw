@@ -2,7 +2,6 @@
 
 .azui {
   &.azui-docker {
-    box-sizing: border-box;
     // padding: 2px;
     position: absolute;
     bottom: 0;
@@ -13,7 +12,6 @@
     grid-gap: 2px;
 
     & .azSortableItem {
-      box-sizing: border-box;
       cursor: pointer;
       user-select: none;
       background-color: $main-color;

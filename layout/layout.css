@@ -17,7 +17,6 @@
 }
 .azui.azui-layout > .azLayoutArea {
   overflow: hidden;
-  box-sizing: border-box;
 }
 .azui.azui-layout > .azLayoutArea > div {
   width: 100%;
@@ -43,5 +42,3 @@
   position: relative;
   grid-area: c;
 }
-
-/*# sourceMappingURL=layout.css.map */

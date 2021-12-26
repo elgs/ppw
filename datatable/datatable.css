@@ -30,17 +30,14 @@
 }
 .azui.azui-datatable > div.tbody {
   height: 300px;
-  box-sizing: border-box;
   overflow-x: hidden;
   overflow-y: auto;
   border-left: 1px solid #cfcfcf;
   border-right: 1px solid #cfcfcf;
   white-space: nowrap;
-  box-sizing: border-box;
   outline: none;
 }
 .azui.azui-datatable > div.tbody > div.tr {
-  box-sizing: border-box;
   height: 28px;
   display: flex;
 }
@@ -75,7 +72,6 @@
 .azui.azui-datatable > div.thead {
   height: 30px;
   background-color: #e8e8e8;
-  box-sizing: border-box;
   border: 1px solid #cfcfcf;
   white-space: nowrap;
 }
@@ -84,7 +80,6 @@
   display: inline-block;
   background-color: #e8e8e8;
   white-space: nowrap;
-  box-sizing: border-box;
   padding: 0 0 0 10px;
   cursor: default;
   border-right: solid 1px #d6d6d6;
@@ -135,7 +130,6 @@
   justify-content: space-between;
   align-items: center;
   height: 30px;
-  box-sizing: border-box;
   border-left: 1px solid #cfcfcf;
   border-right: 1px solid #cfcfcf;
   border-bottom: 1px solid #cfcfcf;
