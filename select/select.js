@@ -18,7 +18,7 @@ export class Select {
 
       empty(dom);
 
-      const showDropdown = function (e, init = false) {
+      const showDropdown = function (e, initialize = false) {
          // console.log('show');
          // alert(e.currentTarget.outerHTML);
          // console.log(e.currentTarget);
@@ -44,7 +44,8 @@ export class Select {
                dom.dispatchEvent(
                   new CustomEvent('done', {
                      detail: {
-                        value: me.selectInput.value
+                        value: me.selectInput.value,
+                        originalEvent: e,
                      }
                   })
                );
@@ -93,12 +94,12 @@ export class Select {
                };
             }
             // console.log(item);
-            if (init || item.title.toLowerCase().includes(me.selectInput.value.toLowerCase())) {
+            if (initialize || item.title.toLowerCase().includes(me.selectInput.value.toLowerCase())) {
                me.menu.appendChild(createMenuItem(item));
                empty = false;
 
                // highlight the selected
-               if (init && item.title === me.selectInput.value) {
+               if (initialize && item.title === me.selectInput.value) {
                   highlightIndex = index;
                   navigateDropdown();
                }
@@ -109,10 +110,10 @@ export class Select {
             document.documentElement.appendChild(me.menu);
             dropdownShown = true;
 
-            document.addEventListener('mousedown', offDropdown);
+            document.addEventListener('mousedown', dismissDropdown);
 
             if (isTouchDevice()) {
-               document.addEventListener('touchstart', offDropdown);
+               document.addEventListener('touchstart', dismissDropdown);
             }
 
             const meBcr = dom.getBoundingClientRect();
@@ -127,9 +128,7 @@ export class Select {
             me.selectInput.focus();
          });
 
-         if (e) {
-            e.stopPropagation();
-         }
+         e?.stopPropagation();
       };
 
       let dropdownShown = false;
@@ -151,25 +150,22 @@ export class Select {
          selected.classList.add('selected');
       };
 
-      const offDropdown = function (e) {
+      const dismissDropdown = function (e) {
          // console.log('off');
          // if (e.target === me.selectInput) {
          // return;
          // }
          me.menu.remove();
 
-         document.removeEventListener('mousedown', offDropdown);
+         document.removeEventListener('mousedown', dismissDropdown);
 
          if (isTouchDevice()) {
-            document.removeEventListener('touchstart', offDropdown);
+            document.removeEventListener('touchstart', dismissDropdown);
          }
 
          dropdownShown = false;
 
-         if (e) {
-            // alert(e.currentTarget.innerHTML);
-            e.stopPropagation();
-         }
+         e?.stopPropagation();
       };
 
       const toggleDropdown = function (e) {
@@ -184,7 +180,7 @@ export class Select {
          if (!dropdownShown) {
             showDropdown(e, true);
          } else {
-            offDropdown(e);
+            dismissDropdown(e);
          }
       };
 
@@ -195,7 +191,7 @@ export class Select {
          if (e.key === 'Escape') {
             // esc key is pressed
             if (dropdownShown) {
-               offDropdown(e);
+               dismissDropdown(e);
             } else {
                dom.dispatchEvent(
                   new CustomEvent('cancel', {
@@ -229,7 +225,7 @@ export class Select {
                   if (selected) {
                      me.selectInput.value = selected.textContent;
                   }
-                  offDropdown(e);
+                  dismissDropdown(e);
                }
             } else {
                if (dropdownShown) {
@@ -241,7 +237,7 @@ export class Select {
                   } else {
                      return;
                   }
-                  offDropdown(e);
+                  dismissDropdown(e);
                } else {
                   return;
                }
@@ -259,7 +255,7 @@ export class Select {
             // if input.val().trim().length>0, trigger filtered dropdown
             settings.select(e);
             if (dropdownShown) {
-               offDropdown(e);
+               dismissDropdown(e);
             }
             showDropdown(e);
          }

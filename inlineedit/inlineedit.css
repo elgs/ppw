@@ -2,47 +2,36 @@
   font-size: 13px;
   font-family: -apple-system, BlinkMacSystemFont, "San Francisco", "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif;
 }
-
 .azui *,
 .azui *::before,
 .azui *::after {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .azui.azui-inlineeditor-wrapper {
   position: relative;
   border: none;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
 }
-
 .azui.azui-inlineeditor-wrapper .azui-inlineedit {
   width: 100%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-
 .azui.azui-inlineeditor-wrapper .azui-inlineeditor {
   width: 100%;
   height: 100%;
 }
-
 .azui.azui-inlineeditor-wrapper .azui-inlineeditor input.azInlineEditorInput {
   margin: 0;
   width: 100%;
   height: 100%;
 }
-
 .azui.azui-inlineeditor-wrapper .azui-inlineeditor input.azInlineEditorInput:focus {
   outline: none;
 }
-
 .azui.azui-inlineeditor-wrapper .azui-inlineeditor .dirtySign {
   position: absolute;
   border-style: inset;
@@ -55,37 +44,28 @@
   right: 0;
   z-index: 1;
 }
-
 .azui.azui-inlineeditor-wrapper .azui-inlineeditor .numberButton {
   position: absolute;
   right: 0;
   width: 20px;
   height: 50%;
-  display: -ms-grid;
   display: grid;
-  -ms-flex-line-pack: center;
-      align-content: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  align-content: center;
+  justify-content: center;
   background: #e8e8e8;
 }
-
 .azui.azui-inlineeditor-wrapper .azui-inlineeditor .numberButton.upButton {
   top: 1px;
   border-width: 1px;
   border-style: solid;
   border-color: #d6d6d6;
 }
-
 .azui.azui-inlineeditor-wrapper .azui-inlineeditor .numberButton.upButton:hover {
   background-color: #cfcfcf;
 }
-
 .azui.azui-inlineeditor-wrapper .azui-inlineeditor .numberButton.upButton:active {
   background-color: #b5b5b5;
 }
-
 .azui.azui-inlineeditor-wrapper .azui-inlineeditor .numberButton.downButton {
   bottom: 1px;
   border-width: 1px;
@@ -95,15 +75,12 @@
   border-right-color: #d6d6d6;
   border-bottom-color: #d6d6d6;
 }
-
 .azui.azui-inlineeditor-wrapper .azui-inlineeditor .numberButton.downButton:hover {
   background-color: #cfcfcf;
 }
-
 .azui.azui-inlineeditor-wrapper .azui-inlineeditor .numberButton.downButton:active {
   background-color: #b5b5b5;
 }
-
 .azui.azui-inlineeditor-wrapper .azui-inlineeditor .numberButton svg {
   width: 10px;
   height: 10px;

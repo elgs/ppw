@@ -2,79 +2,56 @@
   font-size: 13px;
   font-family: -apple-system, BlinkMacSystemFont, "San Francisco", "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif;
 }
-
 .azui *,
 .azui *::before,
 .azui *::after {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .azui.azui-window {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   background-color: white;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
-          box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
+  flex-direction: column;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
 }
-
 .azui.azui-window:hover {
-  -webkit-box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.08);
-          box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.08);
 }
-
 .azui.azui-window.active > .azWindowHeader {
   background-color: #c9c9c9;
 }
-
 @media (hover: hover) {
   .azui.azui-window.active > .azWindowHeader:hover {
     background-color: #c9c9c9;
   }
 }
-
 .azui.azui-window.inactive .azWindowHeader {
   background-color: #e8e8e8;
 }
-
 .azui.azui-window.inactive .active > .azWindowHeader {
   background-color: #d4d4d4;
 }
-
 .azui.azui-window.inactive .azui-docker .azSortableItem {
   background-color: #e8e8e8;
 }
-
 .azui.azui-window.inactive .azui-docker .azSortableItem.dock-active {
   background-color: #d4d4d4;
 }
-
 .azui.azui-window > .azWindowHeader {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   width: 100%;
   padding: 6px;
   font-size: 12px;
-  -webkit-transition: 0.5s;
   transition: 0.5s;
-  -webkit-transition-property: background-color;
   transition-property: background-color;
   background-color: #e8e8e8;
 }
-
 @media (hover: hover) {
   .azui.azui-window > .azWindowHeader:hover {
     background-color: #dedede;
   }
 }
-
 .azui.azui-window > .azWindowHeader span.azHeaderIcon {
   cursor: pointer;
   display: inline-block;
@@ -82,80 +59,67 @@
   width: 24px;
   height: 24px;
 }
-
 .azui.azui-window > .azWindowHeader span.azHeaderIcon::before {
-  content: '';
+  content: "";
   display: inline-block;
   vertical-align: middle;
   height: 100%;
 }
-
 .azui.azui-window > .azWindowHeader span.azHeaderIcon:hover {
   border: 1px solid #dedede;
 }
-
 .azui.azui-window > .azWindowHeader span.azHeaderIcon svg {
   width: 8px;
   height: 8px;
 }
-
 .azui.azui-window > .azWindowHeader .left {
   white-space: nowrap;
   float: left;
   height: 100%;
   text-align: left;
 }
-
 .azui.azui-window > .azWindowHeader .left::before {
-  content: '';
+  content: "";
   display: inline-block;
   vertical-align: middle;
   height: 100%;
 }
-
 .azui.azui-window > .azWindowHeader .left span.title {
   cursor: default;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+  user-select: none;
 }
-
 .azui.azui-window > .azWindowHeader .left span.icon {
   padding: 8px;
   cursor: default;
   font-size: 18px;
 }
-
 .azui.azui-window > .azWindowHeader .left span.icon svg {
   width: 12px;
   height: 12px;
   position: relative;
   top: 2px;
 }
-
 .azui.azui-window > .azWindowHeader .center {
   display: inline-block;
   height: 100%;
   text-align: center;
 }
-
 .azui.azui-window > .azWindowHeader .right {
   float: right;
   height: 100%;
   text-align: right;
 }
-
 .azui.azui-window > .azWindowHeader .right::before {
-  content: '';
+  content: "";
   display: inline-block;
   vertical-align: middle;
   height: 100%;
 }
-
 .azui.azui-window > .azWindowContent {
   position: relative;
   width: 100%;
   height: 100%;
   overflow: hidden;
 }
+
+/*# sourceMappingURL=window.css.map */

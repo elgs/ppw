@@ -2,27 +2,18 @@
   font-size: 13px;
   font-family: -apple-system, BlinkMacSystemFont, "San Francisco", "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif;
 }
-
 .azui *,
 .azui *::before,
 .azui *::after {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .azui.azui-pager {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  justify-content: space-between;
+  align-items: center;
   height: 30px;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   border-left: 1px solid #cfcfcf;
   border-right: 1px solid #cfcfcf;
   border-bottom: 1px solid #cfcfcf;
@@ -31,46 +22,38 @@
   padding: 0 10px;
   font-size: 12px;
 }
-
 .azui.azui-pager a.azPageIcon {
   position: relative;
   top: 2px;
   margin-right: 15px;
   cursor: pointer;
 }
-
 .azui.azui-pager a.azPageIcon > svg {
   width: 12px;
   height: 12px;
   fill: #666666;
 }
-
 .azui.azui-pager a.azPageIcon > svg:hover {
   fill: white;
 }
-
 .azui.azui-pager a.azPageIcon > svg:active {
   fill: #b5b5b5;
 }
-
-.azui.azui-pager input[type='number'].pagerInput {
-  font-family: 'Roboto', sans-serif;
+.azui.azui-pager input[type=number].pagerInput {
+  font-family: "Roboto", sans-serif;
   font-size: 13px;
   margin-right: 5px;
   width: 40px;
   -moz-appearance: textfield;
 }
-
-.azui.azui-pager input[type='number'].pagerInput::-webkit-outer-spin-button, .azui.azui-pager input[type='number'].pagerInput::-webkit-inner-spin-button {
+.azui.azui-pager input[type=number].pagerInput::-webkit-outer-spin-button, .azui.azui-pager input[type=number].pagerInput::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-
 .azui.azui-pager .azPageInfo {
   color: #666666;
   white-space: nowrap;
 }
-
 @media screen and (orientation: portrait) {
   .azui.azui-pager .azWideScreen {
     display: none;

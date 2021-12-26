@@ -9,7 +9,6 @@ import {
    setOuterWidth,
    setWidth,
    textWidth,
-   empty,
    getHeight,
    diffPosition,
    siblings
@@ -49,7 +48,7 @@ export class DataTable {
       const dom = this.dom;
       const settings = this.settings;
 
-      empty(dom);
+      // empty(dom);
 
       me.totalSize = 0;
 
@@ -64,7 +63,7 @@ export class DataTable {
             me.pager.settings.pageNumber = pageNumber;
          }
 
-         empty(tbody);
+         // empty(tbody);
 
          me.rows = pageData.map((row, index) => {
             const tr = document.createElement('div');
@@ -93,6 +92,10 @@ export class DataTable {
                      });
                   },
                   done: (event, ui) => {
+                     if (event?.detail?.originalEvent?.type === 'mousedown') {
+                        // prevent other row from being selected when clicking on inline dropdown
+                        me.noSelect = true;
+                     }
                      me.activeEditor = null;
                      tbody.focus({
                         preventScroll: true
@@ -124,15 +127,15 @@ export class DataTable {
       };
 
       const rowSelected = e => {
+         if (me.noSelect) {
+            me.noSelect = false;
+            return;
+         }
          if (e.type === 'mouseup' && e.button !== 0) {
             return;
          }
 
          setTimeout(() => {
-            if (e._azRightClickTriggered) {
-               return;
-            }
-
             const tr = e.target.closest('div.tr');
             const td = e.target.closest('div.td');
 

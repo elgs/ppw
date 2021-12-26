@@ -1,43 +1,35 @@
+@charset "UTF-8";
 @media (hover: hover) {
   .azui.azui-accordion .azAccordionHeader:not(.disabled):hover {
     background-color: #dedede;
   }
 }
-
 .azui.azui-accordion .azAccordionHeader:not(.disabled).active {
   background-color: #c9c9c9;
 }
-
 .azui.azui-accordion .disabled.azAccordionHeader * {
   color: gray;
   fill: gray;
   cursor: not-allowed;
 }
-
 .azui.azui-accordion .azAccordionHeader * {
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+  user-select: none;
 }
 
 .azui {
   font-size: 13px;
   font-family: -apple-system, BlinkMacSystemFont, "San Francisco", "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif;
 }
-
 .azui *,
 .azui *::before,
 .azui *::after {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .azui.azui-accordion {
   border: 1px solid #ccc;
   font-size: 12px;
 }
-
 .azui.azui-accordion .azAccordionHeader {
   background-color: #eee;
   color: #444;
@@ -46,40 +38,33 @@
   border-bottom: 1px solid #ccc;
   border-top: 1px solid white;
   text-align: left;
-  -webkit-transition: 0.5s;
   transition: 0.5s;
-  -webkit-transition-property: background-color;
   transition-property: background-color;
 }
-
 .azui.azui-accordion .azAccordionHeader:first-of-type {
   border-top: none;
 }
-
 .azui.azui-accordion .azAccordionHeader:last-of-type {
   border-bottom: none;
 }
-
 .azui.azui-accordion .azAccordionHeader:after {
-  content: "\002B";
+  content: "+";
   color: #777;
   font-weight: bold;
   float: right;
   margin-left: 5px;
 }
-
 .azui.azui-accordion .azAccordionHeader.active:after {
-  content: "\2212";
+  content: "−";
 }
-
 .azui.azui-accordion .azAccordionHeader.azAccordionAlert {
   font-weight: bold;
 }
-
 .azui.azui-accordion .azAccordionContent {
   background-color: white;
   max-height: 0;
   overflow: hidden;
-  -webkit-transition: max-height 0.2s ease-out;
   transition: max-height 0.2s ease-out;
 }
+
+/*# sourceMappingURL=accordion.css.map */
