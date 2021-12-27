@@ -1,4 +1,5 @@
-import '../azdom.js';
+import '../_core/core.js';
+import '../_core/lib.js';
 
 export class Droppable {
    static id = 'azui-droppable';

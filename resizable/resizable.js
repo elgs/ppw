@@ -1,4 +1,5 @@
-import { getHeight, getWidth, normalizeIcon, setHeight, setOuterHeight, setOuterWidth, setWidth } from '../azdom.js';
+import '../_core/core.js';
+import { getHeight, getWidth, normalizeIcon, setHeight, setOuterHeight, setOuterWidth, setWidth } from '../_core/lib.js';
 import { Draggable } from '../draggable/draggable.js';
 
 const svgTriangleUp = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 10"><path d="M0 10L10 0l10 10z"/></svg>`;

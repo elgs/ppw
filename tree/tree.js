@@ -1,5 +1,5 @@
 import { svgTriangle } from '../icons.js'
-import { ancestors, children, diffPosition, getHeight, insertAfter, isTouchDevice, matches, nextElem, parseDOMElement, prevElem, resolveFunction } from '../azdom.js';
+import { ancestors, children, diffPosition, getHeight, insertAfter, isTouchDevice, matches, nextElem, parseDOMElement, prevElem, resolveFunction } from '../_core/lib.js';
 
 let _treeKey = 0;
 

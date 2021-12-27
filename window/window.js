@@ -1,5 +1,6 @@
-import * as icons from '../icons.js';
-import { isOutside, isTouchDevice, matches, parseDOMElement, siblings } from '../azdom.js';
+import '../_core/core.js';
+import * as icons from '../_core/icons.js';
+import { isOutside, isTouchDevice, matches, parseDOMElement, siblings } from '../_core/lib.js';
 import { Docker } from '../docker/docker.js';
 import { Resizable } from '../resizable/resizable.js';
 import { Draggable } from '../draggable/draggable.js';

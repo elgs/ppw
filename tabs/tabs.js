@@ -1,5 +1,6 @@
-import * as icons from '../icons.js';
-import { getDocScrollLeft, getDocScrollTop, isTouchDevice, matches, nextAll, normalizeIcon, parseDOMElement, siblings } from '../azdom.js';
+import '../_core/core.js';
+import * as icons from '../_core/icons.js';
+import { getDocScrollLeft, getDocScrollTop, isTouchDevice, matches, nextAll, normalizeIcon, parseDOMElement, siblings } from '../_core/lib.js';
 import { ContextMenu } from '../contextmenu/contextmenu.js';
 import { Sortable } from '../sortable/sortable.js';
 import { Draggable } from '../draggable/draggable.js';

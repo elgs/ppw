@@ -1,6 +1,7 @@
+import '../_core/core.js';
 import { Draggable } from '../draggable/draggable.js';
 import { Droppable } from '../droppable/droppable.js';
-import { diffPositionInnerBorder, getDocScrollLeft, getDocScrollTop, getHeight, getWidth, index, insertAfter, insertBefore, matches, position, setHeight, setWidth, siblings, swapElement } from '../azdom.js';
+import { diffPositionInnerBorder, getDocScrollLeft, getDocScrollTop, getHeight, getWidth, index, insertAfter, insertBefore, matches, position, setHeight, setWidth, siblings, swapElement } from '../_core/lib.js';
 
 export class Sortable {
    static id = 'azui-sortable';

@@ -1,4 +1,5 @@
-import * as icons from '../icons.js';
+import '../_core/core.js';
+import * as icons from '../_core/icons.js';
 import {
    getWidth,
    index,
@@ -12,7 +13,7 @@ import {
    getHeight,
    diffPosition,
    siblings
-} from '../azdom.js';
+} from '../_core/lib.js';
 import { Resizable } from '../resizable/resizable.js';
 import { ContextMenu } from '../contextmenu/contextmenu.js';
 import { Sortable } from '../sortable/sortable.js';

@@ -1,4 +1,5 @@
-import { getHeight, getWidth, resolveDOM, isTouchDevice } from '../azdom.js';
+import '../_core/core.js';
+import { getHeight, getWidth, resolveDOM, isTouchDevice } from '../_core/lib.js';
 import { Resizable } from '../resizable/resizable.js';
 
 export class Layout {

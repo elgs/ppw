@@ -1,6 +1,6 @@
-import * as icons from '../icons.js';
-import { empty, getDocScrollLeft, getDocScrollTop, index, isTouchDevice, matches } from '../azdom.js';
-
+import '../_core/core.js';
+import * as icons from '../_core/icons.js';
+import { empty, getDocScrollLeft, getDocScrollTop, index, isTouchDevice, matches } from '../_core/lib.js';
 
 export class Select {
    static id = 'azui-select';

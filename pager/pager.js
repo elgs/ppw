@@ -1,5 +1,6 @@
-import * as icons from '../icons.js';
-import { parseDOMElement } from '../azdom.js';
+import '../_core/core.js';
+import * as icons from '../_core/icons.js';
+import { parseDOMElement } from '../_core/lib.js';
 
 export class Pager {
    static id = 'azui-pager';

@@ -1,4 +1,5 @@
-import * as azdom from '../azdom.js';
+import '../_core/core.js';
+import * as azdom from '../_core/lib.js';
 
 export class Draggable {
    static id = 'azui-draggable';

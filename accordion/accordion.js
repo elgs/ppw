@@ -1,4 +1,5 @@
-import { isTouchDevice, parseDOMElement } from '../azdom.js';
+import '../_core/core.js';
+import { isTouchDevice, parseDOMElement } from '../_core/lib.js';
 import { ContextMenu } from '../contextmenu/contextmenu.js';
 
 let _key = 0;

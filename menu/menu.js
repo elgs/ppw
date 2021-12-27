@@ -1,4 +1,5 @@
-import { isTouchDevice, matches, nextElem, normalizeIcon, parseDOMElement, prevElem, resolveFunction } from '../azdom.js';
+import '../_core/core.js';
+import { isTouchDevice, matches, nextElem, normalizeIcon, parseDOMElement, prevElem, resolveFunction } from '../_core/lib.js';
 
 let _itemId = 0;
 

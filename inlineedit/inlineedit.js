@@ -1,5 +1,6 @@
-import * as icons from '../icons.js';
-import { insertAfter } from '../azdom.js';
+import '../_core/core.js';
+import * as icons from '../_core/icons.js';
+import { insertAfter } from '../_core/lib.js';
 import { DoubleClick } from '../doubleclick/doubleclick.js';
 import { Select } from '../select/select.js';
 

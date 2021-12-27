@@ -1,4 +1,5 @@
-import { calcMenuPosition, getHeight, getWidth, index, isOutside, isTouchDevice, matches, normalizeIcon, parseDOMElement, resolveFunction } from '../azdom.js';
+import '../_core/core.js';
+import { calcMenuPosition, getHeight, getWidth, index, isOutside, isTouchDevice, matches, normalizeIcon, parseDOMElement, resolveFunction } from '../_core/lib.js';
 
 import { RightClick } from '../rightclick/rightclick.js';
 

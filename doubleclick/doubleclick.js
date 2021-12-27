@@ -1,4 +1,5 @@
-import { isTouchDevice } from '../azdom.js';
+import '../_core/core.js';
+import { isTouchDevice } from '../_core/lib.js';
 
 export class DoubleClick {
 

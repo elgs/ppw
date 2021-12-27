@@ -1,5 +1,6 @@
-import * as icons from '../icons.js';
-import { diffPosition, matches, isTouchDevice } from '../azdom.js';
+import '../_core/core.js';
+import * as icons from '../_core/icons.js';
+import { diffPosition, matches, isTouchDevice } from '../_core/lib.js';
 import { Sortable } from '../sortable/sortable.js';
 import { ContextMenu } from '../contextmenu/contextmenu.js';
 
