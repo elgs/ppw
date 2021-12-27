@@ -115,6 +115,7 @@ export class ContextMenu {
          me.menu = menu;
          menu.classList.add('azui', 'azContextMenuPopup');
          menu.style['z-index'] = Number.MAX_SAFE_INTEGER;
+         highlightIndex = -1;
 
          const onKeyDown = e => {
             // prevent browser scroll
