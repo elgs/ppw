@@ -7,6 +7,9 @@
 .azui *::after {
   box-sizing: border-box;
 }
+.azui input:focus {
+  outline: none;
+}
 
 .azui.azui-select {
   display: inline-block;
@@ -17,9 +20,6 @@
   margin: 0;
   width: 100%;
   border: 1px solid gray;
-}
-.azui.azui-select input.azSelectInput:focus {
-  outline: none;
 }
 .azui.azui-select .dirtySign {
   position: absolute;

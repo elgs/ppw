@@ -7,6 +7,9 @@
 .azui *::after {
   box-sizing: border-box;
 }
+.azui input:focus {
+  outline: none;
+}
 
 .azui.azui-window {
   background-color: white;

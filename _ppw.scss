@@ -51,6 +51,10 @@ $collapseIconSize: 4px !default;
     box-sizing: border-box;
   }
 
+  input:focus {
+    outline: none;
+  }
+
   // * {
   //     a {
   //         text-decoration: none;

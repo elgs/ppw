@@ -25,6 +25,9 @@
 .azui *::after {
   box-sizing: border-box;
 }
+.azui input:focus {
+  outline: none;
+}
 
 .azui.azui-accordion {
   border: 1px solid #ccc;
@@ -66,5 +69,3 @@
   overflow: hidden;
   transition: max-height 0.2s ease-out;
 }
-
-/*# sourceMappingURL=accordion.css.map */

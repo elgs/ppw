@@ -24,6 +24,9 @@
 .azui *::after {
   box-sizing: border-box;
 }
+.azui input:focus {
+  outline: none;
+}
 
 .azui.azui-datatable {
   font-size: 12px;

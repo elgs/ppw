@@ -24,6 +24,9 @@
 .azui *::after {
   box-sizing: border-box;
 }
+.azui input:focus {
+  outline: none;
+}
 
 .azui.azui-tree {
   font-size: 14px;
@@ -81,5 +84,3 @@
 .azui.azui-tree .treeScroller .filtered {
   display: none;
 }
-
-/*# sourceMappingURL=tree.css.map */

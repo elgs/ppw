@@ -7,6 +7,9 @@
 .azui *::after {
   box-sizing: border-box;
 }
+.azui input:focus {
+  outline: none;
+}
 
 .azui.azui-resizable > .handle {
   background-color: #e8e8e8;
