@@ -1,5 +1,5 @@
 import '../_core/core.js';
-import { calcMenuPosition, getHeight, getWidth, index, isOutside, isTouchDevice, matches, normalizeIcon, parseDOMElement, resolveFunction } from '../_core/lib.js';
+import { getDocScrollLeft, getDocScrollTop, getHeight, getWidth, index, isOutside, isTouchDevice, matches, normalizeIcon, parseDOMElement, resolveFunction } from '../_core/lib.js';
 
 import { RightClick } from '../rightclick/rightclick.js';
 
@@ -99,11 +99,10 @@ export class ContextMenu {
             });
          }
 
-         const onMouseEnter = function (e) {
+         menuItem.addEventListener('mouseenter', e => {
             highlightIndex = index(e.currentTarget, '.azMenuItem');
             navigateMenu();
-         };
-         menuItem.addEventListener('mouseenter', onMouseEnter);
+         });
 
          return menuItem;
       };
@@ -182,7 +181,7 @@ export class ContextMenu {
          });
 
          // console.log(getWidth(menu), getHeight(menu));
-         const menuPosition = calcMenuPosition(
+         const menuPosition = calcContextMenuPosition(
             e.touches ? e.touches[0].clientX : az.cursor.x ?? e.clientX,
             e.touches ? e.touches[0].clientY : az.cursor.y ?? e.clientY,
             getWidth(menu),
@@ -215,3 +214,38 @@ export class ContextMenu {
       });
    }
 }
+
+const calcContextMenuPosition = function (mx, my, mw, mh) {
+   // console.log(mx, my);
+   // mouse x, y, menu width, height
+   const buf = 20;
+   const m2p = 5;
+   let x = 0;
+   let y = 0;
+
+   // const bw = getWidth(document.body);
+   // const bh = getHeight(document.body);
+
+   const bw = window.innerWidth;
+   const bh = window.innerHeight;
+
+   // console.log(mx, my, mw, mh, bw, bh, document.body.scrollTop, document.body.scrollLeft);
+   if (mx + mw + buf < bw) {
+      // console.log('enough on right');
+      x = mx + m2p + getDocScrollLeft();
+   } else if (mx > mw + buf) {
+      // console.log('enough on left');
+      x = mx - mw - m2p + getDocScrollLeft();
+   }
+   if (my + mh + buf < bh) {
+      // console.log('enough on bottom');
+      y = my + m2p + getDocScrollTop();
+   } else if (my > mh + buf) {
+      // console.log('enough on top');
+      y = my - mh - m2p + getDocScrollTop();
+   }
+   return {
+      x,
+      y
+   };
+};

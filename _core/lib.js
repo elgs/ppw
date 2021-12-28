@@ -131,41 +131,6 @@ export const elemSize = function (elem) {
    };
 };
 
-export const calcMenuPosition = function (mx, my, mw, mh) {
-   // console.log(mx, my);
-   // mouse x, y, menu width, height
-   const buf = 20;
-   const m2p = 5;
-   let x = 0;
-   let y = 0;
-
-   // const bw = getWidth(document.body);
-   // const bh = getHeight(document.body);
-
-   const bw = window.innerWidth;
-   const bh = window.innerHeight;
-
-   // console.log(mx, my, mw, mh, bw, bh, document.body.scrollTop, document.body.scrollLeft);
-   if (mx + mw + buf < bw) {
-      // console.log('enough on right');
-      x = mx + m2p + getDocScrollLeft();
-   } else if (mx > mw + buf) {
-      // console.log('enough on left');
-      x = mx - mw - m2p + getDocScrollLeft();
-   }
-   if (my + mh + buf < bh) {
-      // console.log('enough on bottom');
-      y = my + m2p + getDocScrollTop();
-   } else if (my > mh + buf) {
-      // console.log('enough on top');
-      y = my - mh - m2p + getDocScrollTop();
-   }
-   return {
-      x,
-      y
-   };
-};
-
 export const parseDOMElement = domstring => {
    return new DOMParser().parseFromString(domstring, 'text/html').body.childNodes;
 };

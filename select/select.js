@@ -117,10 +117,17 @@ export class Select {
             }
 
             const meBcr = dom.getBoundingClientRect();
-            // console.log(meBcr);
-            me.menu.style['left'] = meBcr.left + getDocScrollLeft() + 'px';
-            me.menu.style['top'] = meBcr.bottom + getDocScrollTop() + 'px';
-            me.menu.style['width'] = meBcr.width + 'px';
+            setTimeout(() => {
+               const menuBcr = me.menu.getBoundingClientRect();
+               // console.log(meBcr);
+               let top = meBcr.bottom + getDocScrollTop() + 1;
+               if (top + menuBcr.height > window.innerHeight) {
+                  top = meBcr.top - menuBcr.height + getDocScrollTop() - 1;
+               }
+               me.menu.style['left'] = meBcr.left + getDocScrollLeft() + 'px';
+               me.menu.style['top'] = top + 'px';
+               me.menu.style['width'] = meBcr.width - 1 + 'px';
+            });
             me.menu.style['display'] = 'block';
          }
 

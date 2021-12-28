@@ -4,14 +4,39 @@
    <meta charset="UTF-8" />
    <title>azSelect</title>
    <link rel="stylesheet" href="./select.css">
+   <style>
+      html,
+      body {
+         height: 120%;
+         margin: 0;
+      }
+
+      .container {
+         height: 100%;
+         position: relative;
+      }
+
+      #select0 {
+         position: absolute;
+         top: 50px;
+      }
+
+      #select1 {
+         position: absolute;
+         bottom: 50px;
+      }
+   </style>
 </head>
 
 <body>
-   <div id="select0"></div>
+   <div class="container">
+      <div id="select0"></div>
+      <div id="select1"></div>
+   </div>
    <script type="module">
       import { Select } from './select.js';
-      const elem = document.querySelector('#select0');
-      az.ui(Select, elem, {
+      const select0 = document.querySelector('#select0');
+      az.ui(Select, select0, {
          items: [
             {
                key: '0',
@@ -22,7 +47,9 @@
             'Close All'
          ]
       });
-      az.ui(Select, elem, {
+
+      const select1 = document.querySelector('#select1');
+      az.ui(Select, select1, {
          items: [
             {
                key: '0',
