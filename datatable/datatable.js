@@ -12,7 +12,8 @@ import {
    textWidth,
    getHeight,
    diffPosition,
-   siblings
+   siblings,
+   empty
 } from '../_core/lib.js';
 import { Resizable } from '../resizable/resizable.js';
 import { ContextMenu } from '../contextmenu/contextmenu.js';
@@ -64,7 +65,7 @@ export class DataTable {
             me.pager.settings.pageNumber = pageNumber;
          }
 
-         // empty(tbody);
+         empty(tbody);
 
          me.rows = pageData.map((row, index) => {
             const tr = document.createElement('div');
