@@ -29,6 +29,9 @@
   width: 100%;
   height: 100%;
 }
+.azui.azui-inlineeditor-wrapper .azui-inlineeditor input.azInlineEditorInput:focus {
+  outline: none;
+}
 .azui.azui-inlineeditor-wrapper .azui-inlineeditor .dirtySign {
   position: absolute;
   border-style: inset;
