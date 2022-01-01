@@ -40,8 +40,8 @@ globalThis.az = {
 let domId = 0;
 
 // dom holds component object in [class id]
-globalThis.az.ui = (componentClass, domElement, options) => {
-   const dom = resolveDOM(null, domElement);
+globalThis.az.ui = (componentClass, domElement, options, parent = null) => {
+   const dom = resolveDOM(parent, domElement);
    let componentObject = dom[componentClass.id];
    if (componentObject) {
       return componentObject;
