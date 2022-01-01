@@ -15,6 +15,21 @@ export class ContextMenu {
 
    init() {
 
+      if (az.cursor.x === undefined) {
+         az.cursor.x = 0;
+         let wait = false;
+         document.addEventListener('mousemove', e => {
+            if (!wait) {
+               az.cursor.x = e.clientX;
+               az.cursor.y = e.clientY;
+               wait = true;
+               setTimeout(() => {
+                  wait = false;
+               }, 50);
+            }
+         });
+      }
+
       const me = this;
       const dom = this.dom;
       const settings = this.settings;

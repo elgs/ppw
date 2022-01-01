@@ -56,15 +56,3 @@ globalThis.az.ui = (componentClass, domElement, options, parent = null) => {
    componentObject.init?.call(componentObject);
    return componentObject;
 };
-
-let wait = false;
-document.addEventListener('mousemove', e => {
-   if (!wait) {
-      az.cursor.x = e.clientX;
-      az.cursor.y = e.clientY;
-      wait = true;
-      setTimeout(() => {
-         wait = false;
-      }, 50);
-   }
-});
