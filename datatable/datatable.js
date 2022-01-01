@@ -140,6 +140,9 @@ export class DataTable {
          setTimeout(() => {
             const tr = e.target.closest('div.tr');
             const td = e.target.closest('div.td');
+            if (!tr || !td) {
+               return;
+            }
 
             const trNum = tr.getAttribute('tr-num') * 1;
             const colKey = td.getAttribute('col-key') * 1;
