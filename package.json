@@ -20,6 +20,6 @@
     "jasmine": "4.0.1",
     "live-server": "^1.2.1",
     "puppeteer": "13.0.1",
-    "sass": "^1.46.0"
+    "sass": "^1.47.0"
   }
 }
