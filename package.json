@@ -17,9 +17,9 @@
   "author": "Qian Chen",
   "license": "MIT",
   "devDependencies": {
-    "jasmine": "4.0.1",
+    "jasmine": "4.0.2",
     "live-server": "^1.2.1",
     "puppeteer": "13.0.1",
-    "sass": "^1.47.0"
+    "sass": "^1.48.0"
   }
 }
