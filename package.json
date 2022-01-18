@@ -5,7 +5,7 @@
   "scripts": {
     "test": "npx jasmine tests/*",
     "dev": "npx live-server",
-    "sass": "npx sass --no-source-map -w ."
+    "scss": "npx sass --no-source-map -w ."
   },
   "repository": {
     "type": "git",
@@ -19,7 +19,7 @@
   "devDependencies": {
     "jasmine": "4.0.2",
     "live-server": "^1.2.1",
-    "puppeteer": "13.0.1",
+    "puppeteer": "13.1.0",
     "sass": "^1.48.0"
   }
 }

@@ -50,6 +50,7 @@ export class Resizable {
          position = 'relative';
          dom.style['position'] = position;
       }
+      me.position = position;
 
       const parseHandles = function () {
          const h = {
@@ -104,7 +105,7 @@ export class Resizable {
       const h = parseHandles();
       // console.log(h);
 
-      let thisAspectRatio;
+      me.thisAspectRatio;
       let mx = 0;
       let my = 0; // position of this element, and mouse x, y coordinate
 
@@ -224,28 +225,7 @@ export class Resizable {
             mx = event.touches ? event.touches[0].clientX : event.clientX;
             my = event.touches ? event.touches[0].clientY : event.clientY;
 
-            const styles = getComputedStyle(dom);
-            if (position === 'relative') {
-               me.thisTop = parseInt(styles.top || 0);
-               me.thisLeft = parseInt(styles.left || 0);
-            } else {
-               // child outer border to parent inner border
-               const marginTop = parseInt(styles['margin-top']) || 0;
-               const marginLeft = parseInt(styles['margin-left']) || 0;
-               me.thisTop = dom.offsetTop - marginTop;
-               me.thisLeft = dom.offsetLeft - marginLeft;
-            }
-
-            // outer border to outer border
-            me.thisWidth = dom.offsetWidth;
-            me.thisHeight = dom.offsetHeight;
-
-            me.yToMax = settings.maxHeight - me.thisHeight;
-            me.yToMin = me.thisHeight - settings.minHeight;
-            me.xToMax = settings.maxWidth - me.thisWidth;
-            me.xToMin = me.thisWidth - settings.minWidth;
-
-            thisAspectRatio = (me.thisHeight * 1.0) / (me.thisWidth * 1.0);
+            me.setup();
             event.preventDefault(); // prevent text from selecting and mobile screen view port from moving around.
             // console.log('create');
          };
@@ -290,7 +270,7 @@ export class Resizable {
             }
             let ar;
             if (settings.aspectRatio === true) {
-               ar = thisAspectRatio;
+               ar = me.thisAspectRatio;
             } else if (typeof settings.aspectRatio === 'number') {
                ar = settings.aspectRatio;
             } else {
@@ -514,6 +494,34 @@ export class Resizable {
       setTimeout(() => {
          me._resetCollapseIconStyle();
       });
+   }
+
+   setup() {
+      const me = this;
+      const dom = me.dom;
+      const settings = me.settings;
+      const styles = getComputedStyle(dom);
+      if (me.position === 'relative') {
+         me.thisTop = parseInt(styles.top || 0);
+         me.thisLeft = parseInt(styles.left || 0);
+      } else {
+         // child outer border to parent inner border
+         const marginTop = parseInt(styles['margin-top']) || 0;
+         const marginLeft = parseInt(styles['margin-left']) || 0;
+         me.thisTop = dom.offsetTop - marginTop;
+         me.thisLeft = dom.offsetLeft - marginLeft;
+      }
+
+      // outer border to outer border
+      me.thisWidth = dom.offsetWidth;
+      me.thisHeight = dom.offsetHeight;
+
+      me.yToMax = settings.maxHeight - me.thisHeight;
+      me.yToMin = me.thisHeight - settings.minHeight;
+      me.xToMax = settings.maxWidth - me.thisWidth;
+      me.xToMin = me.thisWidth - settings.minWidth;
+
+      me.thisAspectRatio = (me.thisHeight * 1.0) / (me.thisWidth * 1.0);
    }
 
    moveN(by) {

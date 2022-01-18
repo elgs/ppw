@@ -43,7 +43,7 @@ export class Layout {
             hideCollapseButton: settings.hideCollapseButton,
             create: function (e, h) {
                centerHeight = getHeight(me.center);
-               centerContent.querySelectorAll('iframe').forEach(iframe => {
+               dom.querySelectorAll('iframe').forEach(iframe => {
                   iframe && (iframe.style['pointer-events'] = 'none');
                });
             },
@@ -51,12 +51,12 @@ export class Layout {
                by.dy = Math.min(by.dy, centerHeight);
             },
             stop: function (e, el) {
-               centerContent.querySelectorAll('iframe').forEach(iframe => {
+               dom.querySelectorAll('iframe').forEach(iframe => {
                   iframe && (iframe.style['pointer-events'] = '');
                });
             },
             collapse: function (e, el) {
-               centerContent.querySelectorAll('iframe').forEach(iframe => {
+               dom.querySelectorAll('iframe').forEach(iframe => {
                   iframe && (iframe.style['pointer-events'] = '');
                });
             }
@@ -82,7 +82,7 @@ export class Layout {
                });
             },
             resize: function (e, h, by) {
-               by.dx = Math.max(by.dx, -centerWidth);
+               // by.dx = Math.max(by.dx, -centerWidth);
             },
             stop: function (e, el) {
                dom.querySelectorAll('iframe').forEach(iframe => {
@@ -116,7 +116,7 @@ export class Layout {
                });
             },
             resize: function (e, h, by) {
-               by.dy = Math.max(by.dy, -centerHeight);
+               // by.dy = Math.max(by.dy, -centerHeight);
             },
             stop: function (e, el) {
                dom.querySelectorAll('iframe').forEach(iframe => {

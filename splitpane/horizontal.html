@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8" />
+   <title>azLayout</title>
+   <link rel="stylesheet" href="../resizable/resizable.css">
+   <link rel="stylesheet" href="../splitpane/splitpane.css">
+   <style>
+      html,
+      body {
+         width: 100%;
+         height: 100%;
+         margin: 0;
+      }
+
+      div#container {
+         /* width: 800px; */
+         /* height: 600px; */
+         width: 100%;
+         height: 100%;
+         /* margin: auto; */
+         /* position: relative; */
+         /* border: 1px solid gray; */
+      }
+   </style>
+</head>
+
+<body>
+   <div id="container">
+      <div>
+         North
+         <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur deserunt repudiandae asperiores
+            consequuntur
+            iure fugiat est quidem, nam perferendis assumenda iste qui repellat cumque excepturi quae! Voluptatibus
+            provident possimus distinctio?
+         </p>
+      </div>
+      <div>
+         South
+         <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur deserunt repudiandae asperiores
+            consequuntur
+            iure fugiat est quidem, nam perferendis assumenda iste qui repellat cumque excepturi quae! Voluptatibus
+            provident possimus distinctio?
+         </p>
+      </div>
+      <div>
+         West
+         <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur deserunt repudiandae asperiores
+            consequuntur
+            iure fugiat est quidem, nam perferendis assumenda iste qui repellat cumque excepturi quae! Voluptatibus
+            provident possimus distinctio?
+         </p>
+         <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur deserunt repudiandae asperiores
+            consequuntur
+            iure fugiat est quidem, nam perferendis assumenda iste qui repellat cumque excepturi quae! Voluptatibus
+            provident possimus distinctio?
+         </p>
+      </div>
+      <div>
+         East
+         <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur deserunt repudiandae asperiores
+            consequuntur
+            iure fugiat est quidem, nam perferendis assumenda iste qui repellat cumque excepturi quae! Voluptatibus
+            provident possimus distinctio?
+         </p>
+      </div>
+      <div>
+         Center
+         <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur deserunt repudiandae asperiores
+            consequuntur
+            iure fugiat est quidem, nam perferendis assumenda iste qui repellat cumque excepturi quae! Voluptatibus
+            provident possimus distinctio?
+         </p>
+         <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur deserunt repudiandae asperiores
+            consequuntur
+            iure fugiat est quidem, nam perferendis assumenda iste qui repellat cumque excepturi quae! Voluptatibus
+            provident possimus distinctio?
+         </p>
+         <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur deserunt repudiandae asperiores
+            consequuntur
+            iure fugiat est quidem, nam perferendis assumenda iste qui repellat cumque excepturi quae! Voluptatibus
+            provident possimus distinctio?
+         </p>
+         <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur deserunt repudiandae asperiores
+            consequuntur
+            iure fugiat est quidem, nam perferendis assumenda iste qui repellat cumque excepturi quae! Voluptatibus
+            provident possimus distinctio?
+         </p>
+         <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur deserunt repudiandae asperiores
+            consequuntur
+            iure fugiat est quidem, nam perferendis assumenda iste qui repellat cumque excepturi quae! Voluptatibus
+            provident possimus distinctio?
+         </p>
+         <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur deserunt repudiandae asperiores
+            consequuntur
+            iure fugiat est quidem, nam perferendis assumenda iste qui repellat cumque excepturi quae! Voluptatibus
+            provident possimus distinctio?
+         </p>
+         <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur deserunt repudiandae asperiores
+            consequuntur
+            iure fugiat est quidem, nam perferendis assumenda iste qui repellat cumque excepturi quae! Voluptatibus
+            provident possimus distinctio?
+         </p>
+         <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur deserunt repudiandae asperiores
+            consequuntur
+            iure fugiat est quidem, nam perferendis assumenda iste qui repellat cumque excepturi quae! Voluptatibus
+            provident possimus distinctio?
+         </p>
+      </div>
+   </div>
+   <script type="module">
+      import { SplitPane } from './splitpane.js';
+      const container = document.querySelector('#container');
+      az.ui(SplitPane, container, {
+         // hideCollapseButton: false
+      });
+   </script>
+</body>
+</html>

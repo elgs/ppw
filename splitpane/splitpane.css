@@ -1,0 +1,12 @@
+.azui {
+  font-size: 13px;
+  font-family: -apple-system, BlinkMacSystemFont, "San Francisco", "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif;
+}
+.azui *,
+.azui *::before,
+.azui *::after {
+  box-sizing: border-box;
+}
+.azui input:focus {
+  outline: none;
+}

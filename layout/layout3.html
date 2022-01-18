@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8" />
+   <title>azLayout</title>
+   <link rel="stylesheet" href="../resizable/resizable.css">
+   <link rel="stylesheet" href="../layout/layout.css">
+   <style>
+      html,
+      body {
+         height: 100%;
+         width: 100%;
+         margin: 0;
+      }
+
+      div#container {
+         /* width: 800px; */
+         /* height: 600px; */
+         width: 100%;
+         height: 100%;
+         /* margin: auto; */
+         /* position: relative; */
+         /* border: 1px solid gray; */
+      }
+   </style>
+</head>
+
+<body>
+   <div id="container">
+      <!-- <div class="azLayoutNorth"></div>
+      <div class="azLayoutSouth"></div> -->
+      <div class="azLayoutWest"></div>
+      <div class="azLayoutEast"></div>
+      <div class="azLayoutCenter"></div>
+   </div>
+   <script type="module">
+      import { Layout } from './layout.js';
+      const container = document.querySelector('#container');
+      az.ui(Layout, container, {
+         hideCollapseButton: false
+      });
+   </script>
+</body>
+</html>
