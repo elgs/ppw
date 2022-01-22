@@ -75,10 +75,12 @@ export class SplitPane {
          // childWrapper.style['background-color'] = colors[index % colors.length];
          childWrapper.style.position = 'absolute';
          if (me.settings.direction === 'v') {
+            childWrapper.style['padding-bottom'] = handleSize + 'px';
             childWrapper.style.top = partSizePercent * index + '%';
             childWrapper.style.height = partSizePercent + '%';
             childWrapper.style.width = '100%';
          } else {
+            childWrapper.style['padding-right'] = handleSize + 'px';
             childWrapper.style.left = partSizePercent * index + '%';
             childWrapper.style.width = partSizePercent + '%';
             childWrapper.style.height = '100%';
