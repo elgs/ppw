@@ -21,6 +21,8 @@ export class SplitPane {
       const partSizePercent = 100.0 / parts;
 
       const colors = ['red', 'green', 'blue'];
+      let selfSize;
+      let nextSize;
 
       const wrappers = [...dom.children].map(function (child, index) {
          const childWrapper = document.createElement('div');
@@ -30,15 +32,19 @@ export class SplitPane {
             handleSize,
             hideCollapseButton: settings.hideCollapseButton,
             create: function (e, h) {
-               // centerHeight = getHeight(me.center);
-               const nextResizable = wrappers[index + 1][Resizable.id];
+               const nextWrapper = wrappers[index + 1];
+               selfSize = getHeight(childWrapper) - handleSize;
+               nextSize = getHeight(nextWrapper) - (index === parts - 2 ? 0 : handleSize);
+               console.log(index, parts);
+               const nextResizable = nextWrapper[Resizable.id];
                nextResizable.setup();
                dom.querySelectorAll('iframe').forEach(iframe => {
                   iframe && (iframe.style['pointer-events'] = 'none');
                });
             },
             resize: function (e, h, by) {
-               // by.dy = Math.min(by.dy, centerHeight);
+               by.dy = Math.max(by.dy, -selfSize);
+               by.dy = Math.min(by.dy, nextSize);
                const nextResizable = wrappers[index + 1][Resizable.id];
                nextResizable.moveN(by.dy);
             },
@@ -57,7 +63,6 @@ export class SplitPane {
          childWrapper.style['background-color'] = colors[index % colors.length];
          childWrapper.style.position = 'absolute';
          childWrapper.style.top = partSizePercent * index + '%';
-         // childWrapper.style.bottom = (100 - partSize * (index + 1)) + '%';
          childWrapper.style.height = partSizePercent + '%';
          childWrapper.style.overflow = 'auto';
          me.dom.appendChild(childWrapper);
