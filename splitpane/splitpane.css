@@ -10,8 +10,3 @@
 .azui input:focus {
   outline: none;
 }
-
-.azui.azui-splitpane {
-  display: flex;
-  flex-direction: row;
-}
