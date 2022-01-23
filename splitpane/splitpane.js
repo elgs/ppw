@@ -85,8 +85,13 @@ export class SplitPane {
                if (settings.stop(me, e) === false) {
                   return false;
                }
-               childWrapper.style.height = childWrapper.offsetHeight * 100 / dom.offsetHeight + '%';
-               nextWrapper.style.height = nextWrapper.offsetHeight * 100 / dom.offsetHeight + '%';
+               if (me.settings.direction === 'v') {
+                  childWrapper.style.height = childWrapper.offsetHeight * 100 / dom.offsetHeight + '%';
+                  nextWrapper.style.height = nextWrapper.offsetHeight * 100 / dom.offsetHeight + '%';
+               } else {
+                  childWrapper.style.width = childWrapper.offsetWidth * 100 / dom.offsetWidth + '%';
+                  nextWrapper.style.width = nextWrapper.offsetWidth * 100 / dom.offsetWidth + '%';
+               }
                dom.querySelectorAll('iframe').forEach(iframe => {
                   iframe && (iframe.style['pointer-events'] = '');
                });
