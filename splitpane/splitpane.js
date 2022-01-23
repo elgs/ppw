@@ -6,6 +6,7 @@ export class SplitPane {
    static id = 'azui-splitpane';
    static settings = {
       direction: 'v', // v for vertical or h for horizonal
+      paneSizes: [],
       // hideCollapseButton: true,
       create: function (event) {
          // console.log('create');
@@ -32,7 +33,10 @@ export class SplitPane {
       const handleSize = isTouchDevice() ? 8 : 4;
 
       const parts = dom.children.length;
-      const partSizePercent = 100.0 / parts;
+      if (parts !== settings.paneSizes.length) {
+         settings.paneSizes.length = parts;
+         settings.paneSizes.fill(100.0 / parts);
+      }
 
       // const colors = ['red', 'green', 'blue'];
       let selfSize;
@@ -106,11 +110,11 @@ export class SplitPane {
          // childWrapper.style['background-color'] = colors[index % colors.length];
          if (me.settings.direction === 'v') {
             childWrapper.style['padding-bottom'] = (index <= parts - 2 ? handleSize : 0) + 'px';
-            childWrapper.style.height = partSizePercent + '%';
+            childWrapper.style.height = settings.paneSizes[index] + '%';
             childWrapper.style.width = '100%';
          } else {
             childWrapper.style['padding-right'] = (index <= parts - 2 ? handleSize : 0) + 'px';
-            childWrapper.style.width = partSizePercent + '%';
+            childWrapper.style.width = settings.paneSizes[index] + '%';
             childWrapper.style.height = '100%';
          }
          childWrapper.style.overflow = 'hidden';
