@@ -6,7 +6,19 @@ export class SplitPane {
    static id = 'azui-splitpane';
    static settings = {
       direction: 'v', // v for vertical or h for horizonal
-      // hideCollapseButton: true
+      // hideCollapseButton: true,
+      create: function (event) {
+         // console.log('create');
+      },
+      start: function (event) {
+         // console.log('start');
+      },
+      resize: function (event, handle, by) {
+         // console.log('resize', handle, by);
+      },
+      stop: function (event) {
+         // console.log('stop');
+      },
    };
 
    init() {
@@ -34,13 +46,16 @@ export class SplitPane {
             handleSize,
             hideCollapseButton: true,
             create: function (e, h) {
+               if (settings.create(me, e) === false) {
+                  return false;
+               }
                const nextWrapper = wrappers[index + 1];
                if (settings.direction === 'v') {
-                  selfSize = getHeight(childWrapper) - handleSize;
-                  nextSize = getHeight(nextWrapper) - (index === parts - 2 ? 0 : handleSize);
+                  selfSize = getHeight(childWrapper);
+                  nextSize = getHeight(nextWrapper) + (index === parts - 2 ? handleSize : 0);
                } else {
-                  selfSize = getWidth(childWrapper) - handleSize;
-                  nextSize = getWidth(nextWrapper) - (index === parts - 2 ? 0 : handleSize);
+                  selfSize = getWidth(childWrapper);
+                  nextSize = getWidth(nextWrapper) + (index === parts - 2 ? handleSize : 0);
                }
                const nextResizable = nextWrapper[Resizable.id];
                nextResizable.setup();
@@ -49,6 +64,9 @@ export class SplitPane {
                });
             },
             resize: function (e, h, by) {
+               if (settings.resize(me, e, h, by) === false) {
+                  return false;
+               }
                const nextResizable = wrappers[index + 1][Resizable.id];
                if (settings.direction === 'v') {
                   by.dy = Math.max(by.dy, -selfSize);
@@ -60,16 +78,19 @@ export class SplitPane {
                   nextResizable.moveW(by.dx);
                }
             },
-            stop: function (e, el) {
+            stop: function (e) {
+               if (settings.stop(me, e) === false) {
+                  return false;
+               }
                dom.querySelectorAll('iframe').forEach(iframe => {
                   iframe && (iframe.style['pointer-events'] = '');
                });
             },
-            collapse: function (e, el) {
-               dom.querySelectorAll('iframe').forEach(iframe => {
-                  iframe && (iframe.style['pointer-events'] = '');
-               });
-            }
+            // collapse: function (e, el) {
+            //    dom.querySelectorAll('iframe').forEach(iframe => {
+            //       iframe && (iframe.style['pointer-events'] = '');
+            //    });
+            // }
          });
          // childWrapper.classList.add('azSplitPane');
          // childWrapper.style['background-color'] = colors[index % colors.length];
@@ -85,7 +106,7 @@ export class SplitPane {
             childWrapper.style.width = partSizePercent + '%';
             childWrapper.style.height = '100%';
          }
-         childWrapper.style.overflow = 'auto';
+         childWrapper.style.overflow = 'hidden';
          me.dom.appendChild(childWrapper);
          childWrapper.appendChild(child);
          // console.log(childWrapper);

@@ -218,7 +218,7 @@ export class Resizable {
 
          me._resetHandles();
 
-         const onCreate = function (event, elem) {
+         const onCreate = function (event) {
             if (settings.create.call(me, event) === false) {
                return false;
             }
