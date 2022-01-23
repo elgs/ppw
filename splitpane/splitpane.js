@@ -26,6 +26,8 @@ export class SplitPane {
       const me = this;
       const settings = this.settings;
       dom.style.position = 'relative';
+      dom.style.display = 'flex';
+      dom.style['flex-direction'] = me.settings.direction === 'v' ? 'column' : 'row';
 
       const handleSize = isTouchDevice() ? 8 : 4;
 
@@ -35,6 +37,7 @@ export class SplitPane {
       // const colors = ['red', 'green', 'blue'];
       let selfSize;
       let nextSize;
+      let nextWrapper;
 
       const handleBorder = me.settings.direction === 'v' ? 's' : 'e';
 
@@ -42,20 +45,20 @@ export class SplitPane {
          const childWrapper = document.createElement('div');
 
          az.ui(Resizable, childWrapper, {
-            handles: index < parts - 1 ? handleBorder : '',
+            handles: index <= parts - 2 ? handleBorder : '',
             handleSize,
             hideCollapseButton: true,
-            create: function (e, h) {
+            create: function (e) {
                if (settings.create(me, e) === false) {
                   return false;
                }
-               const nextWrapper = wrappers[index + 1];
+               nextWrapper = wrappers[index + 1];
                if (settings.direction === 'v') {
                   selfSize = getHeight(childWrapper);
-                  nextSize = getHeight(nextWrapper) + (index === parts - 2 ? handleSize : 0);
+                  nextSize = getHeight(nextWrapper);
                } else {
                   selfSize = getWidth(childWrapper);
-                  nextSize = getWidth(nextWrapper) + (index === parts - 2 ? handleSize : 0);
+                  nextSize = getWidth(nextWrapper);
                }
                const nextResizable = nextWrapper[Resizable.id];
                nextResizable.setup();
@@ -67,21 +70,23 @@ export class SplitPane {
                if (settings.resize(me, e, h, by) === false) {
                   return false;
                }
-               const nextResizable = wrappers[index + 1][Resizable.id];
+               const nextResizable = nextWrapper[Resizable.id];
                if (settings.direction === 'v') {
                   by.dy = Math.max(by.dy, -selfSize);
                   by.dy = Math.min(by.dy, nextSize);
-                  nextResizable.moveN(by.dy);
+                  nextResizable.moveS(-by.dy);
                } else {
                   by.dx = Math.max(by.dx, -selfSize);
                   by.dx = Math.min(by.dx, nextSize);
-                  nextResizable.moveW(by.dx);
+                  nextResizable.moveE(-by.dx);
                }
             },
             stop: function (e) {
                if (settings.stop(me, e) === false) {
                   return false;
                }
+               childWrapper.style.height = childWrapper.offsetHeight * 100 / dom.offsetHeight + '%';
+               nextWrapper.style.height = nextWrapper.offsetHeight * 100 / dom.offsetHeight + '%';
                dom.querySelectorAll('iframe').forEach(iframe => {
                   iframe && (iframe.style['pointer-events'] = '');
                });
@@ -94,15 +99,12 @@ export class SplitPane {
          });
          // childWrapper.classList.add('azSplitPane');
          // childWrapper.style['background-color'] = colors[index % colors.length];
-         childWrapper.style.position = 'absolute';
          if (me.settings.direction === 'v') {
-            childWrapper.style['padding-bottom'] = handleSize + 'px';
-            childWrapper.style.top = partSizePercent * index + '%';
+            childWrapper.style['padding-bottom'] = (index <= parts - 2 ? handleSize : 0) + 'px';
             childWrapper.style.height = partSizePercent + '%';
             childWrapper.style.width = '100%';
          } else {
-            childWrapper.style['padding-right'] = handleSize + 'px';
-            childWrapper.style.left = partSizePercent * index + '%';
+            childWrapper.style['padding-right'] = (index <= parts - 2 ? handleSize : 0) + 'px';
             childWrapper.style.width = partSizePercent + '%';
             childWrapper.style.height = '100%';
          }

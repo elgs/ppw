@@ -152,24 +152,20 @@ export const outerHeightTrue = function (el) {
 
 // inner padding to inner padding
 export const getWidth = function (el) {
-   let width = el.offsetWidth;
+   let width = el.clientWidth;
    const style = getComputedStyle(el);
    width -=
       parseInt(style.paddingLeft) +
-      parseInt(style.paddingRight) +
-      parseInt(style.borderLeftWidth) +
-      parseInt(style.borderRightWidth);
+      parseInt(style.paddingRight)
    return width;
 };
 
 export const getHeight = function (el) {
-   let height = el.offsetHeight;
+   let height = el.clientHeight;
    const style = getComputedStyle(el);
    height -=
       parseInt(style.paddingTop) +
-      parseInt(style.paddingBottom) +
-      parseInt(style.borderTopWidth) +
-      parseInt(style.borderBottomWidth);
+      parseInt(style.paddingBottom)
    return height;
 };
 
