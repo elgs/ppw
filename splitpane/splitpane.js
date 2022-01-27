@@ -1,6 +1,6 @@
 import { Resizable } from '../resizable/resizable.js';
 import '../_core/core.js';
-import { children, getHeight, getWidth, isTouchDevice } from '../_core/lib.js';
+import { getHeight, getWidth, isTouchDevice } from '../_core/lib.js';
 
 export class SplitPane {
    static id = 'azui-splitpane';
@@ -123,7 +123,5 @@ export class SplitPane {
          // console.log(childWrapper);
          return childWrapper;
       });
-
-
    }
 }

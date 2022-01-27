@@ -19,7 +19,7 @@
   "devDependencies": {
     "jasmine": "4.0.2",
     "live-server": "^1.2.1",
-    "puppeteer": "13.1.0",
-    "sass": "^1.48.0"
+    "puppeteer": "13.1.2",
+    "sass": "^1.49.0"
   }
 }
