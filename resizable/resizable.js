@@ -529,7 +529,7 @@ export class Resizable {
       }
    }
 
-   moveV(by, n) {
+   moveY(by, n) {
       const me = this;
       if (by > me.yToMin) {
          by = me.yToMin;
@@ -552,7 +552,7 @@ export class Resizable {
       }
    }
 
-   moveH(by, w) {
+   moveX(by, w) {
       const me = this;
       if (by > me.xToMin) {
          by = me.xToMin;
@@ -576,16 +576,16 @@ export class Resizable {
    }
 
    moveN(by) {
-      this.moveV(by, true);
+      this.moveY(by, true);
    }
    moveE(by) {
-      this.moveH(-by, false);
+      this.moveX(-by, false);
    }
    moveS(by) {
-      this.moveV(-by, false);
+      this.moveY(-by, false);
    }
    moveW(by) {
-      this.moveH(by, true);
+      this.moveX(by, true);
    }
 
    collapseX(event, ui) {
