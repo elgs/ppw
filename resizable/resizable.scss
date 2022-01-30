@@ -1,4 +1,4 @@
-@use '../ppw.scss' as *;
+@use "../ppw.scss" as *;
 
 .azui {
   &.azui-resizable > .handle {
@@ -27,15 +27,13 @@
         width: 30px;
 
         > span.collapseIcon {
-          height: $collapseIconSize;
           display: flex;
           justify-content: center;
           align-items: center;
 
           > svg {
             fill: $main-color;
-            width: $collapseIconSize * 2;
-            height: $collapseIconSize;
+            height: 4px;
             display: block;
           }
         }
@@ -45,15 +43,13 @@
         height: 30px;
 
         > span.collapseIcon {
-          width: $collapseIconSize;
           display: flex;
           justify-content: center;
           align-items: center;
 
           > svg {
             fill: $main-color;
-            width: $collapseIconSize;
-            height: $collapseIconSize * 2;
+            width: 4px;
             display: block;
           }
         }

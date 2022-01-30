@@ -136,42 +136,38 @@ export const parseDOMElement = domstring => {
 };
 
 // outer margin to outer margin
-export const outerWidthTrue = function (el) {
+export const outerWidthTrue = function (el, style) {
    let width = el.offsetWidth;
-   const style = getComputedStyle(el);
+   style ??= getComputedStyle(el);
    width += parseInt(style.marginLeft) + parseInt(style.marginRight);
    return width;
 };
 
-export const outerHeightTrue = function (el) {
+export const outerHeightTrue = function (el, style) {
    let height = el.offsetHeight;
-   const style = getComputedStyle(el);
+   style ??= getComputedStyle(el);
    height += parseInt(style.marginTop) + parseInt(style.marginBottom);
    return height;
 };
 
 // inner padding to inner padding
-export const getWidth = function (el) {
+export const getWidth = function (el, style) {
    let width = el.clientWidth;
-   const style = getComputedStyle(el);
-   width -=
-      parseInt(style.paddingLeft) +
-      parseInt(style.paddingRight)
+   style ??= getComputedStyle(el);
+   width -= parseInt(style.paddingLeft) + parseInt(style.paddingRight);
    return width;
 };
 
-export const getHeight = function (el) {
+export const getHeight = function (el, style) {
    let height = el.clientHeight;
-   const style = getComputedStyle(el);
-   height -=
-      parseInt(style.paddingTop) +
-      parseInt(style.paddingBottom)
+   style ??= getComputedStyle(el);
+   height -= parseInt(style.paddingTop) + parseInt(style.paddingBottom);
    return height;
 };
 
 // inner padding to inner padding
-export const setWidth = function (el, w) {
-   const style = getComputedStyle(el);
+export const setWidth = function (el, w, style) {
+   style ??= getComputedStyle(el);
    if (style['box-sizing'] === 'border-box') {
       const borderLeft = parseInt(style['border-left-width']);
       const borderRight = parseInt(style['border-right-width']);
@@ -183,8 +179,8 @@ export const setWidth = function (el, w) {
    }
 };
 
-export const setHeight = function (el, h) {
-   const style = getComputedStyle(el);
+export const setHeight = function (el, h, style) {
+   style ??= getComputedStyle(el);
    if (style['box-sizing'] === 'border-box') {
       const borderTop = parseInt(style['border-top-width']);
       const borderBottom = parseInt(style['border-bottom-width']);
@@ -198,8 +194,8 @@ export const setHeight = function (el, h) {
 };
 
 // outer border to ourter border
-export const setOuterWidth = function (el, w) {
-   const style = getComputedStyle(el);
+export const setOuterBorderWidth = function (el, w, style) {
+   style ??= getComputedStyle(el);
    if (style['box-sizing'] === 'border-box') {
       el.style.width = w + 'px';
    } else {
@@ -211,8 +207,8 @@ export const setOuterWidth = function (el, w) {
    }
 };
 
-export const setOuterHeight = function (el, h) {
-   const style = getComputedStyle(el);
+export const setOuterBorderHeight = function (el, h, style) {
+   style ??= getComputedStyle(el);
    if (style['box-sizing'] === 'border-box') {
       el.style.height = h + 'px';
    } else {

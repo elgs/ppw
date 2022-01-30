@@ -16,8 +16,6 @@ $shadow-hovered: 0 3px 8px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.08);
 $shadow-inset: inset 0 2px 2px 0 rgba(0, 0, 0, 0.16),
   inset 0 0 0 1px rgba(0, 0, 0, 0.08);
 
-$collapseIconSize: 4px !default;
-
 %hoveractive {
   @media (hover: hover) {
     &:not(.disabled):hover {

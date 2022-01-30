@@ -106,7 +106,7 @@ export class SplitPane {
             //    });
             // }
          });
-         // childWrapper.classList.add('azSplitPane');
+         childWrapper.classList.add('azui-splitpane-wrapper');
          // childWrapper.style['background-color'] = colors[index % colors.length];
          if (me.settings.direction === 'v') {
             childWrapper.style['padding-bottom'] = (index <= parts - 2 ? handleSize : 0) + 'px';

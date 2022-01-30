@@ -27,19 +27,15 @@
 }
 .azui.azui-layout > .azLayoutArea.azLayoutAreaNorth {
   grid-area: n;
-  padding-bottom: 4px;
 }
 .azui.azui-layout > .azLayoutArea.azLayoutAreaEast {
   grid-area: e;
-  padding-left: 4px;
 }
 .azui.azui-layout > .azLayoutArea.azLayoutAreaSouth {
   grid-area: s;
-  padding-top: 4px;
 }
 .azui.azui-layout > .azLayoutArea.azLayoutAreaWest {
   grid-area: w;
-  padding-right: 4px;
 }
 .azui.azui-layout > .azLayoutArea.azLayoutAreaCenter {
   position: relative;

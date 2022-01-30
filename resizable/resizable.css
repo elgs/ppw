@@ -35,14 +35,12 @@
   width: 30px;
 }
 .azui.azui-resizable > .handle > div.collapseButton.collapseButtonH > span.collapseIcon {
-  height: 4px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .azui.azui-resizable > .handle > div.collapseButton.collapseButtonH > span.collapseIcon > svg {
   fill: #e8e8e8;
-  width: 8px;
   height: 4px;
   display: block;
 }
@@ -50,7 +48,6 @@
   height: 30px;
 }
 .azui.azui-resizable > .handle > div.collapseButton.collapseButtonV > span.collapseIcon {
-  width: 4px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -58,6 +55,5 @@
 .azui.azui-resizable > .handle > div.collapseButton.collapseButtonV > span.collapseIcon > svg {
   fill: #e8e8e8;
   width: 4px;
-  height: 8px;
   display: block;
 }

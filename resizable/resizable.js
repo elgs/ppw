@@ -1,5 +1,5 @@
 import '../_core/core.js';
-import { getHeight, getWidth, normalizeIcon, setHeight, setOuterHeight, setOuterWidth, setWidth } from '../_core/lib.js';
+import { getHeight, getWidth, normalizeIcon, outerHeightTrue, outerWidthTrue, setHeight, setOuterBorderHeight, setOuterBorderWidth, setWidth } from '../_core/lib.js';
 import { Draggable } from '../draggable/draggable.js';
 
 const svgTriangleUp = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 10"><path d="M0 10L10 0l10 10z"/></svg>`;
@@ -105,6 +105,7 @@ export class Resizable {
       const h = parseHandles();
       // console.log(h);
 
+      me.style;
       me.thisAspectRatio;
       let mx = 0;
       let my = 0; // position of this element, and mouse x, y coordinate
@@ -276,108 +277,122 @@ export class Resizable {
             } else {
                return;
             }
-            if (getOuterHeight(dom) / getOuterWidth(dom) > ar) {
-               setOuterWidth(dom, getOuterHeight(dom) / ar);
-            } else if (getOuterHeight(dom) / getOuterWidth(dom) < ar) {
-               setOuterHeight(dom, getOuterWidth(dom) * ar);
+            console.log(ar);
+            // 
+            if (outerHeightTrue(dom, me.style) / outerWidthTrue(dom, me.style) > ar) {
+               setOuterBorderWidth(dom, outerHeightTrue(dom) / ar, me.style);
+            } else if (outerHeightTrue(dom, me.style) / outerWidthTrue(dom) < ar, me.style) {
+               setOuterBorderHeight(dom, outerWidthTrue(dom) * ar, me.style);
             }
          };
          const checkAll = function () {
             checkAspectRatio();
          };
 
-         h.n && az.ui(Draggable, eh.n, {
-            axis: 'y',
-            create: onCreate,
-            start: onStart,
-            drag: function (event) {
-               // const nmx = event.touches ? event.touches[0].clientX : event.clientX;
-               const nmy = event.touches ? event.touches[0].clientY : event.clientY;
-               const by = {
-                  dy: nmy - my
-               };
+         if (h.n) {
+            az.ui(Draggable, eh.n, {
+               axis: 'y',
+               create: onCreate,
+               start: onStart,
+               drag: function (event) {
+                  // const nmx = event.touches ? event.touches[0].clientX : event.clientX;
+                  const nmy = event.touches ? event.touches[0].clientY : event.clientY;
+                  const by = {
+                     dy: nmy - my
+                  };
 
-               if (settings.resize.call(me, event, eh.n, by) === false) {
+                  if (settings.resize.call(me, event, eh.n, by) === false) {
+                     return false;
+                  }
+
+                  me.moveN(by.dy);
+                  checkAll();
+                  // console.log(event.type);
+                  event.preventDefault();
                   return false;
-               }
+               },
+               stop: onStop
+            });
+            me.dom.style['padding-top'] = settings.handleSize + 'px';
+         }
+         if (h.e) {
+            az.ui(Draggable, eh.e, {
+               axis: 'x',
+               create: onCreate,
+               start: onStart,
+               drag: function (event) {
+                  const nmx = event.touches ? event.touches[0].clientX : event.clientX;
+                  // const nmy = event.touches ? event.touches[0].clientY : event.clientY;
 
-               me.moveN(by.dy);
-               checkAll();
-               // console.log(event.type);
-               event.preventDefault();
-               return false;
-            },
-            stop: onStop
-         });
-         h.e && az.ui(Draggable, eh.e, {
-            axis: 'x',
-            create: onCreate,
-            start: onStart,
-            drag: function (event) {
-               const nmx = event.touches ? event.touches[0].clientX : event.clientX;
-               // const nmy = event.touches ? event.touches[0].clientY : event.clientY;
+                  const by = {
+                     dx: nmx - mx
+                  };
 
-               const by = {
-                  dx: nmx - mx
-               };
+                  if (settings.resize.call(me, event, eh.e, by) === false) {
+                     return false;
+                  }
 
-               if (settings.resize.call(me, event, eh.e, by) === false) {
+                  me.moveE(by.dx);
+                  checkAll();
+                  event.preventDefault();
                   return false;
-               }
+               },
+               stop: onStop
+            });
+            me.dom.style['padding-right'] = settings.handleSize + 'px';
+         }
+         if (h.s) {
+            az.ui(Draggable, eh.s, {
+               axis: 'y',
+               create: onCreate,
+               start: onStart,
+               drag: function (event) {
+                  // const nmx = event.touches ? event.touches[0].clientX : event.clientX;
+                  const nmy = event.touches ? event.touches[0].clientY : event.clientY;
 
-               me.moveE(by.dx);
-               checkAll();
-               event.preventDefault();
-               return false;
-            },
-            stop: onStop
-         });
-         h.s && az.ui(Draggable, eh.s, {
-            axis: 'y',
-            create: onCreate,
-            start: onStart,
-            drag: function (event) {
-               // const nmx = event.touches ? event.touches[0].clientX : event.clientX;
-               const nmy = event.touches ? event.touches[0].clientY : event.clientY;
+                  const by = {
+                     dy: nmy - my
+                  };
 
-               const by = {
-                  dy: nmy - my
-               };
+                  if (settings.resize.call(me, event, eh.s, by) === false) {
+                     return false;
+                  }
 
-               if (settings.resize.call(me, event, eh.s, by) === false) {
+                  me.moveS(by.dy);
+                  checkAll();
+                  event.preventDefault();
                   return false;
-               }
+               },
+               stop: onStop
+            });
+            me.dom.style['padding-bottom'] = settings.handleSize + 'px';
+         }
+         if (h.w) {
+            az.ui(Draggable, eh.w, {
+               axis: 'x',
+               create: onCreate,
+               start: onStart,
+               drag: function (event) {
+                  const nmx = event.touches ? event.touches[0].clientX : event.clientX;
+                  // const nmy = event.touches ? event.touches[0].clientY : event.clientY;
 
-               me.moveS(by.dy);
-               checkAll();
-               event.preventDefault();
-               return false;
-            },
-            stop: onStop
-         });
-         h.w && az.ui(Draggable, eh.w, {
-            axis: 'x',
-            create: onCreate,
-            start: onStart,
-            drag: function (event) {
-               const nmx = event.touches ? event.touches[0].clientX : event.clientX;
-               // const nmy = event.touches ? event.touches[0].clientY : event.clientY;
+                  const by = {
+                     dx: nmx - mx
+                  };
 
-               const by = {
-                  dx: nmx - mx
-               };
+                  if (settings.resize.call(me, event, eh.w, by) === false) {
+                     return false;
+                  }
 
-               if (settings.resize.call(me, event, eh.w, by) === false) {
+                  me.moveW(by.dx);
+                  checkAll();
+                  event.preventDefault();
                   return false;
-               }
-
-               me.moveW(by.dx);
-               checkAll();
-               event.preventDefault();
-               return false;
-            },
-            stop: onStop
-         });
+               },
+               stop: onStop
+            });
+            me.dom.style['padding-left'] = settings.handleSize + 'px';
+         }
 
          h.ne && az.ui(Draggable, eh.ne, {
             create: onCreate,
@@ -500,16 +515,14 @@ export class Resizable {
       const me = this;
       const dom = me.dom;
       const settings = me.settings;
-      const styles = getComputedStyle(dom);
+      me.style = getComputedStyle(dom);
       if (me.position === 'relative') {
-         me.thisTop = parseInt(styles.top || 0);
-         me.thisLeft = parseInt(styles.left || 0);
+         me.thisTop = parseInt(me.style.top || 0);
+         me.thisLeft = parseInt(me.style.left || 0);
       } else {
          // child outer border to parent inner border
-         const marginTop = parseInt(styles['margin-top']) || 0;
-         const marginLeft = parseInt(styles['margin-left']) || 0;
-         me.thisTop = dom.offsetTop - marginTop;
-         me.thisLeft = dom.offsetLeft - marginLeft;
+         me.thisTop = dom.offsetTop - parseInt(me.style['margin-top']) || 0;
+         me.thisLeft = dom.offsetLeft - parseInt(me.style['margin-left'] || 0);
       }
 
       // outer border to outer border
@@ -524,7 +537,7 @@ export class Resizable {
       me.thisAspectRatio = (me.thisHeight * 1.0) / (me.thisWidth * 1.0);
    }
 
-   moveN(by) {
+   moveV(by, n) {
       const me = this;
       if (by > me.yToMin) {
          by = me.yToMin;
@@ -532,53 +545,55 @@ export class Resizable {
          by = -me.yToMax;
       }
       if (me.settings.moveOnResize) {
-         const styles = getComputedStyle(me.dom);
-         const borderTop = parseInt(styles['border-top-width']);
-         const borderBottom = parseInt(styles['border-bottom-width']);
-         const paddingTop = parseInt(styles['padding-top']);
-         const paddingBottom = parseInt(styles['padding-bottom']);
+         const borderTop = parseInt(me.style['border-top-width']);
+         const borderBottom = parseInt(me.style['border-bottom-width']);
+         const paddingTop = parseInt(me.style['padding-top']);
+         const paddingBottom = parseInt(me.style['padding-bottom']);
          if (me.thisHeight - by >= borderTop + borderBottom + paddingTop + paddingBottom) {
-            me.dom.style.top = me.thisTop + by + 'px';
+            if (n) {
+               me.dom.style.top = me.thisTop + by + 'px';
+            }
+            setOuterBorderHeight(me.dom, me.thisHeight - by, me.style);
          }
+      } else {
+         setOuterBorderHeight(me.dom, me.thisHeight - by, me.style);
       }
-      setOuterHeight(me.dom, me.thisHeight - by);
    }
-   moveE(by) {
+
+   moveH(by, w) {
       const me = this;
-      if (by > me.xToMax) {
-         by = me.xToMax;
-      } else if (-by > me.xToMin) {
-         by = -me.xToMin;
-      }
-      setOuterWidth(me.dom, me.thisWidth + by);
-   }
-   moveS(by) {
-      const me = this;
-      if (by > me.yToMax) {
-         by = me.yToMax;
-      } else if (-by > me.yToMin) {
-         by = -me.yToMin;
-      }
-      setOuterHeight(me.dom, me.thisHeight + by);
-   }
-   moveW(by) {
-      const me = this;
-      if (-by > me.xToMax) {
-         by = -me.xToMax;
-      } else if (by > me.xToMin) {
+      if (by > me.xToMin) {
          by = me.xToMin;
+      } else if (-by > me.xToMax) {
+         by = -me.xToMax;
       }
       if (me.settings.moveOnResize) {
-         const styles = getComputedStyle(me.dom);
-         const borderLeft = parseInt(styles['border-left-width']);
-         const borderRight = parseInt(styles['border-right-width']);
-         const paddingLeft = parseInt(styles['padding-left']);
-         const paddingRight = parseInt(styles['padding-right']);
+         const borderLeft = parseInt(me.style['border-left-width']);
+         const borderRight = parseInt(me.style['border-right-width']);
+         const paddingLeft = parseInt(me.style['padding-left']);
+         const paddingRight = parseInt(me.style['padding-right']);
          if (me.thisWidth - by >= borderLeft + borderRight + paddingLeft + paddingRight) {
-            me.dom.style.left = me.thisLeft + by + 'px';
+            if (w) {
+               me.dom.style.left = me.thisLeft + by + 'px';
+            }
+            setOuterBorderWidth(me.dom, me.thisWidth - by, me.style);
          }
+      } else {
+         setOuterBorderWidth(me.dom, me.thisWidth - by, me.style);
       }
-      setOuterWidth(me.dom, me.thisWidth - by);
+   }
+
+   moveN(by) {
+      this.moveV(by, true);
+   }
+   moveE(by) {
+      this.moveH(-by, false);
+   }
+   moveS(by) {
+      this.moveV(-by, false);
+   }
+   moveW(by) {
+      this.moveH(by, true);
    }
 
    collapseX(event, ui) {

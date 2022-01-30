@@ -24,22 +24,18 @@
 
       &.azLayoutAreaNorth {
         grid-area: n;
-        padding-bottom: $collapseIconSize;
       }
 
       &.azLayoutAreaEast {
         grid-area: e;
-        padding-left: $collapseIconSize;
       }
 
       &.azLayoutAreaSouth {
         grid-area: s;
-        padding-top: $collapseIconSize;
       }
 
       &.azLayoutAreaWest {
         grid-area: w;
-        padding-right: $collapseIconSize;
       }
 
       &.azLayoutAreaCenter {

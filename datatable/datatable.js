@@ -7,7 +7,7 @@ import {
    insertBefore,
    isTouchDevice,
    parseDOMElement,
-   setOuterWidth,
+   setOuterBorderWidth,
    setWidth,
    textWidth,
    getHeight,
@@ -110,7 +110,7 @@ export class DataTable {
                tr.appendChild(td);
 
                if (col.width) {
-                  setOuterWidth(td, col.width);
+                  setOuterBorderWidth(td, col.width);
                }
             });
 
@@ -313,7 +313,7 @@ export class DataTable {
          }
          thead.appendChild(th);
          if (col.width) {
-            setOuterWidth(th, col.width);
+            setOuterBorderWidth(th, col.width);
          }
       });
 
@@ -355,9 +355,9 @@ export class DataTable {
                const newWidth = getWidth(dom) + maxWidth - getWidth(tds[0]);
                setWidth(dom, newWidth);
                tds.forEach(el => {
-                  setOuterWidth(el, maxWidth);
+                  setOuterBorderWidth(el, maxWidth);
                });
-               setOuterWidth(th, maxWidth);
+               setOuterBorderWidth(th, maxWidth);
                settings.columns[idx].width = tds[0].offsetWidth;
 
                // prevent sorting
