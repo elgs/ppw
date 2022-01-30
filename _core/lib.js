@@ -135,34 +135,15 @@ export const parseDOMElement = domstring => {
    return new DOMParser().parseFromString(domstring, 'text/html').body.childNodes;
 };
 
-// outer margin to outer margin
-export const outerWidthTrue = function (el, style) {
-   let width = el.offsetWidth;
-   style ??= getComputedStyle(el);
-   width += parseInt(style.marginLeft) + parseInt(style.marginRight);
-   return width;
-};
-
-export const outerHeightTrue = function (el, style) {
-   let height = el.offsetHeight;
-   style ??= getComputedStyle(el);
-   height += parseInt(style.marginTop) + parseInt(style.marginBottom);
-   return height;
-};
-
 // inner padding to inner padding
 export const getWidth = function (el, style) {
-   let width = el.clientWidth;
    style ??= getComputedStyle(el);
-   width -= parseInt(style.paddingLeft) + parseInt(style.paddingRight);
-   return width;
+   return el.clientWidth - parseInt(style.paddingLeft) - parseInt(style.paddingRight);
 };
 
 export const getHeight = function (el, style) {
-   let height = el.clientHeight;
    style ??= getComputedStyle(el);
-   height -= parseInt(style.paddingTop) + parseInt(style.paddingBottom);
-   return height;
+   return el.clientHeight - parseInt(style.paddingTop) - parseInt(style.paddingBottom);
 };
 
 // inner padding to inner padding

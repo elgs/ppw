@@ -1,5 +1,5 @@
 import '../_core/core.js';
-import { getHeight, getWidth, normalizeIcon, outerHeightTrue, outerWidthTrue, setHeight, setOuterBorderHeight, setOuterBorderWidth, setWidth } from '../_core/lib.js';
+import { getHeight, getWidth, normalizeIcon, setHeight, setOuterBorderHeight, setOuterBorderWidth, setWidth } from '../_core/lib.js';
 import { Draggable } from '../draggable/draggable.js';
 
 const svgTriangleUp = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 10"><path d="M0 10L10 0l10 10z"/></svg>`;
@@ -14,7 +14,7 @@ export class Resizable {
       maxWidth: Number.MAX_SAFE_INTEGER,
       minHeight: 0,
       maxHeight: Number.MAX_SAFE_INTEGER,
-      aspectRatio: false,
+      aspectRatio: true,
       handleSize: 4,
       handles: 'all', //n, e, s, w, ne, se, sw, nw, all
       moveOnResize: true,
@@ -106,7 +106,6 @@ export class Resizable {
       // console.log(h);
 
       me.style;
-      me.thisAspectRatio;
       let mx = 0;
       let my = 0; // position of this element, and mouse x, y coordinate
 
@@ -265,30 +264,6 @@ export class Resizable {
             // console.log('stop');
          };
 
-         const checkAspectRatio = function () {
-            if (!settings.aspectRatio) {
-               return;
-            }
-            let ar;
-            if (settings.aspectRatio === true) {
-               ar = me.thisAspectRatio;
-            } else if (typeof settings.aspectRatio === 'number') {
-               ar = settings.aspectRatio;
-            } else {
-               return;
-            }
-            console.log(ar);
-            // 
-            if (outerHeightTrue(dom, me.style) / outerWidthTrue(dom, me.style) > ar) {
-               setOuterBorderWidth(dom, outerHeightTrue(dom) / ar, me.style);
-            } else if (outerHeightTrue(dom, me.style) / outerWidthTrue(dom) < ar, me.style) {
-               setOuterBorderHeight(dom, outerWidthTrue(dom) * ar, me.style);
-            }
-         };
-         const checkAll = function () {
-            checkAspectRatio();
-         };
-
          if (h.n) {
             az.ui(Draggable, eh.n, {
                axis: 'y',
@@ -306,7 +281,6 @@ export class Resizable {
                   }
 
                   me.moveN(by.dy);
-                  checkAll();
                   // console.log(event.type);
                   event.preventDefault();
                   return false;
@@ -333,7 +307,7 @@ export class Resizable {
                   }
 
                   me.moveE(by.dx);
-                  checkAll();
+
                   event.preventDefault();
                   return false;
                },
@@ -359,7 +333,7 @@ export class Resizable {
                   }
 
                   me.moveS(by.dy);
-                  checkAll();
+
                   event.preventDefault();
                   return false;
                },
@@ -385,7 +359,7 @@ export class Resizable {
                   }
 
                   me.moveW(by.dx);
-                  checkAll();
+
                   event.preventDefault();
                   return false;
                },
@@ -414,8 +388,12 @@ export class Resizable {
                }
 
                me.moveN(by.dy);
-               me.moveE(by.dx);
-               checkAll();
+               if (me._aspectRatio) {
+                  me.moveE(-by.dy * me._aspectRatio);
+               } else {
+                  me.moveE(by.dx);
+               }
+
                event.preventDefault();
                return false;
             },
@@ -441,8 +419,12 @@ export class Resizable {
                }
 
                me.moveS(by.dy);
-               me.moveE(by.dx);
-               checkAll();
+               if (me._aspectRatio) {
+                  me.moveE(by.dy * me._aspectRatio);
+               } else {
+                  me.moveE(by.dx);
+               }
+
                event.preventDefault();
                return false;
             },
@@ -469,8 +451,12 @@ export class Resizable {
                }
 
                me.moveS(by.dy);
-               me.moveW(by.dx);
-               checkAll();
+               if (me._aspectRatio) {
+                  me.moveW(-by.dy * me._aspectRatio);
+               } else {
+                  me.moveW(by.dx);
+               }
+
                event.preventDefault();
                return false;
             },
@@ -496,8 +482,12 @@ export class Resizable {
                }
 
                me.moveN(by.dy);
-               me.moveW(by.dx);
-               checkAll();
+               if (me._aspectRatio) {
+                  me.moveW(by.dy * me._aspectRatio);
+               } else {
+                  me.moveW(by.dx);
+               }
+
                event.preventDefault();
                return false;
             },
@@ -534,7 +524,9 @@ export class Resizable {
       me.xToMax = settings.maxWidth - me.thisWidth;
       me.xToMin = me.thisWidth - settings.minWidth;
 
-      me.thisAspectRatio = (me.thisHeight * 1.0) / (me.thisWidth * 1.0);
+      if (settings.aspectRatio === true) {
+         me._aspectRatio = (dom.offsetWidth * 1.0) / (dom.offsetHeight * 1.0);
+      }
    }
 
    moveV(by, n) {
