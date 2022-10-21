@@ -14,7 +14,7 @@ export class Resizable {
       maxWidth: Number.MAX_SAFE_INTEGER,
       minHeight: 0,
       maxHeight: Number.MAX_SAFE_INTEGER,
-      aspectRatio: true,
+      aspectRatio: false,
       handleSize: 4,
       handles: 'all', //n, e, s, w, ne, se, sw, nw, all
       moveOnResize: true,
